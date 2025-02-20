@@ -1,0 +1,23 @@
+{
+  "name": "jewelry-express",
+  "version": "1.0.0",
+  "description": "Appointment System Website",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cogiii/jewelry-express.git"
+  },
+  "author": "Cogiii",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Cogiii/jewelry-express/issues"
+  },
+  "homepage": "https://github.com/Cogiii/jewelry-express#readme",
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2"
+  }
+}
