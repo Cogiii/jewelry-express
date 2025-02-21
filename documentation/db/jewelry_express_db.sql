@@ -66,6 +66,7 @@ CREATE TABLE product (
     product_type_id INT,
     product_material_id INT,
     product_description VARCHAR(255),
+    product_image LONGBLOB,
     admin_id INT,
     date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_type_id) REFERENCES product_type(product_type_id),
