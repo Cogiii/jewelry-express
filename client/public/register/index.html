@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+
+        <form id="registerForm">
+            <input type="text" id="firstName" placeholder="First Name" required>
+            <input type="text" id="middleName" placeholder="Middle Name">
+            <input type="text" id="lastName" placeholder="Last Name" required>
+
+            <select name="position" id="position">
+                <option value="">Select Position</option>
+            </select>
+
+            <select name="status" id="status">
+                <option value="">Select Status</option>
+            </select>
+
+            <input type="text" id="username" placeholder="username" required>
+            <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+            <button type="submit">Register</button>
+        </form>
+
+        <p id="responseMessage"></p>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>

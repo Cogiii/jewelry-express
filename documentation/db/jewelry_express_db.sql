@@ -13,9 +13,9 @@
 CREATE DATABASE jewelry_express_db;
 USE jewelry_express_db;
 
-CREATE TABLE employee_position (
-    employee_position_id INT PRIMARY KEY AUTO_INCREMENT,
-    employee_position VARCHAR(255) NOT NULL
+CREATE TABLE position (
+    position_id INT PRIMARY KEY AUTO_INCREMENT,
+    position_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE employee (
@@ -23,9 +23,9 @@ CREATE TABLE employee (
     first_name VARCHAR(255) NOT NULL,
     middle_name VARCHAR(255),
     last_name VARCHAR(255) NOT NULL,
-    employee_position_id INT,
+    position_id INT,
     employee_status ENUM('admin', 'staff', 'resigned') NOT NULL DEFAULT 'staff',
-    FOREIGN KEY (employee_position_id) REFERENCES employee_position(employee_position_id)
+    FOREIGN KEY (position_id) REFERENCES position(position_id)
 );
 
 CREATE TABLE employee_contact (
