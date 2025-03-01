@@ -13,12 +13,15 @@ document.getElementById('loginButton').addEventListener('click', async (error) =
         })
         const data = await response.json();
         
-        // if (response.ok){
-        //     sessionStorage.setItem("firstName", data.user.firstName);
-        //     window.location.href = data.redirectUrl;
-        // } else {
-        //     alert("No login for you")
-        // }
+        if (response.ok){
+            // // sessionStorage.setItem("firstName", data.user.firstName);
+            window.location.href = data.redirectUrl;
+
+            // alert("Login")
+        } else {
+            console.log(response.message)
+            alert("No login for you")
+        }
     } catch (error) {
         console.log("Error: " + error);
     }
