@@ -60,7 +60,7 @@ CREATE TABLE product_type (
     product_type VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE product (
+CREATE TABLE n (
     product_id INT PRIMARY KEY AUTO_INCREMENT,
     product_name VARCHAR(255) NOT NULL,
     product_type_id INT,
