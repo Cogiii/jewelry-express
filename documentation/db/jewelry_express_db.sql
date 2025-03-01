@@ -60,7 +60,7 @@ CREATE TABLE product_type (
     product_type VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE n (
+CREATE TABLE product (
     product_id INT PRIMARY KEY AUTO_INCREMENT,
     product_name VARCHAR(255) NOT NULL,
     product_type_id INT,
@@ -174,6 +174,8 @@ CREATE TABLE purchase_details (
     FOREIGN KEY (product_code) REFERENCES product_coding(product_code)
 );
 
+-- ==============================================================
+-- TRIGGERS FUNCTIONS
 
 -- ONLY ADMIN (employee_status) can be create an admin account
 DELIMITER $$
