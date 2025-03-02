@@ -24,6 +24,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('client/public', {
     index: false, // Prevent serving index.html automatically
 }));
+app.use(express.static('client/admin', {
+    index: false, // Prevent serving index.html automatically
+}));
 
 // Session middleware
 app.use(session({

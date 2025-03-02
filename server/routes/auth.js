@@ -98,13 +98,13 @@ router.post('/registerAdmin', async (req, res) => {
 
 // Login route
 router.post('/login', ensureNotAuthenticated, (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', (err, admin, info) => {
         if (err) return res.status(500).json({ message: 'Internal server error.' });
-        if (!user) return res.status(401).json({ message: info.message || 'Authentication failed.' });
+        if (!admin) return res.status(401).json({ message: info.message || 'Authentication failed.' });
 
-        req.logIn(user, (err) => {
+        req.logIn(admin, (err) => {
             if (err) return res.status(500).json({ message: 'Login error.' });
-            return res.status(200).json({ message: 'Login successful!', redirectUrl: '/admin', user });
+            return res.status(200).json({ message: 'Login successful!', redirectUrl: '/dashboard', admin: admin });
         });
     })(req, res, next);
 });

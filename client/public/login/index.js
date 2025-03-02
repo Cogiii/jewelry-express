@@ -14,7 +14,7 @@ document.getElementById('loginButton').addEventListener('click', async (error) =
         const data = await response.json();
         
         if (response.ok){
-            // // sessionStorage.setItem("firstName", data.user.firstName);
+            localStorage.setItem("id", data.admin.employee_id);
             window.location.href = data.redirectUrl;
 
             // alert("Login")
