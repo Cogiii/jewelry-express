@@ -3,9 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/font.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Jewelry Express</title>
 </head>
 <body>
-    <h1>TEST HOME PAGE</h1>
+    <nav>
+        <div class="mobile_look">
+            <div class="mobile_nav">
+                <div id="menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <button class="search" id="search"><img src="assets/icons/ion_search-outline.webp" alt="search icon"></button>
+        </div>
+
+        <div class="mobile_links" id="mobile_links">
+            <ul>
+                <li><a href="">Home </a></li>
+                <li><a href="">Shops</a></li>
+                <li><a href="">Appointment</a></li>
+                <li><a href="">About Us</a></li>
+            </ul>
+        </div>
+
+        <div class="logo">
+            <a href="/">
+                <img src="assets/icons/Jewelry Express Assets 1.webp" alt="Jewelry Express Logo">
+            </a>
+        </div>
+
+        <div class="appointment">
+            <button><img src="assets/icons/Group.webp" alt="appointment"></button>
+        </div>
+    </nav>
+
+    <main>
+        <header>
+            <div class="loop_vid">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/videos/6248708_Woman_Caucasian_1280x720.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+    
+                <div class="header_text">
+                    <h1>Maker of Fine Jewelry</h1>
+                    <p>EXCELLENCE CREATIVITY SERVICE</p>
+                </div>
+            </div>
+        </header>
+    </main>
+
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/nav.js"></script>
 </body>
 </html>

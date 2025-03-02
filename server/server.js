@@ -42,7 +42,7 @@ app.use('/api', apiRoutes);
 app.use('/auth', authRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
-app.use('/admin', adminRoutes);
+app.use('/', adminRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
