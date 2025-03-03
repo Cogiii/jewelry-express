@@ -11,6 +11,10 @@
 -- ==============================================
 USE jewelry_express_db;
 
+INSERT INTO position (position_name) VALUES
+    ("admin"),
+    ("Cashier");
+
 INSERT INTO product_material (product_material) VALUES 
     ("Gold"),
     ("Silver"),

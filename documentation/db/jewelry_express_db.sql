@@ -10,6 +10,7 @@
 
 -- CREATED BY: Laurence Kharl Devera
 -- =========================================
+DROP DATABASE jewelry_express_db;
 CREATE DATABASE jewelry_express_db;
 USE jewelry_express_db;
 
