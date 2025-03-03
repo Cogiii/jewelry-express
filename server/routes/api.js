@@ -9,7 +9,7 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 router.get('/getPositions', (req, res) => {
-    query('SELECT * FROM position', (err, results) => {
+    query('SELECT * FROM positions', (err, results) => {
         if (err) {
             console.error('Error fetching positions:', err);
             return res.status(500).json({ message: 'Error fetching positions' });
