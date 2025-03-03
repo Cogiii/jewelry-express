@@ -14,7 +14,7 @@ DROP DATABASE jewelry_express_db;
 CREATE DATABASE jewelry_express_db;
 USE jewelry_express_db;
 
-CREATE TABLE position (
+CREATE TABLE positions (
     position_id INT PRIMARY KEY AUTO_INCREMENT,
     position_name VARCHAR(255) NOT NULL
 );
@@ -26,7 +26,7 @@ CREATE TABLE employee (
     last_name VARCHAR(255) NOT NULL,
     position_id INT,
     employee_status ENUM('admin', 'staff', 'resigned') NOT NULL DEFAULT 'staff',
-    FOREIGN KEY (position_id) REFERENCES position(position_id)
+    FOREIGN KEY (position_id) REFERENCES positions(position_id) ON DELETE SET NULL
 );
 
 CREATE TABLE employee_contact (
@@ -177,6 +177,7 @@ CREATE TABLE purchase_details (
 
 -- ==============================================================
 -- TRIGGERS FUNCTIONS
+-- Triggeres wont work especially on hosted db (unless we have privilege)
 
 -- ONLY ADMIN (employee_status) can be create an admin account
 DELIMITER $$
