@@ -42,26 +42,80 @@
             </a>
         </div>
 
-        <div class="appointment">
-            <button><img src="assets/icons/Group.webp" alt="appointment"></button>
+        <div class="bookAppointment">
+            <button id="bookAppointmentBtn"><img src="assets/icons/Group.webp" alt="appointment"></button>
+        </div>
+
+        <div class="search-container" id="searchContainer">
+            <input type="text" id="searchInput" placeholder="Search..." />
+            <button id="closeSearch">&times;</button>
         </div>
     </nav>
 
-    <main>
+    <main class="mobile">
         <header>
-            <div class="loop_vid">
+            <div class="header_vid">
                 <video autoplay loop muted playsinline>
                     <source src="assets/videos/6248708_Woman_Caucasian_1280x720.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-    
                 <div class="header_text">
                     <h1>Maker of Fine Jewelry</h1>
                     <p>EXCELLENCE CREATIVITY SERVICE</p>
                 </div>
             </div>
         </header>
+    
+        <div class="featured_jewelries">
+            <div class="jewelries_wrapper">
+                <div class="jewelries_container"></div>
+                <div class="slider_dots jewelries_slider"></div>
+    
+                <a href="#" class="book_appointment_link">Book Appointment</a>
+                <a href="#" class="see_more_link">SEE MORE</a>
+            </div>
+        </div>
+    
+        <section>
+            <div class="loop_vid">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/videos/6248708_Woman_Caucasian_1280x720.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+    
+        <section class="category">
+            <h2>Our Creations</h2>
+            <div class="jewelries_wrapper">
+                <div class="category_container"></div>
+                <div class="slider_dots category_slider"></div>
+    
+                <a href="#" class="book_appointment_link">Book Appointment</a>
+                <a href="#" class="see_more_link">SEE MORE</a>
+            </div>
+        </section>
+
+        <section class="services">
+            <h2>Services</h2>
+
+            <div class="services_container">
+                <div class="service">
+                    <img src="assets/icons/resizing.webp" alt="Resizing">
+                    <p>Resizing</p>
+                </div>
+                <div class="service">
+                    <img src="assets/icons/consultation.webp" alt="Consultation">
+                    <p>Consultation</p>
+                </div>
+                <div class="service">
+                    <img src="assets/icons/restoration.webp" alt="Restoration">
+                    <p>Restoration</p>
+                </div>
+            </div>
+        </section>
     </main>
+    
 
     <script src="assets/js/index.js"></script>
     <script src="assets/js/nav.js"></script>
