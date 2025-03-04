@@ -94,3 +94,11 @@ document.addEventListener("DOMContentLoaded", function () {
         { img: "assets/images/earring.webp", category: "Earrings" }
     ], ".category_container", ".category_slider");
 });
+
+$(document).ready(function () {
+    $('.dropdown').click(function () {
+        $(document.getElementsByClassName('arrow')).toggleClass('down up');
+
+        $('#customer_care_details').stop().slideToggle(300);
+    });
+});
