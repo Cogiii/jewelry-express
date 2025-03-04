@@ -1,5 +1,10 @@
+/* Inria Serif */
 @import url('https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
+/* Cactus Classical Serif */
+@import url('https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+/* Gamalia */
 @font-face {
     font-family: 'Gamalia';
     src: url('../font/GamiliaDemoRegular-d9DL7.ttf') format('truetype'),
