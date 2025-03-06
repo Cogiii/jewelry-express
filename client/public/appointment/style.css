@@ -121,11 +121,7 @@ div.input > * {
     transition: 0.3s;
 }
 
-.calendar-dates div:hover {
-    background-color: var(--secondary-color);
-}
-
-.selected {
+.selected, .calendar-dates div:hover {
     background-color: var(--secondary-color) !important;
     color: var(--main-color);
 }
@@ -164,15 +160,9 @@ div.input > * {
     transition: 0.3s;
 }
 
-.time-slot:hover {
+.time-slot:hover, .time-slot.selected {
     background-color: var(--secondary-color);
     color: var(--main-color);
-}
-
-.time-slot.selected {
-    background-color: var(--secondary-color);
-    color: var(--main-color);
-    /* font-weight: bold; */
 }
 
 .time-slot.disabled {
