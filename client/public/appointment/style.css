@@ -1,0 +1,202 @@
+main {
+    text-align: center;
+    font-family: 'Cactus Classical Serif';
+    padding: 30px 0;
+}
+
+main h1 {
+    font-family: 'Gamalia';
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.appointment_services_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 60px;
+}
+
+.appointment_services_container .service img {
+    width: 20px;
+}
+.appointment_services_container .service p {
+    font-size: 11px;
+    font-weight: lighter;
+}
+
+#appointment_form {
+    text-align: left;
+    margin: 20px 0;
+}
+
+div.input {
+    display: block;
+    margin: 9px 0;
+    font-size: 13px;
+    margin: 0 51px;
+}
+div.input > * {
+    margin: 9px 0;
+}
+
+#appointment_form input {
+    background-color: var(--main-H-color);
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.numberInput {
+    display: flex; 
+    gap: 5px;
+    align-items: center;
+}
+
+.numberInput select {
+    background-color: var(--main-H-color);
+    border: none;
+    padding: 10px;
+    width: 35%;
+}
+.numberInput input {
+    width: 65%;
+}
+
+#appointment_form textarea {
+    background-color: var(--main-H-color);
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    resize: vertical;
+    height: 5em;
+    border-radius: 7px;
+}
+
+.calendar_container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    background-color: var(--main-H-color);
+}
+
+.calendar {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    /* margin-bottom: 10px; */
+}
+
+.calendar-header span {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 10px;
+    margin: 10px 0;
+    color: var(--text-H-color);
+}
+
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    font-size: 13px;
+}
+
+.calendar-dates div {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: 0.3s;
+}
+
+.calendar-dates div:hover {
+    background-color: var(--secondary-color);
+}
+
+.selected {
+    background-color: var(--secondary-color) !important;
+    color: var(--main-color);
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    color: gray;
+}
+
+/* Available Time */
+.available_time_container {
+    margin: 40px 0;
+    text-align: center;
+    padding: 0 41px;
+}
+.available_time_container h2 {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.time-slot {
+    padding: 10px;
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.time-slot:hover {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+}
+
+.time-slot.selected {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    /* font-weight: bold; */
+}
+
+.time-slot.disabled {
+    color: #a6a6a6;
+    pointer-events: none;
+    border-color: #c0b8b0;
+}
+
+.submit_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#appointment_form button {
+    margin: 0 auto;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    padding: 10px 38px;
+    border: none;
+    border-radius: 7px;
+}
+
+#appointment_form button:hover {
+    background-color: var(--secondary-H-color);
+}
+

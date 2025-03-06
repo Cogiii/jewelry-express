@@ -68,8 +68,8 @@ nav .mobile_links a:hover {
 }
 
 nav .mobile_look .mobile_nav #menu {
-    width: 20px;
-    height: 15px;
+    width: 17px;
+    height: 13px;
     position: relative;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
@@ -85,7 +85,7 @@ nav .mobile_look .mobile_nav #menu {
 nav .mobile_look .mobile_nav #menu span {
     display: block;
     position: absolute;
-    height: 2px;
+    height: 1.5px;
     width: 100%;
     background: var(--secondary-color);
     border-radius: 9px;
@@ -102,7 +102,8 @@ nav .mobile_look .mobile_nav #menu span {
 }
 
 nav .mobile_look .mobile_nav #menu span:nth-child(1) {
-    top: 0px;
+    top: 2px;
+    height: 2px;
 }
   
 nav .mobile_look .mobile_nav #menu span:nth-child(2), 
@@ -111,7 +112,8 @@ nav .mobile_look .mobile_nav #menu span:nth-child(3) {
 }
   
 nav .mobile_look .mobile_nav #menu span:nth-child(4) {
-    top: 16px;
+    top: 14px;
+    height: 2px;
 }
   
 nav .mobile_look .mobile_nav #menu.open span:nth-child(1), 
@@ -136,7 +138,7 @@ nav .mobile_look .mobile_nav #menu.open span:nth-child(3) {
 }
 
 /* Search container covers the entire nav */
-.search-container {
+nav .search-container {
     position: absolute;
     top: 0;
     left: 0;
@@ -154,7 +156,7 @@ nav .mobile_look .mobile_nav #menu.open span:nth-child(3) {
 }
 
 /* Search input styling */
-.search-container input {
+nav .search-container input {
     width: 80%;
     padding: 10px;
     font-size: 16px;
@@ -164,7 +166,7 @@ nav .mobile_look .mobile_nav #menu.open span:nth-child(3) {
 }
 
 /* Close button */
-.search-container button {
+nav .search-container button {
     background: none;
     border: none;
     font-size: 24px;
@@ -172,6 +174,22 @@ nav .mobile_look .mobile_nav #menu.open span:nth-child(3) {
 }
 
 /* Active state */
-.search-container.active {
+nav .search-container.active {
     transform: translateY(0);
+}
+
+
+@media only screen and (max-width: 431px) {
+    nav .mobile_links {
+        background-color: var(--main-color);
+        position: absolute;
+        margin-top: 40px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: none;
+        justify-content: center;
+        /* border: solid red 2px; */
+        overflow: hidden;
+    }
 }

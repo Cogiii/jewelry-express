@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="assets/css/font.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/resources.css">
     <link rel="stylesheet" href="assets/css/nav.css">
     <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Jewelry Express</title>
 </head>
@@ -69,7 +69,7 @@
                 <div class="jewelries_container"></div>
                 <div class="slider_dots jewelries_slider"></div>
     
-                <a href="#" class="book_appointment_link">Book Appointment</a>
+                <a href="/appointment" class="book_appointment_link">Book Appointment</a>
                 <a href="#" class="see_more_link">SEE MORE</a>
             </div>
         </div>
@@ -89,7 +89,7 @@
                 <div class="category_container"></div>
                 <div class="slider_dots category_slider"></div>
     
-                <a href="#" class="book_appointment_link">Book Appointment</a>
+                <a href="/appointment" class="book_appointment_link">Book Appointment</a>
                 <a href="#" class="see_more_link">SEE MORE</a>
             </div>
         </section>
@@ -111,6 +111,26 @@
                     <p>Restoration</p>
                 </div>
             </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="thankyou_overlay">
+            <div class="container">
+                <h2>Thank you!</h2>
+    
+                <p>Check your email for more updates.</p>
+                <button id="okayBtn">Okay</button>
+            </div>
+        </div>
+
+        <section class="news_letter">
+            <h2>Subscribe to our Newsletter</h2>
+
+            <form action="" id="newsletterForm">
+                <input type="email" name="news_email" id="news_email" class="news_email" autocomplete="email" placeholder="Write your email here..." required>
+                <button type="submit">Send</button>
+            </form>
         </section>
 
         <section class="customer_care">
@@ -141,13 +161,14 @@
 
             <img src="assets/images/Jewelry_Express_Logo_Transparent 2.webp" alt="Jewelry Express Logo" class="logo">
         </section>
-    </main>
-    
-    <footer>
-        <p>&#169; Jewelry Express Davao</p>
+
+        <div class="bottom">
+            <p>&#169; Jewelry Express Davao</p>
+        </div>
     </footer>
 
     <script src="assets/js/index.js"></script>
     <script src="assets/js/nav.js"></script>
+    <script src="assets/js/footer.js"></script>
 </body>
 </html>

@@ -1,0 +1,106 @@
+/* Inria Serif */
+@import url('https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+/* Cactus Classical Serif */
+@import url('https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+/* Gamalia */
+@font-face {
+    font-family: 'Gamalia';
+    src: url('../font/GamiliaDemoRegular-d9DL7.ttf') format('truetype'),
+         url('../font/GamiliademoRegular-mL9Ev.otf') format('opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --main-color: #F0E9E1;
+    --main-H-color: #E4DBD0;
+    --text-color: #11100E;
+    --text-H-color: #33312C;
+    --secondary-color: #245B51;
+    --secondary-H-color: #607974;
+    --compliment-color: #5D1C34;
+    --section-border-color: #B3ACA3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    overflow-x: hidden;
+    color: var(--text-color);
+}
+
+.thankyou_overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visiblity 0.3s ease-in-out;
+    overflow: hidden;
+    z-index: 10001;
+}
+
+.thankyou_overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #11100E;
+    z-index: 10001;
+    opacity: 0.5;
+}
+
+.thankyou_overlay .container {
+    width: 300px;
+    height: 192px;
+    background-color: var(--main-color);
+    z-index: 10002;
+    border-radius: 5px;
+    text-align: center;
+    padding: 35px 31px;
+    transform: scale(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.thankyou_overlay .container h2 {
+    font-size: 24px;
+    font-family: 'Gamalia';
+    font-weight: 500;
+    width: 80%;
+    margin: 0 auto 4px auto;
+    border-bottom: solid var(--section-border-color) 2px;
+}
+
+.thankyou_overlay .container p {
+    font-family: 'Inria Serif';
+    font-size: 14px;
+    margin: 21px 0 17px 0;
+}
+
+.thankyou_overlay .container button {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    font-family: 'Inria Serif';
+    font-size: 13px;
+    padding: 9px 45px;
+    border: none;
+    border-radius: 7px;
+}
+
+.thankyou_overlay .container button:hover {
+    background-color: var(--secondary-H-color);
+}

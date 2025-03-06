@@ -37,19 +37,31 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+// If direct to /admin url just send(404 page)
+app.use('/admin', (req, res) => {
+    res.status(404).sendFile(path.join(__dirname, '../client/public/404.html'));
+});
+
 // Middleware to protect the /admin directory
 app.use('/admin', ensureAuthenticated, express.static(path.join(__dirname, 'client/admin')));
 
 app.use('/', indexRoutes);
+app.use('/', adminRoutes);
 app.use('/api', apiRoutes);
 app.use('/auth', authRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
-app.use('/', adminRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ message: 'Something went wrong!' });
 });
 
-app.listen(port, () => console.log(`Server running at http://localhost:${port}`));
+// 404 Not Found Handler
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, '../client/public/404.html'));
+});
+
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`)
+});

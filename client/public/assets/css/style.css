@@ -1,29 +1,3 @@
-:root {
-    --main-color: #F0E9E1;
-    --main-H-color: #E4DBD0;
-    --text-color: #11100E;
-    --text-H-color: #33312C;
-    --secondary-color: #245B51;
-    --secondary-H-color: #607974;
-    --compliment-color: #5D1C34;
-    --section-border-color: #B3ACA3;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Cactus Classical Serif";
-    color: var(--text-color);
-}
-
-body, html {
-    width: 100%;
-    height: 100%;
-    background-color: var(--main-color);
-    overflow-x: hidden;
-}
-
 header .header_vid {
     width: 100%;
     height: 93vh;
@@ -91,6 +65,10 @@ header .header_vid .header_text > p {
     flex-direction: column;
     align-items: center;
     overflow: hidden; /* Prevent horizontal scrolling */
+}
+
+a {
+    color: var(--text-color);
 }
 
 .jewelries_container {
@@ -216,80 +194,7 @@ header .header_vid .header_text > p {
     margin-top: 5px;
 }
 
-.customer_care {
-    border-top: solid var(--section-border-color) 1px;
-    padding: 35px 39px;
-    font-family: 'Gamalia';
-}
-
-.dropdown {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.dropdown h2 {
-    font-size: 18px;
-}
-.arrow {
-    border: solid black;
-    border-width: 0 3px 3px 0;
-    display: inline-block;
-    padding: 3px;
-    transition: transform 0.5s ease, top 0.5s ease;
-}
-.up {
-transform: rotate(225deg);
--webkit-transform: rotate(225deg);
-}
-
-.down {
-transform: rotate(45deg);
--webkit-transform: rotate(45deg);
-}
-
-.customer_care .details {
-    font-size: small;
-    margin-top: 20px;
-    display: none;
-    overflow: hidden;
-}
-.customer_care .details > * {
-    margin: 5px 0;
-}
-
-.store_details {
-    text-align: center;
-    border-top: solid var(--section-border-color) 1px;
-    padding: 20px 39px;
-    font-family: 'Gamalia';
-    
-}
-.store_details .social_links {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100px;
-    margin: 30px auto;
-}
-.store_details .social_links img{
-    width: 24px;
-}
-
-.store_details .logo {
-    width: 218px;
-}
-
+/* FOR MOBILE USERS */
 @media only screen and (max-width: 431px) {
-    nav .mobile_links {
-        background-color: var(--main-color);
-        position: absolute;
-        margin-top: 40px;
-        top: 0;
-        left: 0;
-        width: 100%;
-        display: none;
-        justify-content: center;
-        /* border: solid red 2px; */
-        overflow: hidden;
-    }
+    
 }

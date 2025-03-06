@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     // Close search when close button is clicked
     bookAppointmentBtn.addEventListener("click", function () {
-        window.location.href = "/book-Appointment";
+        window.location.href = "/appointment";
     });
 
     // Close search when clicking outside input

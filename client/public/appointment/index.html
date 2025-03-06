@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="../assets/css/font.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/resources.css">
     <link rel="stylesheet" href="../assets/css/nav.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Jewelry Express | Appointment</title>
 </head>
@@ -51,11 +51,146 @@
     </nav>
     
     <main>
+        <h1>Book an Appointment</h1>
 
+        <div class="appointment_services_container">
+            <div class="service">
+                <img src="../assets/icons/resizing.webp" alt="Resizing">
+                <p>Resizing</p>
+            </div>
+            <div class="service">
+                <img src="../assets/icons/consultation.webp" alt="Consultation">
+                <p>Consultation</p>
+            </div>
+            <div class="service">
+                <img src="../assets/icons/restoration.webp" alt="Restoration">
+                <p>Restoration</p>
+            </div>
+        </div>
+
+        <form action="" id="appointment_form">
+            <div class="input">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" id="firstName" placeholder="Write your first name here..." autocomplete="given-name" required>
+            </div>
+
+            <div class="input">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" id="lastName" placeholder="Write your last name here..." autocomplete="family-name" required>
+            </div>
+
+            <div class="input">
+                <label for="contactNumber">Contact Number</label>
+                <div class="numberInput">
+                    <select name="countryCode" id="countryCode" required>
+                        <option value="+63" selected>🇵🇭 +63</option>
+                    </select>
+                    <input type="tel" name="contactNumber" id="contactNumber" placeholder="Enter your number..." required>
+                </div>
+            </div>
+
+            <div class="input">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Write your email here..." autocomplete="email" required>
+            </div>
+
+            <div class="input">
+                <label for="purpose">Describe your purpose</label>
+                <textarea name="purpose" id="purpose" placeholder="Write your purpose here..."></textarea>
+            </div>
+
+            <!-- Selected Date Input -->
+            <!-- <div class="input">
+                <label for="selectedDate">Selected Date</label>
+                <input type="text" id="selectedDate" readonly placeholder="Click a date..." required>
+            </div> -->
+
+            <!-- Calendar -->
+            <div class="calendar_container">
+                <div class="calendar">
+                    <div class="calendar-header">
+                        <span id="prevMonth">&lt;</span>
+                        <span id="currentMonthYear"></span>
+                        <span id="nextMonth">&gt;</span>
+                    </div>
+                    <div class="calendar-days">
+                        <div class="day-label">SUN</div>
+                        <div class="day-label">MON</div>
+                        <div class="day-label">TUE</div>
+                        <div class="day-label">WED</div>
+                        <div class="day-label">THU</div>
+                        <div class="day-label">FRI</div>
+                        <div class="day-label">SAT</div>
+                    </div>
+                    <div class="calendar-dates"></div>
+                </div>
+            </div>
+
+            <div class="available_time_container">
+                <h2>Available Time</h2>
+                <div class="time-grid" id="timeSlots"></div>
+            </div>
+
+            <div class="submit_container">
+                <button type="submit">Confirm</button>
+            </div>
+        </form>
     </main>
 
     <footer>
-        <p>&#169; Jewelry Express Davao</p>
+        <div class="thankyou_overlay">
+            <div class="container">
+                <h2>Thank you!</h2>
+    
+                <p>Check your email for more updates.</p>
+                <button id="okayBtn">Okay</button>
+            </div>
+        </div>
+
+        <section class="news_letter">
+            <h2>Subscribe to our Newsletter</h2>
+
+            <form action="" id="newsletterForm">
+                <input type="email" name="news_email" id="news_email" class="news_email" autocomplete="email" placeholder="Write your email here..." required>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+
+        <section class="customer_care">
+            <div class="dropdown">
+                <h2>Customer Care</h2>
+
+                <p><i class="arrow down"></i></p>
+            </div>
+
+            <div class="details" id="customer_care_details">
+                <p>CONTACT US</p>
+                <p>CALL NOW: (+63 969 617 8289)</p>
+                <p>BOOK AND APPOINTMENT</p>
+            </div>
+        </section>
+
+        <section class="store_details">
+            <h2>Follow Us</h2>
+
+            <div class="social_links">
+                <a href="https://www.facebook.com/jewelryexpressdavao" target="_blank">
+                    <img src="../assets/icons/ri_facebook-line.webp" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com/janelly_joyce/" target="_blank">
+                    <img src="../assets/icons/circum_instagram.webp" alt="Instagram">
+                </a>
+            </div>
+
+            <img src="../assets/images/Jewelry_Express_Logo_Transparent 2.webp" alt="Jewelry Express Logo" class="logo">
+        </section>
+
+        <div class="bottom">
+            <p>&#169; Jewelry Express Davao</p>
+        </div>
     </footer>
+    <script src="index.js"></script>
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/footer.js"></script>
 </body>
 </html>

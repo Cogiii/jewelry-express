@@ -81,24 +81,18 @@ function initializeSlider(container, dotsContainer, totalItems) {
 
 document.addEventListener("DOMContentLoaded", function () {
     createJewelrySlider([
-        { img: "assets/images/ring.webp", name: "Amore, small", material: "Gold" },
-        { img: "assets/images/bracelet.webp", name: "Pearl Bracelet", material: "Freshwater Pearl" },
-        { img: "assets/images/necklace.webp", name: "Gold Necklace", material: "18K Gold" },
-        { img: "assets/images/necklace.webp", name: "Gold Necklace", material: "18K Gold" }
+        { img: "../assets/images/ring.webp", name: "Amore, small", material: "Gold" },
+        { img: "../assets/images/bracelet.webp", name: "Pearl Bracelet", material: "Freshwater Pearl" },
+        { img: "../assets/images/necklace.webp", name: "Gold Necklace", material: "18K Gold" },
+        { img: "../assets/images/necklace.webp", name: "Gold Necklace", material: "18K Gold" }
     ], ".jewelries_container", ".jewelries_slider");
 
     createJewelrySlider([
-        { img: "assets/images/ring.webp", category: "Rings" },
-        { img: "assets/images/bracelet.webp", category: "Bracelets" },
-        { img: "assets/images/necklace.webp", category: "Necklaces" },
-        { img: "assets/images/earring.webp", category: "Earrings" }
+        { img: "../assets/images/ring.webp", category: "Rings" },
+        { img: "../assets/images/bracelet.webp", category: "Bracelets" },
+        { img: "../assets/images/necklace.webp", category: "Necklaces" },
+        { img: "../assets/images/earring.webp", category: "Earrings" }
     ], ".category_container", ".category_slider");
 });
 
-$(document).ready(function () {
-    $('.dropdown').click(function () {
-        $(document.getElementsByClassName('arrow')).toggleClass('down up');
 
-        $('#customer_care_details').stop().slideToggle(300);
-    });
-});
