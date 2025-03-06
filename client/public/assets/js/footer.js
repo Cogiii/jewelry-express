@@ -9,7 +9,7 @@ function getCustomerEmail() {
     const form = document.getElementById('newsletterForm');
     const emailInput = document.getElementById("news_email");
 
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
         event.preventDefault(); // Prevent page refresh
 
         const emailValue = emailInput.value.trim();
@@ -20,9 +20,27 @@ function getCustomerEmail() {
         if (!emailPattern.test(emailValue)) {
             emailInput.setCustomValidity("Please enter a valid email address.");
         } else {
-            emailInput.setCustomValidity("");
-            console.log("Success!");
-            displayThankYouOverlay();
+            try {
+                const response = await fetch('/api/addCustomerEmail', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ customerEmail: emailValue})
+                });
+
+                const data = await response.json();
+
+                if(response.ok) {
+                    displayThankYouOverlay();
+                    emailInput.setCustomValidity("");
+                } else {
+                    emailInput.setCustomValidity(data.message);
+                }
+
+            } catch (error) {
+                emailInput.setCustomValidity("Error in subscribing the email. try again later!");
+            }
         }
 
         emailInput.reportValidity();

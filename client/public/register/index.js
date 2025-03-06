@@ -1,13 +1,13 @@
 function statusDropdown() {
     const statusDropDown = document.getElementById("status");
-    const status = ['Admin', 'Staff', 'Resigned'];
+    const status = ['Admin', 'Staff'];
 
     status.forEach(status => {
         const option = document.createElement("option");
         option.value = status;
         option.textContent = status;
         statusDropDown.appendChild(option);
-    })
+    });
 }
 
 async function positionDropdown() {

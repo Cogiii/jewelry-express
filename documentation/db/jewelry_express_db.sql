@@ -10,7 +10,7 @@
 
 -- CREATED BY: Laurence Kharl Devera
 -- =========================================
-DROP DATABASE jewelry_express_db;
+DROP DATABASE IF EXISTS jewelry_express_db;
 CREATE DATABASE jewelry_express_db;
 USE jewelry_express_db;
 
@@ -68,7 +68,7 @@ CREATE TABLE product (
     product_material_id INT,
     product_description VARCHAR(255),
     product_image LONGBLOB,
-    admin_id INT,
+    admin_id INT NOT NULL,
     date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_type_id) REFERENCES product_type(product_type_id),
     FOREIGN KEY (product_material_id) REFERENCES product_material(product_material_id),
@@ -89,14 +89,14 @@ CREATE TABLE customer (
 );
 
 CREATE TABLE customer_email (
-    customer_email_id INT PRIMARY KEY AUTO_INCREMENT,
+    email_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_id INT,
-    contact_email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
 );
 
 CREATE TABLE customer_contact (    
-    customer_contact_id INT PRIMARY KEY AUTO_INCREMENT,
+    contact_id INT PRIMARY KEY AUTO_INCREMENT,
     customer_id INT,
     contact_number VARCHAR(13),
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id)
@@ -159,10 +159,8 @@ CREATE TABLE appointment_service_prod (
 CREATE TABLE purchase (
     purchase_id INT PRIMARY KEY AUTO_INCREMENT,
     appointment_id INT,
-    employee_id INT,
     date_purchased DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id),
-    FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
 CREATE TABLE purchase_details (

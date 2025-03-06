@@ -67,4 +67,38 @@ router.post('/addProduct', ensureAuthenticated, upload.single('productImage'), a
     }
 });
 
+router.post('/addCustomerEmail', async (req, res) => {
+    const { customerEmail } = req.body;
+
+    if (!customerEmail) {
+        return res.status(400).json({ message: "Invalid Email" });
+    }
+
+    try {
+        const checkEmailExist = await query(
+            "SELECT COUNT(*) AS count FROM customer_email WHERE email = ? ",
+            [customerEmail]
+        );
+        const isEmailExist = checkEmailExist[0].count;
+
+        if(isEmailExist > 0) {
+            return res.status(409).json({ message: "This email is already subscribed" });
+        }
+
+        const insertEmail = await query(
+            "INSERT INTO customer_email (email) VALUES (?)",
+            [customerEmail]
+        );
+
+        if(!insertEmail.insertId) {
+            return res.status(500).json({ message: "Error adding email" });
+        }
+
+        res.status(201).json({ message: 'Email has been successfully subscribed.' });
+    } catch (error) {
+        console.error("Error adding email:", error);
+        return res.status(500).json({ message: "Error adding email" });
+    } 
+});
+
 module.exports = router;

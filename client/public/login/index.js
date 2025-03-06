@@ -10,7 +10,7 @@ document.getElementById('loginButton').addEventListener('click', async (error) =
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({username, password})
-        })
+        });
         const data = await response.json();
         
         if (response.ok){
