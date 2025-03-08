@@ -6,9 +6,10 @@
 
 nav {
     background-color: inherit;
+    height: 7%;
     position: sticky;
     top: 0;
-    padding: 16px 17px;
+    padding: 13px 17px 8px 17px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,7 +23,7 @@ nav button {
     width: 20px;
 }
 nav button img {
-    width: inherit;
+    width: 20px;
 }
 nav button:hover {
     background: var(--main-H-color);
@@ -30,7 +31,7 @@ nav button:hover {
 }
 
 nav .logo img {
-    width: 222px;
+    width: 210px;
 }
 
 nav .mobile_look {
@@ -43,7 +44,20 @@ nav .mobile_look .mobile_nav {
 
 nav .mobile_links {
     width: 100%;
+    height: 94vh;
     padding: 10px 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+nav .mobile_links hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid var(--section-border-color);
+    margin: 1em 0;
+    padding: 0;
 }
 
 nav .mobile_links ul {
@@ -51,10 +65,13 @@ nav .mobile_links ul {
     text-align: left;
     font-size: large;
     width: inherit;
+    margin: 15px auto;
+    width: 90%;
+    padding: 20px;
+    flex-grow: 1;
 }
 nav .mobile_links ul li {
     margin: 10px 0;
-    border-bottom: solid var(--main-H-color) 1px;
 }
 nav .mobile_links a {
     text-decoration: none;
@@ -62,9 +79,36 @@ nav .mobile_links a {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-family: 'Cactus Classical Serif';
+    font-size: 15px;
 }
 nav .mobile_links a:hover {
     color: var(--text-H-color);
+    background-color: none;
+    text-decoration: underline;
+}
+
+nav .mobile_links .info {
+    margin: 15px auto;
+    width: 90%;
+    padding: 20px;
+    position: relative;
+    color: var(--text-color);
+}
+
+nav .mobile_links .info > * {
+    display: flex;
+    font-family: 'Inria Serif';
+    font-size: 10px;
+    margin: 3px 5px 3px 0;
+    justify-content:flex-start
+}
+nav .mobile_links .info > * > img {
+    width: 15px;
+    height: 15px;
+}
+nav .mobile_links .info > * > * {
+    margin: 0 5px;
 }
 
 nav .mobile_look .mobile_nav #menu {
@@ -87,7 +131,7 @@ nav .mobile_look .mobile_nav #menu span {
     position: absolute;
     height: 1.5px;
     width: 100%;
-    background: var(--secondary-color);
+    background: var(--secondary-H-color);
     border-radius: 9px;
     opacity: 1;
     left: 0;
@@ -102,18 +146,19 @@ nav .mobile_look .mobile_nav #menu span {
 }
 
 nav .mobile_look .mobile_nav #menu span:nth-child(1) {
-    top: 2px;
-    height: 2px;
+    top: 3px;
+    height: 1.5px;
 }
   
 nav .mobile_look .mobile_nav #menu span:nth-child(2), 
 nav .mobile_look .mobile_nav #menu span:nth-child(3) {
-    top: 8px;
+    top: 9.5px;
+    height: 1.5px;
 }
   
 nav .mobile_look .mobile_nav #menu span:nth-child(4) {
-    top: 14px;
-    height: 2px;
+    top: 16px;
+    height: 1.5px;
 }
   
 nav .mobile_look .mobile_nav #menu.open span:nth-child(1), 
@@ -128,6 +173,7 @@ nav .mobile_look .mobile_nav #menu.open span:nth-child(2) {
     -moz-transform: rotate(45deg);
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
+    height: 1.5px;
 }
   
 nav .mobile_look .mobile_nav #menu.open span:nth-child(3) {
@@ -135,6 +181,7 @@ nav .mobile_look .mobile_nav #menu.open span:nth-child(3) {
     -moz-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
+    height: 1.5px;
 }
 
 /* Search container covers the entire nav */
@@ -183,13 +230,27 @@ nav .search-container.active {
     nav .mobile_links {
         background-color: var(--main-color);
         position: absolute;
-        margin-top: 40px;
         top: 0;
         left: 0;
         width: 100%;
-        display: none;
+        margin-top: 40px;
+        padding: 0;
         justify-content: center;
         /* border: solid red 2px; */
         overflow: hidden;
+        clip-path: inset(0 100% 0 0);
+        transition: clip-path 0.6s ease-out;
     }
+
+    nav .mobile_links.open_links {
+        clip-path: inset(0 0 0 0);
+    }
+
+    body.no-scroll {
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+
 }

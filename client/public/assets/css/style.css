@@ -19,8 +19,8 @@ header .header_vid video {
 header .header_vid::after {
     content: '';
     position: absolute;
-    bottom: -1%;
-    background: linear-gradient(to top, var(--main-color) 10%, rgba(0, 0, 0, 0) 90%);
+    bottom: -3%;
+    background: linear-gradient(to top, var(--main-color) 15%, rgba(0, 0, 0, 0) 100%);
     width: 100%;
     height: 40%;
     pointer-events: none;

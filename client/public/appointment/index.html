@@ -13,181 +13,142 @@
 </head>
 <body>
     <nav>
-        <div class="mobile_look">
-            <div class="mobile_nav">
-                <div id="menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <button class="search" id="search"><img src="../assets/icons/ion_search-outline.webp" alt="search icon"></button>
-        </div>
 
-        <div class="mobile_links" id="mobile_links">
-            <ul>
-                <li><a href="">Home </a></li>
-                <li><a href="">Shops</a></li>
-                <li><a href="">Appointment</a></li>
-                <li><a href="">About Us</a></li>
-            </ul>
-        </div>
-
-        <div class="logo">
-            <a href="/">
-                <img src="../assets/images/Jewelry Express Assets 1.webp" alt="Jewelry Express Logo">
-            </a>
-        </div>
-
-        <div class="bookAppointment">
-            <button id="bookAppointmentBtn"><img src="../assets/icons/Group.webp" alt="appointment"></button>
-        </div>
-
-        <div class="search-container" id="searchContainer">
-            <input type="text" id="searchInput" placeholder="Search..." />
-            <button id="closeSearch">&times;</button>
-        </div>
     </nav>
     
     <main>
-        <h1>Book an Appointment</h1>
-
-        <div class="appointment_services_container">
-            <div class="service">
-                <img src="../assets/icons/resizing.webp" alt="Resizing">
-                <p>Resizing</p>
-            </div>
-            <div class="service">
-                <img src="../assets/icons/consultation.webp" alt="Consultation">
-                <p>Consultation</p>
-            </div>
-            <div class="service">
-                <img src="../assets/icons/restoration.webp" alt="Restoration">
-                <p>Restoration</p>
-            </div>
-        </div>
-
-        <form action="" id="appointment_form">
-            <div class="input">
-                <label for="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName" placeholder="Write your first name here..." autocomplete="given-name" required>
-            </div>
-
-            <div class="input">
-                <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" placeholder="Write your last name here..." autocomplete="family-name" required>
-            </div>
-
-            <div class="input">
-                <label for="contactNumber">Contact Number</label>
-                <div class="numberInput">
-                    <select name="countryCode" id="countryCode" required>
-                        <option value="+63" selected>🇵🇭 +63</option>
-                    </select>
-                    <input type="tel" name="contactNumber" id="contactNumber" placeholder="Enter your number..." required>
-                </div>
-            </div>
-
-            <div class="input">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Write your email here..." autocomplete="email" required>
-            </div>
-
-            <div class="input">
-                <label for="purpose">Describe your purpose</label>
-                <textarea name="purpose" id="purpose" placeholder="Write your purpose here..."></textarea>
-            </div>
-
-            <!-- Selected Date Input -->
-            <!-- <div class="input">
-                <label for="selectedDate">Selected Date</label>
-                <input type="text" id="selectedDate" readonly placeholder="Click a date..." required>
-            </div> -->
-
-            <!-- Calendar -->
-            <div class="calendar_container">
-                <div class="calendar">
-                    <div class="calendar-header">
-                        <span id="prevMonth">&lt;</span>
-                        <span id="currentMonthYear"></span>
-                        <span id="nextMonth">&gt;</span>
-                    </div>
-                    <div class="calendar-days">
-                        <div class="day-label">SUN</div>
-                        <div class="day-label">MON</div>
-                        <div class="day-label">TUE</div>
-                        <div class="day-label">WED</div>
-                        <div class="day-label">THU</div>
-                        <div class="day-label">FRI</div>
-                        <div class="day-label">SAT</div>
-                    </div>
-                    <div class="calendar-dates"></div>
-                </div>
-            </div>
-
-            <div class="available_time_container">
-                <h2>Available Time</h2>
-                <div class="time-grid" id="timeSlots"></div>
-            </div>
-
-            <div class="submit_container">
-                <button type="submit">Confirm</button>
-            </div>
-        </form>
-    </main>
-
-    <footer>
-        <div class="thankyou_overlay">
-            <div class="container">
-                <h2>Thank you!</h2>
+        <section class="form">
+            <h1>Book an Appointment</h1>
     
-                <p>Check your email for more updates.</p>
-                <button id="okayBtn">Okay</button>
-            </div>
-        </div>
-
-        <section class="news_letter">
-            <h2>Subscribe to our Newsletter</h2>
-
-            <form action="" id="newsletterForm">
-                <input type="email" name="news_email" id="news_email" class="news_email" autocomplete="email" placeholder="Write your email here..." required>
-                <button type="submit">Send</button>
+            <form action="" id="appointment_form" class="appointment_form">
+                <div class="appointment_services_container">
+                    <div class="service" data-value="Resizing">
+                        <img src="../assets/icons/resizing.webp" alt="Resizing">
+                        <p>Resizing</p>
+                    </div>
+                    <div class="service" data-value="Consultation">
+                        <img src="../assets/icons/consultation.webp" alt="Consultation">
+                        <p>Consultation</p>
+                    </div>
+                    <div class="service" data-value="Restoration">
+                        <img src="../assets/icons/restoration.webp" alt="Restoration">
+                        <p>Restoration</p>
+                    </div>
+                    <p class="error_message"></p>
+                </div>
+    
+                <div class="input">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" placeholder="Write your first name here..." autocomplete="given-name">
+                </div>
+    
+                <div class="input">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" placeholder="Write your last name here..." autocomplete="family-name">
+                </div>
+    
+                <div class="input">
+                    <label for="contactNumber">Contact Number</label>
+                    <div class="numberInput">
+                        <select name="countryCode" id="countryCode">
+                            <option value="+63" selected>🇵🇭 +63</option>
+                        </select>
+                        <input type="tel" name="contactNumber" id="contactNumber" placeholder="Enter your number...">
+                    </div>
+                </div>
+    
+                <div class="input">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Write your email here..." autocomplete="email">
+                </div>
+    
+                <div class="input">
+                    <label for="purpose">Describe your purpose</label>
+                    <textarea name="purpose" id="purpose" placeholder="Write your purpose here..."></textarea>
+                </div>
+    
+                <!-- Calendar -->
+                <div class="calendar_container">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <span id="prevMonth"><i class="arrow left"></i></span>
+                            <span id="currentMonthYear"></span>
+                            <span id="nextMonth"><i class="arrow right"></i></span>
+                        </div>
+                        <div class="calendar-days">
+                            <div class="day-label">SUN</div>
+                            <div class="day-label">MON</div>
+                            <div class="day-label">TUE</div>
+                            <div class="day-label">WED</div>
+                            <div class="day-label">THU</div>
+                            <div class="day-label">FRI</div>
+                            <div class="day-label">SAT</div>
+                        </div>
+                        <div class="calendar-dates"></div>
+                        <p class="error_message"></p>
+                    </div>
+                </div>
+    
+                <div class="available_time_container">
+                    <h2>Available Time</h2>
+                    <p>Please select a date first</p>
+                    <div class="time-grid" id="timeSlots"></div>
+                    <p class="error_message"></p>
+                </div>
+    
+                <div class="submit_container">
+                    <button type="submit">Confirm</button>
+                </div>
             </form>
         </section>
 
-        <section class="customer_care">
-            <div class="dropdown">
-                <h2>Customer Care</h2>
+        <section class="confirmation" id="confirmation">
+            <header>
+                <span id="goBack"><i class="arrow left"></i></span>
+                <h1>Confirm Details</h1>
+            </header>
 
-                <p><i class="arrow down"></i></p>
+            <div class="container_details">
+                <div class="schedule">
+                    <span id="date">March 15, 2025</span>
+                    <p id="dayTime">WED - 9:30 AM - 10:30 AM</p>
+                </div>
+
+                <div class="customer_info">
+                    <div id="full_name_info">
+                        <span>Full Name</span>
+                        <p>Janelle Joyce</p>
+                    </div>
+                    <div id="contact_number_info">
+                        <span>Contact Number</span>
+                        <p>(+63) 981 084 8830</p>
+                    </div>
+                    <div id="email_info">
+                        <span>Email</span>
+                        <p>nelly@gmail.com</p>
+                    </div>
+                    <div id="appointment_type_info">
+                        <span>Appointment Type</span>
+                        <p>Consultation</p>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="purpose_details">
+                <span>Purpose</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
 
-            <div class="details" id="customer_care_details">
-                <p>CONTACT US</p>
-                <p>CALL NOW: (+63 969 617 8289)</p>
-                <p>BOOK AND APPOINTMENT</p>
-            </div>
+            <!-- 
+            MAYBE ANOTHER DIV FOR PRODUCT CONSULTATION 
+            -->
+
+            <button id="submitAppointmentBtn">Submit</button>
         </section>
+    </main>
 
-        <section class="store_details">
-            <h2>Follow Us</h2>
+    <footer>
 
-            <div class="social_links">
-                <a href="https://www.facebook.com/jewelryexpressdavao" target="_blank">
-                    <img src="../assets/icons/ri_facebook-line.webp" alt="Facebook">
-                </a>
-                <a href="https://www.instagram.com/janelly_joyce/" target="_blank">
-                    <img src="../assets/icons/circum_instagram.webp" alt="Instagram">
-                </a>
-            </div>
-
-            <img src="../assets/images/Jewelry_Express_Logo_Transparent 2.webp" alt="Jewelry Express Logo" class="logo">
-        </section>
-
-        <div class="bottom">
-            <p>&#169; Jewelry Express Davao</p>
-        </div>
     </footer>
     <script src="index.js"></script>
     <script src="../assets/js/nav.js"></script>

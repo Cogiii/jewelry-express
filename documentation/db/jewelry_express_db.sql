@@ -108,15 +108,16 @@ CREATE TABLE appointment (
     employee_id INT,
     date_appointed DATETIME DEFAULT CURRENT_TIMESTAMP,
     sched_of_appointment DATETIME,
+    appointment_purpose VARCHAR(255),
     appointment_status ENUM('pending', 'approve', 'cancelled', 'done') NOT NULL DEFAULT 'pending',
     FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
     FOREIGN KEY (employee_id) REFERENCES employee(employee_id)
 );
 
-CREATE TABLE appointment_purpose (
-    appointment_purpose_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE appointment_type (
+    appointment_type_id INT PRIMARY KEY AUTO_INCREMENT,
     appointment_id INT,
-    appointment_purpose VARCHAR(255) NOT NULL,
+    appointment_type VARCHAR(255) NOT NULL,
     FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id)
 );
 
@@ -160,7 +161,7 @@ CREATE TABLE purchase (
     purchase_id INT PRIMARY KEY AUTO_INCREMENT,
     appointment_id INT,
     date_purchased DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id),
+    FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id)
 );
 
 CREATE TABLE purchase_details (

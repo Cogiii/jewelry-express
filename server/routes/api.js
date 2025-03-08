@@ -101,4 +101,23 @@ router.post('/addCustomerEmail', async (req, res) => {
     } 
 });
 
+router.get("/getUnavailableTimes/:date", async (req, res) => {
+    const { date } = req.params; // Extract from params correctly
+    if (!date) return res.status(400).json({ error: "Date is required" });
+
+    try {
+        const result = await query(
+            "SELECT TIME_FORMAT(sched_of_appointment, '%l:%i %p') AS time FROM appointment WHERE DATE(sched_of_appointment) = ?",
+            [date]
+        );
+
+        res.status(200).json({ unavailableTimes: result.map(row => row.time) });
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+
+
 module.exports = router;

@@ -15,6 +15,24 @@ main h1 {
     justify-content: space-between;
     align-items: center;
     margin: 30px 60px;
+    position: relative;
+}
+
+.appointment_services_container .service {
+    opacity: 0.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.appointment_services_container .service:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.appointment_services_container .service.selected {
+    opacity: 1;
 }
 
 .appointment_services_container .service img {
@@ -25,7 +43,7 @@ main h1 {
     font-weight: lighter;
 }
 
-#appointment_form {
+.appointment_form {
     text-align: left;
     margin: 20px 0;
 }
@@ -34,13 +52,13 @@ div.input {
     display: block;
     margin: 9px 0;
     font-size: 13px;
-    margin: 0 51px;
+    margin: 0 13%;
 }
 div.input > * {
     margin: 9px 0;
 }
 
-#appointment_form input {
+.appointment_form input {
     background-color: var(--main-H-color);
     border: none;
     padding: 10px 20px;
@@ -57,21 +75,22 @@ div.input > * {
 .numberInput select {
     background-color: var(--main-H-color);
     border: none;
-    padding: 10px;
+    padding: 10px 0 10px 5px;
     width: 35%;
+    border-radius: 3px;
 }
 .numberInput input {
     width: 65%;
 }
 
-#appointment_form textarea {
+.appointment_form textarea {
     background-color: var(--main-H-color);
     border: none;
     padding: 10px 20px;
     width: 100%;
     resize: vertical;
     height: 5em;
-    border-radius: 7px;
+    border-radius: 3px;
 }
 
 .calendar_container {
@@ -85,6 +104,7 @@ div.input > * {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    position: relative;
 }
 
 .calendar-header {
@@ -121,7 +141,7 @@ div.input > * {
     transition: 0.3s;
 }
 
-.selected, .calendar-dates div:hover {
+.calendar-dates div.selected, .calendar-dates div:hover {
     background-color: var(--secondary-color) !important;
     color: var(--main-color);
 }
@@ -134,10 +154,17 @@ div.input > * {
 
 /* Available Time */
 .available_time_container {
-    margin: 40px 0;
+    margin: 40px 41px;
     text-align: center;
-    padding: 0 41px;
+    position: relative;
 }
+.available_time_container p {
+    color: var(--section-border-color);
+    margin-top: 50px;
+}
+/* .available_time_container.open {
+    display: block;
+} */
 .available_time_container h2 {
     font-size: 17px;
     font-weight: 500;
@@ -177,16 +204,107 @@ div.input > * {
     justify-content: center;
 }
 
-#appointment_form button {
-    margin: 0 auto;
-    background-color: var(--secondary-color);
-    color: var(--main-color);
-    padding: 10px 38px;
-    border: none;
+/* CONFIRMATION FORM */
+section.form {
+    /* display: none; */
+}
+section.form.hide {
+    display: none;
+}
+
+section.confirmation {
+    display: none;
+    flex-direction: column;
+}
+section.confirmation.show {
+    display: flex;
+}
+section.confirmation > * {
+    margin: auto 10%;
+}
+
+section.confirmation header {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+section.confirmation header span {
+    position: absolute;
+    left: 0;
+}
+
+.confirmation .container_details {
+    font-family: 'Inria Serif';
+    margin: 35px 10%;
+}
+.confirmation .container_details .schedule {
+    margin-bottom: 35px;
+}
+.confirmation .container_details .schedule span {
+    font-size: 18px;
+}
+.confirmation .container_details .schedule p {
+    font-size: 12px;
+}
+
+.confirmation .container_details .customer_info {
+    font-size: 12px;
+
+}
+.confirmation .container_details .customer_info > * {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+}
+.confirmation .container_details .customer_info span {
+    font-family: 'Cactus Classical Serif';
+}
+.confirmation .purpose_details {
+    text-align: left;
+    border-top: solid var(--section-border-color) 1px;
+    margin: 0;
+    padding: 35px 51px;
+    font-size: 12px;
+}
+.confirmation .purpose_details span {
+    font-family: 'Cactus Classical Serif';
+}
+.confirmation .purpose_details p {
+    font-family: 'Inria Serif';
+    text-align: center;
+    margin: 15px 7px;
+}
+section.confirmation button {
+    margin: auto;
+}
+
+@media screen and (max-width: 360px) {
+    .numberInput select {
+        width: 45%;
+    }
+    .numberInput input {
+        width: 55%;
+    }
+
+    .time-slot {
+        font-size: 11px;
+    }
+    .available_time_container {
+        padding: 0 35px;
+    }
+}
+
+p.error_message {
+    color: red;
+    position: absolute;
+    bottom: -20px;
+    left: 0px;    
+    font-size: 12px;
+    /* display: none; */
+}
+.error {
+    border: solid red 1px;
+    padding: 5px;
     border-radius: 7px;
 }
-
-#appointment_form button:hover {
-    background-color: var(--secondary-H-color);
-}
-

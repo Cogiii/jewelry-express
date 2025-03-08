@@ -28,6 +28,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body, html {
@@ -36,6 +37,13 @@ body, html {
     background-color: var(--main-color);
     overflow-x: hidden;
     color: var(--text-color);
+    /* scroll-behavior: smooth; */
+}
+
+input:-webkit-autofill {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--main-H-color) inset !important;
+    -webkit-text-fill-color: #000 !important;
 }
 
 .thankyou_overlay {
@@ -102,5 +110,49 @@ body, html {
 }
 
 .thankyou_overlay .container button:hover {
+    background-color: var(--secondary-H-color);
+}
+
+.arrow {
+    border: solid var(--text-color);
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    border-radius: 2px;
+    padding: 3px;
+    opacity: 0.7;
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+button {
+    margin: 0 auto;
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+    height: 31px;
+    width: 122px;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Inria Serif';
+}
+
+button:hover {
     background-color: var(--secondary-H-color);
 }
