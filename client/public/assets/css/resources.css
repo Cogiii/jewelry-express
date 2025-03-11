@@ -46,7 +46,7 @@ input:-webkit-autofill {
     -webkit-text-fill-color: #000 !important;
 }
 
-.thankyou_overlay {
+.overlay {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -61,7 +61,7 @@ input:-webkit-autofill {
     z-index: 10001;
 }
 
-.thankyou_overlay::before {
+.overlay::before {
     content: '';
     position: absolute;
     top: 0;
@@ -72,7 +72,7 @@ input:-webkit-autofill {
     opacity: 0.5;
 }
 
-.thankyou_overlay .container {
+.overlay .container {
     width: 300px;
     height: 192px;
     background-color: var(--main-color);
@@ -84,7 +84,7 @@ input:-webkit-autofill {
     transition: transform 0.3s ease-in-out;
 }
 
-.thankyou_overlay .container h2 {
+.overlay .container h2 {
     font-size: 24px;
     font-family: 'Gamalia';
     font-weight: 500;
@@ -93,13 +93,13 @@ input:-webkit-autofill {
     border-bottom: solid var(--section-border-color) 2px;
 }
 
-.thankyou_overlay .container p {
+.overlay .container p {
     font-family: 'Inria Serif';
     font-size: 14px;
     margin: 21px 0 17px 0;
 }
 
-.thankyou_overlay .container button {
+.overlay .container button {
     background-color: var(--secondary-color);
     color: var(--main-color);
     font-family: 'Inria Serif';
@@ -109,7 +109,7 @@ input:-webkit-autofill {
     border-radius: 7px;
 }
 
-.thankyou_overlay .container button:hover {
+.overlay .container button:hover {
     background-color: var(--secondary-H-color);
 }
 

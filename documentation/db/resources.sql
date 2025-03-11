@@ -13,18 +13,15 @@ USE jewelry_express_db;
 
 INSERT INTO positions (position_name) VALUES
     ("admin"),
-    ("Cashier");
+    ("Employee");
 
 INSERT INTO product_material (product_material) VALUES 
     ("Gold"),
-    ("Silver"),
-    ("Diamond"),
-    ("Platinum"),
-    ("Pearl"),
-    ("Copper");
+    ("Amethyst"),
+    ("Diamond");
 
 INSERT INTO product_type (product_type) VALUES
-    ("Necklace"),
-    ("Bracelet"),
+    ("Ring"),
     ("Earring"),
-    ("Ring");
+    ("Necklace"),
+    ("Bracelet");

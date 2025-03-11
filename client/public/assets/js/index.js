@@ -32,7 +32,7 @@ function initializeSlider(container, dotsContainer, totalItems) {
     let currentIndex = 0;
     const jewelryItem = container.querySelector(".jewelry");
     if (!jewelryItem) return;
-    const slideDistance = jewelryItem.offsetWidth + 100;
+    const slideDistance = jewelryItem.offsetWidth + 45; // match the value on the gap property
 
     function goToSlide(index) {
         currentIndex = index;

@@ -207,6 +207,7 @@ div.input > * {
 /* CONFIRMATION FORM */
 section.form {
     /* display: none; */
+    display: block;
 }
 section.form.hide {
     display: none;
@@ -301,10 +302,9 @@ p.error_message {
     bottom: -20px;
     left: 0px;    
     font-size: 12px;
-    /* display: none; */
 }
 .error {
-    border: solid red 1px;
+    border: solid red 1px !important;
     padding: 5px;
-    border-radius: 7px;
+    border-radius: 3px;
 }

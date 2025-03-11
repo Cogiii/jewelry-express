@@ -72,11 +72,11 @@ function calendarFormInput(onDateSelect) {
 
                     selectedDate = { 
                         year: selectedYear, 
-                        month: selectedMonth, 
+                        month: selectedMonth+1, 
                         day: day, 
-                        weekday: selectedWeekday // Store the weekday
+                        weekday: selectedWeekday
                     };
-                    
+                    // console.log(selectedMonth);
                     document.querySelector(".calendar").classList.remove("error");
                     document.querySelector(".calendar .error_message").textContent = "";
                     emptyTimeText.style.display = "none";
@@ -112,7 +112,7 @@ function calendarFormInput(onDateSelect) {
 
 async function getUnavailableTimes(selectedDate) {
     try {
-        const formattedDate = `${selectedDate.year}-${selectedDate.month + 1}-${selectedDate.day}`;
+        const formattedDate = `${selectedDate.year}-${selectedDate.month}-${selectedDate.day}`;
 
         const response = await fetch(`/api/getUnavailableTimes/${formattedDate}`, {
             method: 'GET',
@@ -145,7 +145,7 @@ async function renderAvailableTime(selectedDate) {
     const currentHours = now.getHours();
     const currentMinutes = now.getMinutes();
     const isToday = selectedDate.year === now.getFullYear() &&
-                    selectedDate.month === now.getMonth() &&
+                    selectedDate.month-1 === now.getMonth() &&
                     selectedDate.day === now.getDate();
     
     // Convert time to 24-hour format for comparison
@@ -197,11 +197,13 @@ async function renderAvailableTime(selectedDate) {
 }
 
 function validateForm() {
+    // Fields to validate
+    // If add another field, it must be from bottom to top to scroll to the first error
     const fields = [
         { field: document.getElementById('purpose'), message: "Please select a purpose." },
         { field: document.getElementById('email'), message: "Please enter a valid email address.", pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/ },
         { field: document.getElementById('countryCode'), message: "Please select your country code." },
-        { field: document.getElementById('contactNumber'), message: "Please enter a valid contact number." },
+        { field: document.getElementById('contactNumber'), message: "Please enter a valid contact number.", pattern: /^9\d{9}$/ },
         { field: document.getElementById('lastName'), message: "Please enter your last name." },
         { field: document.getElementById('firstName'), message: "Please enter your first name." }
     ];
@@ -211,14 +213,12 @@ function validateForm() {
         if (!field) continue; // Skip if field doesn't exist
         const value = field.value.trim();
 
-        console.log("TEST")
-
         if (!value || (pattern && !pattern.test(value))) {
             field.setCustomValidity(message);
-            field.reportValidity(); // Show error message
+            field.reportValidity();
             field.scrollIntoView({ behavior: "smooth", block: "center" });
-            isValid = false; // Stop further validation
-            field.style.border = 'solid red 1px';
+            isValid = false;
+            field.classList.add('error');
         } else {
             field.setCustomValidity(""); // Clear error
         }
@@ -242,21 +242,29 @@ function appointmentForm() {
 
     calendarFormInput(onDateSelected); // Initialize calendar with the callback
 
+    const firstNameField = document.getElementById('firstName');
+    const lastNameField = document.getElementById('lastName');
     const contactNumberField = document.getElementById('contactNumber');
     const countryCodeField = document.getElementById('countryCode');
     const emailField = document.getElementById('email');
+    const purposeField = document.getElementById('purpose');
 
     document.getElementById('appointment_form').addEventListener('submit', function (event) {
         event.preventDefault(); // Prevent page refresh
 
+        const firstName = firstNameField.value.trim();
+        const lastName = lastNameField.value.trim();
         const countryCode = countryCodeField.value.trim();
         const contactNumber = contactNumberField.value.trim();
         const email = emailField.value.trim();
+        const purpose = purposeField.value.trim();
         const selectedServices = getAppointmentTypes();
         // getSelectedDate
         // getSelectedTime
         
-        console.log(selectedServices)
+        const formData = new FormData();
+
+        // console.log(selectedServices)
 
         if(!getSelectedTime) {
             const timeSlots = document.querySelector('.available_time_container');
@@ -286,38 +294,30 @@ function appointmentForm() {
             return;
         }
 
-        const fullNumber = `${countryCode}-${contactNumber}`;
-        const regex = new RegExp(`^\\${countryCode}-9\\d{9}$`); // Ensures countryCode and format are correct
+        const fullNumber = `${countryCode}${contactNumber}`;
 
-        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-        if (!emailPattern.test(email)) {
-            emailField.setCustomValidity("Please enter a valid email address.");
-            emailField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-            emailField.setCustomValidity("");
-        }
-
-        if (!regex.test(fullNumber)) {
-            contactNumberField.setCustomValidity("Invalid contact number format");
-            contactNumberField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        } else {
-            contactNumberField.setCustomValidity(""); // Clear error if valid
-        }
-
-        console.log("Selected Services:", getAppointmentTypes());
-        console.log("Selected Date:", getSelectedDate || "No date selected");
-        console.log("Selected Time:", getSelectedTime ? getSelectedTime() : "No time selected");
+        // console.log("Selected Services:", getAppointmentTypes());
+        // console.log("Selected Date:", getSelectedDate || "No date selected");
+        // console.log("Selected Time:", getSelectedTime ? getSelectedTime() : "No time selected");
 
         // Validate form before toggling visibility
         if (this.checkValidity()) {
             event.preventDefault();
+
+            formData.append('firstName', firstName);
+            formData.append('lastName', lastName);
+            formData.append('email', email);
+            formData.append('contactNumber', fullNumber);
+            formData.append('purpose', purpose);
+            formData.append('services', JSON.stringify(selectedServices));
+            formData.append('date', JSON.stringify(getSelectedDate));
+            formData.append('time', getSelectedTime());
             
             const form = document.querySelector('section.form');
             const confirmation = document.querySelector('section.confirmation');
             form.classList.add('hide');
             confirmation.classList.add('show');
-            submitConfirmedInfo();
+            submitConfirmedInfo(formData);
             confirmation.scrollIntoView({ block: 'center' });
         }
     });
@@ -333,27 +333,141 @@ function appointmentForm() {
     document.querySelectorAll('input, select, textarea').forEach(field => {
         field.addEventListener('change', function () {
             field.setCustomValidity("");
-            this.style.border = 'none';
+            this.classList.remove('error');
         });
     });    
 
     // Reset validation when country code changes
     countryCodeField.addEventListener("change", function () {
         contactNumberField.setCustomValidity("");
-        this.style.border = 'none';
+        this.classList.remove('error');
     });
 }
 
-function submitConfirmedInfo() {
-    const goBack = document.getElementById('goBack');
+function displayOverlay(header, message) {
+    const thankYouOverlay = document.querySelector('.overlay');
+    const container = document.querySelector('.overlay .container');
+    const headerText = document.querySelector('.overlay .container h2');
+    const messageText = document.querySelector('.overlay .container p');
+    const okayBtn = document.getElementById('okayBtn');
 
+    headerText.textContent = header;
+    messageText.textContent = message;
+
+    thankYouOverlay.style.opacity = '1';
+    thankYouOverlay.style.visibility = 'visible';
+    setTimeout(() => {
+        container.style.transform = 'scale(1)';
+    }, 100);
+
+    okayBtn.addEventListener('click', async () => {
+        container.style.transform = 'scale(0)';
+        await setTimeout(() => {
+            thankYouOverlay.style.opacity = '0';
+            thankYouOverlay.style.visibility = 'hidden';
+        }, 300);
+
+        window.location.href = '/';
+    })
+}
+
+function submitConfirmedInfo(formData) {
+    const goBack = document.getElementById('goBack');
+    const dateText = document.getElementById('date');
+    const dayTimeText = document.getElementById('dayTime');
+    const fullNameText = document.querySelector('#full_name_info p');
+    const contactNumberText = document.querySelector('#contact_number_info p');
+    const emailText = document.querySelector('#email_info p');
+    const servicesText = document.querySelector('#services_info p');
+    const purposeText = document.querySelector('.purpose_details p');
+    const submitAppointmentBtn = document.getElementById('submitAppointmentBtn');
+    // console.log(formData);
+
+    // Get values from FormData
+    const firstName = formData.get('firstName') || 'N/A';
+    const lastName = formData.get('lastName') || 'N/A';
+    const email = formData.get('email') || 'N/A';
+    const contactNumber = formData.get('contactNumber') || 'N/A';
+    const purpose = formData.get('purpose') || 'N/A';
+    const services = formData.get('services') ? JSON.parse(formData.get('services')) : [];
+    const dateObj = formData.get('date') ? JSON.parse(formData.get('date')) : null;
+    const time = formData.get('time') || 'N/A';
+
+    let formattedDate = 'N/A';
+    let dayOfWeek = 'N/A';
+
+    if (dateObj && dateObj.year && dateObj.month - 1 && dateObj.day) {
+        const date = new Date(dateObj.year, dateObj.month - 1, dateObj.day); // Month is 0-based
+        formattedDate = date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        });
+        dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+    }
+
+    let formattedNumber = 'N/A';
+    if (contactNumber.match(/^\+639\d{9}$/)) {
+        formattedNumber = contactNumber.replace(/^\+63(\d{3})(\d{3})(\d{4})$/, '(+63) $1 $2 $3');
+    }
+
+    // Convert services array to a string
+    const servicesTextValue = Array.isArray(services) ? services.join(', ') : 'N/A';
+
+    // Display the data
+    dateText.textContent = formattedDate;
+    dayTimeText.textContent = `${dayOfWeek} - ${time}`;
+    fullNameText.textContent = `${firstName} ${lastName}`;
+    contactNumberText.textContent = formattedNumber;
+    emailText.textContent = email;
+    servicesText.textContent = servicesTextValue;
+    purposeText.textContent = purpose;
+
+    // Go back event listener
     goBack.addEventListener('click', () => {
         const form = document.querySelector('section.form');
         const confirmation = document.querySelector('section.confirmation');
         form.classList.remove('hide');
         confirmation.classList.remove('show');
     });
+
+    submitAppointmentBtn.addEventListener('click', async () => {
+        try {
+            const response = await fetch(`/api/checkIfDateAndTimeAvailable?date=${encodeURIComponent(formattedDate)}&time=${encodeURIComponent(time)}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' }  // Content-Type is unnecessary for GET, but it won't break
+            });
+    
+            const date = await response.json();
+            
+            if(date.isAvailable) {
+                fetch('/api/addAppointment', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.message === 'Appointment added successfully!') {
+                        displayOverlay("Thank You!", "Check your email and messages for your appointment’s updates.");
+                        
+                    } else {
+
+                    }
+                })
+                .catch(error => {
+                    console.error("Error during submision:", error);
+                })
+
+            } else {
+                console.log("SAD");
+            }
+    
+        } catch (error) {
+            console.error("Error in adding appointment:", error);
+        }
+    });    
 }
+
 
 document.addEventListener("DOMContentLoaded", function () {
     appointmentForm();

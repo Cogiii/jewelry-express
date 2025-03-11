@@ -76,17 +76,17 @@ a {
     transition: transform 0.3s ease-in-out;
     will-change: transform;
     width: 100%;
-    gap: 100px;
+    gap: 45px;
+    padding: 0 60px;
 }
 
 .jewelry {
     text-align: center;
-    flex: 0 0 100%; /* Ensures only one item is shown */
+    flex: 0 0 80%; /* Ensures only one item is shown */
 }
 
 .jewelry img {
     width: 255px;
-    border-radius: 10px;
 }
 .jewelry h3 {
     font-size: 18px;
@@ -174,7 +174,8 @@ a {
     transition: transform 0.3s ease-in-out;
     will-change: transform;
     width: 100%;
-    gap: 100px;
+    gap: 45px;
+    padding: 0 60px;
     margin-top: 35px;
 }
 

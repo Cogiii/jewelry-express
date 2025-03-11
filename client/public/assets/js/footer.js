@@ -2,7 +2,7 @@ function displayFooter() {
     const footer = document.querySelector('footer');
 
     const template = `
-        <div class="thankyou_overlay">
+        <div class="thankyou_overlay overlay">
             <div class="container">
                 <h2>Thank you!</h2>
     
@@ -30,7 +30,7 @@ function displayFooter() {
             <div class="details" id="customer_care_details">
                 <p>CONTACT US</p>
                 <p>CALL NOW: (+63 969 617 8289)</p>
-                <p>BOOK AND APPOINTMENT</p>
+                <p>BOOK AN APPOINTMENT</p>
             </div>
         </section>
 
@@ -93,6 +93,9 @@ function getCustomerEmail() {
                 if(response.ok) {
                     displayThankYouOverlay();
                     emailInput.setCustomValidity("");
+                    setTimeout(() => {
+                        emailInput.value = "";
+                    },100)
                 } else {
                     emailInput.setCustomValidity(data.message);
                 }

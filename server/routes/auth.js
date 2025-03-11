@@ -51,7 +51,7 @@ router.post('/registerAdmin', async (req, res) => {
         const userCount = results[0].count;
 
         if (userCount > 0) {
-            console.log("wow")
+            // console.log("wow")
             if (req.isAuthenticated()) {
                 await registerAdmin();
             } else {

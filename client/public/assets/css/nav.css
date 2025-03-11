@@ -115,6 +115,7 @@ nav .mobile_look .mobile_nav #menu {
     width: 17px;
     height: 13px;
     position: relative;
+    margin-top: 3px;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -o-transform: rotate(0deg);
@@ -133,7 +134,7 @@ nav .mobile_look .mobile_nav #menu span {
     width: 100%;
     background: var(--secondary-H-color);
     border-radius: 9px;
-    opacity: 1;
+    opacity: 1; 
     left: 0;
     -webkit-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
