@@ -92,7 +92,7 @@ CREATE TABLE product_coding (
 CREATE TABLE product_image (
     product_image_id INT PRIMARY KEY AUTO_INCREMENT,
     product_id INT,
-    product_image LONGBLOB,
+    image_data LONGBLOB,
     FOREIGN KEY (product_id) REFERENCES product(product_id)
 );
 

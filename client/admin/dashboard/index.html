@@ -17,28 +17,37 @@
         <label for="name">Product Name:</label>
         <input type="text" id="name" required>
         <br>
+    
         <label for="type">Type:</label>
         <select id="type" required>
             <option value="" selected disabled>Select Type</option>
         </select>
         <br>
+    
         <label for="material">Material:</label>
         <select id="material" required>
             <option value="" selected disabled>Select Material</option>
         </select>
         <br>
+    
         <label for="description">Product Description:</label>
         <textarea id="description" required></textarea>
         <br>
+    
         <label for="code">Product Code:</label>
         <input type="text" id="code" required>
         <br>
-        <label for="image">Product Image:</label>
-        <input type="file" id="image" accept="image/*" required>
-        <img id="imagePreview" src="" alt="Image Preview" style="display: none;">
+    
+        <label for="images">Product Images:</label>
+        <input type="file" id="images" accept="image/*" multiple required>
+        
+        <!-- Image Previews -->
+        <div id="imagePreviewContainer"></div>
         <br>
+    
         <button type="submit">Add Product</button>
     </form>
+    
 
 
     <script src="index.js"></script>

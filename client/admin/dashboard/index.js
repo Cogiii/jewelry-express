@@ -47,21 +47,45 @@ document.addEventListener("DOMContentLoaded", function () {
     productMaterialsDropDown();
 });
 
-document.getElementById('image').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const imagePreview = document.getElementById('imagePreview');
-            imagePreview.src = e.target.result;
-            imagePreview.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
+const selectedImages = []; // Store selected images
+
+document.getElementById('images').addEventListener('change', function (event) {
+    const files = event.target.files;
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+
+    Array.from(files).forEach((file) => {
+        // Check if the file is already added
+        if (selectedImages.some(img => img.name === file.name)) {
+            alert(`Image "${file.name}" is already selected.`);
+            return; // Skip duplicate image
+        }
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.alt = file.name;
+                img.style.width = '100px';
+                img.style.height = '100px';
+                img.style.margin = '5px';
+                img.style.border = '1px solid #ccc';
+
+                imagePreviewContainer.appendChild(img);
+            };
+            reader.readAsDataURL(file);
+            selectedImages.push(file); // Store image
+        }
+    });
 });
 
 document.getElementById('productForm').addEventListener('submit', async function (event) {
     event.preventDefault();
+
+    if (selectedImages.length === 0) {
+        alert('Please upload at least one image.');
+        return;
+    }
 
     const formData = new FormData();
     formData.append('productName', document.getElementById('name').value);
@@ -69,8 +93,12 @@ document.getElementById('productForm').addEventListener('submit', async function
     formData.append('productMaterial', document.getElementById('material').value);
     formData.append('productDescription', document.getElementById('description').value);
     formData.append('productCode', document.getElementById('code').value);
-    formData.append('productImage', document.getElementById('image').files[0]);
-    formData.append('adminId', );
+    formData.append('adminId', 1);
+
+    // Append all selected images
+    selectedImages.forEach((image) => {
+        formData.append('productImages', image);
+    });
 
     try {
         const response = await fetch('/api/addProduct', {
@@ -83,7 +111,8 @@ document.getElementById('productForm').addEventListener('submit', async function
         if (response.ok) {
             alert('Product added successfully!');
             this.reset();
-            document.getElementById('imagePreview').style.display = 'none';
+            document.getElementById('imagePreviewContainer').innerHTML = ''; // Clear previews
+            selectedImages.length = 0; // Reset selected images
         } else {
             alert('Product add failed!');
             console.log(data.message);
@@ -92,3 +121,4 @@ document.getElementById('productForm').addEventListener('submit', async function
         console.error('Error:', error);
     }
 });
+

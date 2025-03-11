@@ -40,20 +40,21 @@ router.get('/getProductTypes', (req, res) => {
     });
 });
 
-router.post('/addProduct', ensureAuthenticated, upload.single('productImage'), async (req, res) => {
+router.post('/addProduct', ensureAuthenticated, upload.array('productImages', 8), async (req, res) => {
     const { productName, productType, productMaterial, productDescription, productCode, adminId } = req.body;
-    const productImage = req.file? req.file.buffer : null;
+    const productImages = req.files;
 
-    if (!productName || !productType || !productMaterial || !productDescription || !productCode || !productImage || !adminId) {
+    if (!productName || !productType || !productMaterial || !productDescription || !productCode || !adminId) {
         return res.status(400).json({ message: "All fields are required" });
     }
 
     try {
+        // Insert the product and get its ID
         const product = await query(
-            "INSERT INTO product (product_name, product_type_id, product_material_id, product_description, product_image, admin_id) VALUES (?, ?, ?, ?, ?, ?)",
-            [productName, productType, productMaterial, productDescription, productImage, adminId]
+            "INSERT INTO product (product_name, product_type_id, product_material_id, product_description, admin_id) VALUES (?, ?, ?, ?, ?)",
+            [productName, productType, productMaterial, productDescription, adminId]
         );
-        
+
         const productId = product.insertId;
 
         await query(
@@ -61,12 +62,22 @@ router.post('/addProduct', ensureAuthenticated, upload.single('productImage'), a
             [productCode, productId]
         );
 
+        if (productImages.length > 0) {
+            for (const image of productImages) {
+                await query(
+                    "INSERT INTO product_image (product_id, image_data) VALUES (?, ?)",
+                    [productId, image.buffer]
+                );
+            }
+        }
+
         res.json({ message: "Product added successfully!" });
     } catch (error) {
         console.error("Error adding product:", error);
         res.status(500).json({ message: "Error adding product" });
     }
 });
+
 
 router.post('/addCustomerEmail', async (req, res) => {
     const { customerEmail } = req.body;
