@@ -304,14 +304,12 @@ tbody td:last-child {
     height: 100%;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.5);
-    align-items: center;
-    justify-content: center;
 }
 
 .modal-content {
     position: relative;
     background-color: #F0E9E1;
-    margin: auto;
+    margin: 0 auto;
     padding: 25px;
     width: 500px;
     max-width: 90%;
@@ -319,6 +317,11 @@ tbody td:last-child {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     top: 50%;
     transform: translateY(-50%);
+}
+
+.confirmation-content {
+    width: 400px;
+    padding: 20px;
 }
 
 .modal-close {
@@ -393,6 +396,29 @@ tbody td:last-child {
 
 .reject-btn:hover {
     background-color: #ccc;
+}
+
+.confirmation-message {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.confirmation-actions {
+    justify-content: center;
+}
+
+.remarks-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #E4DBD0;
+    resize: vertical;
+    font-family: 'Georgia', serif;
+    margin-top: 8px;
 }
 
 /* Make table rows clickable */

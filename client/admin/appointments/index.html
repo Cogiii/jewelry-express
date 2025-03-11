@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jewelry Express | Appointments</title>
-    <script src="script.js"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
 </head>
 <body>
-    
+    <script src="script.js"></script>
     <div class="page-content">
         <div class="left">
             <div class="top-bar">
@@ -234,6 +233,7 @@
         }
     </script>
 
+<!-- Customer Details Modal -->
 <div id="customer-modal" class="modal">
     <div class="modal-content">
         <span class="modal-close">&times;</span>
@@ -284,13 +284,14 @@
     </div>
 </div>
 
+<!-- Approval Remarks Modal -->
 <div id="approval-modal" class="modal">
     <div class="modal-content">
         <span class="modal-close approval-close">&times;</span>
         <h3>Appointment Approval Remarks</h3>
         <div class="modal-section">
             <div class="detail-label">Description</div>
-            <textarea class="remarks-textarea" id="approval-remarks" placeholder="Enter approval remarks...">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit, turpis at accumsan malesuada, felis mauris effendum ligula, ut rhoncus felis elit et risus. Aenean vitae justo dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pretium convallis elit et aliquam. Mauris feugiat vulputate enim, eget massa, maximus id eleifend a, hendrerit ullamcorper ante. Nunc at posuere velit. In vel massa ut sem congue convallis. Vestibulum in vestibulum enim. Etiam sollicitudin auctor est.</textarea>
+            <textarea class="remarks-textarea" id="approval-remarks" placeholder="Enter approval remarks...">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit, turpis at accumsan malesuada, felis mauris effendum ligula, ut rhoncus felis elit et risus. Aenean vitae justo dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pretium convallis elit et aliquam.</textarea>
         </div>
         <div class="modal-actions">
             <button class="accept-btn" id="confirm-approval">Accept</button>
@@ -306,7 +307,7 @@
         <h3>Appointment Rejection Remarks</h3>
         <div class="modal-section">
             <div class="detail-label">Description</div>
-            <textarea class="remarks-textarea" id="rejection-remarks" placeholder="Enter rejection reason...">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit, turpis at accumsan malesuada, felis mauris effendum ligula, ut rhoncus felis elit et risus. Aenean vitae justo dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pretium convallis elit et aliquam. Mauris feugiat vulputate enim, eget massa, maximus id eleifend a, hendrerit ullamcorper ante. Nunc at posuere velit. In vel massa ut sem congue convallis. Vestibulum in vestibulum enim. Etiam sollicitudin auctor est.</textarea>
+            <textarea class="remarks-textarea" id="rejection-remarks" placeholder="Enter rejection reason...">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit, turpis at accumsan malesuada, felis mauris effendum ligula, ut rhoncus felis elit et risus. Aenean vitae justo dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pretium convallis elit et aliquam.</textarea>
         </div>
         <div class="modal-actions">
             <button class="reject-btn" id="confirm-rejection">Reject</button>
