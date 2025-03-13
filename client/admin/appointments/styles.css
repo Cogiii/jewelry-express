@@ -1,4 +1,4 @@
-/* dashboard section */
+/* appointments section */
 body {
     margin: 0;
     padding: 20px;
@@ -149,80 +149,30 @@ body {
     padding-right: 10px;
 }
 
-.recent-appointments {
+.appointment-section {
     background-color: #E4DBD0;
     padding: 20px;
     border-radius: 5px;
+    transition: max-height 0.3s ease;
 }
 
-.recent-appointments h3 {
+.appointment-section h3 {
     margin-top: 0;
     margin-bottom: 20px;
     color: #333;
     font-weight: normal;
 }
 
-.stats-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.stat-box {
-    background-color: #2d4f45;
-    color: white;
-    padding: 15px 20px;
-    border-radius: 5px;
-    text-align: center;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.stat-box span {
-    font-size: 24px;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
-.appointments-container {
-    background: #E4DBD0;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-}
-
-.appointments-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.appointments-header h3 {
-    margin: 0;
-    color: #333;
-    font-weight: normal;
-}
-
-.dropdown {
-    background-color: transparent;
-    border: none;
-    color: #666;
-    font-size: 14px;
-    cursor: pointer;
-    padding: 5px 10px;
-}
-
 .table-container {
+    position: relative;
+    max-height: 200px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.appointment-section.expanded .table-container {
+    max-height: 600px;
     overflow-y: auto;
-    flex-grow: 1;
 }
 
 table {
@@ -230,12 +180,23 @@ table {
     border-collapse: separate;
     border-spacing: 0;
     table-layout: fixed; /* Add fixed table layout */
-
 }
 
-/* This ensures proper spacing between rows */
-tbody tr {
-    margin-top: 10px;
+/* Fixed column widths */
+th:nth-child(1), td:nth-child(1) {
+    width: 30%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+    width: 30%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+    width: 20%;
+}
+
+th:nth-child(4), td:nth-child(4) {
+    width: 20%;
 }
 
 thead {
@@ -254,6 +215,9 @@ thead th {
     text-align: left;
     font-weight: normal;
     letter-spacing: 0.5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 thead th:first-child {
@@ -271,32 +235,202 @@ tbody tr {
 }
 
 tbody tr:not(:last-child) {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 tbody td {
     padding: 12px 15px;
     color: #333;
-    border-top: 5px solid #E4DBD0;
-    border-bottom: 5px solid #E4DBD0;
+    border-top: 4px solid #E4DBD0;
+    border-bottom: 4px solid #E4DBD0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+tbody td:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-left: 4px solid #E4DBD0;
+}
+
+tbody td:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-right: 4px solid #E4DBD0;
+}
+
+.time {
+    color: #555;
+    margin-left: 5px;
+}
+
+.hidden-row {
+    display: none;
+}
+
+.hidden-row.show {
+    display: table-row;
+}
+
+.see-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.see-more-btn {
+    background: none;
+    border: none;
+    color: #2d4f45;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+.see-more-btn:hover {
+    color: #1a2f29;
+    text-decoration: underline;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #F0E9E1;
+    margin: 0 auto;
+    padding: 25px;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.confirmation-content {
+    width: 400px;
+    padding: 20px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #2d4f45;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal h3 {
+    color: #2d4f45;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #a8c0b9;
+}
+
+.modal-section {
+    margin-bottom: 25px;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.detail-label {
+    width: 40%;
+    color: #555;
+    font-weight: 600;
+}
+
+.detail-value {
+    width: 60%;
+    background-color: #E4DBD0;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.accept-btn, .reject-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.accept-btn {
+    background-color: #2d4f45;
+    color: white;
+}
+
+.reject-btn {
+    background-color: #E4DBD0;
+    color: #333;
+}
+
+.accept-btn:hover {
+    background-color: #1a2f29;
+}
+
+.reject-btn:hover {
+    background-color: #ccc;
+}
+
+.confirmation-message {
+    text-align: center;
+    padding: 15px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.confirmation-actions {
+    justify-content: center;
+}
+
+.remarks-textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #E4DBD0;
+    resize: vertical;
+    font-family: 'Georgia', serif;
+    margin-top: 8px;
+}
+
+/* Make table rows clickable */
+tbody tr {
+    cursor: pointer;
+    transition: background-color 0.2s;
 }
 
 tbody tr:hover {
     background-color: #8ca9a0;
 }
 
-tbody td:first-child {
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
-    border-left: 5px solid #E4DBD0;
-}
-
-tbody td:last-child {
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-right: 5px solid #E4DBD0;
-}
-
-.time {
-    color: #777;
-}

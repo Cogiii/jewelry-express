@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="style.css">
     
     <title>Jewelry Express | Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
 </head>
 <body>
 
-    <h1>ADMIN DASHBOARD</h1>
+    <!-- <h1>ADMIN DASHBOARD</h1>
 
     <h2>Add Product</h2>
     <form id="productForm">
@@ -42,14 +45,122 @@
         <input type="file" id="images" accept="image/*" multiple required>
         
         <!-- Image Previews -->
-        <div id="imagePreviewContainer"></div>
+        <!-- <div id="imagePreviewContainer"></div>
         <br>
     
         <button type="submit">Add Product</button>
-    </form>
+    </form> -->
     
 
 
     <script src="index.js"></script>
+    <div class="page-content">
+        <div class="left">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Jewelry Express Logo" class="logo-image">
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="menu-item active">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="far fa-calendar"></i> Appointments
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="fas fa-gem"></i> Products
+                </div>
+                <div class="sign-out">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="top-bar">
+                <div class="user-profile">
+                    <h2>Welcome, Emu!</h2>
+                    <div class="profile-section">
+                        <div class="profile-pic">
+                            <img src="profile.jpg" alt="Profile" />
+                        </div>
+                        <div class="menu-dots">...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="recent-appointments">
+                    <h3>Recent Appointments</h3>
+                    <div class="stats-container">
+                        <div class="stat-box">This Day <span>7</span></div>
+                        <div class="stat-box">This Week <span>12</span></div>
+                        <div class="stat-box">This Month <span>20</span></div>
+                    </div>
+                </div>
+                <div class="appointments-container">
+                    <div class="appointments-header">
+                        <h3>Upcoming Appointments</h3>
+                        <select class="dropdown">
+                            <option>This day</option>
+                            <option>This week</option>
+                            <option>This month</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Schedule</th>
+                                    <th>Purpose</th>
+                                    <th>Date Appointed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 29, 2004 <span class="time">9:30 AM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 14, 2004</td>
+                                </tr>
+                                <tr>
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 29, 2004 <span class="time">9:30 AM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 14, 2004</td>
+                                </tr>
+                                <tr>
+                                    <td>Royeras, Mc Arthur Watapon</td>
+                                    <td>Jun 29, 2004 <span class="time">12:00 NN</span></td>
+                                    <td>Maglu2</td>
+                                    <td>Jun 4, 2004</td>
+                                </tr>
+                                <tr>
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 29, 2004 <span class="time">9:30 AM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 14, 2004</td>
+                                </tr>
+                                <tr>
+                                    <td>Devera, Cory Khong</td>
+                                    <td>Jun 30, 2004 <span class="time">1:30 PM</span></td>
+                                    <td>Cleaning</td>
+                                    <td>Jun 17, 2004</td>
+                                </tr>
+                                <tr>
+                                    <td>Royeras, Mc Arthur Watapon</td>
+                                    <td>Jun 30, 2004 <span class="time">2:30 PM</span></td>
+                                    <td>Maglu2</td>
+                                    <td>Jun 4, 2004</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

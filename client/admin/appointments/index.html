@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Express | Appointments</title>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
+</head>
+<body>
+    <div class="page-content">
+        <div class="left">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Jewelry Express Logo" class="logo-image">
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="menu-item">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item active">
+                    <i class="far fa-calendar"></i> Appointments
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="fas fa-gem"></i> Products
+                </div>
+                <div class="sign-out">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="top-bar">
+                <div class="user-profile">
+                    <h2>Welcome, Emu!</h2>
+                    <div class="profile-section">
+                        <div class="profile-pic">
+                            <img src="profile.jpg" alt="Profile" />
+                        </div>
+                        <div class="menu-dots">...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="appointment-section" id="pending-section">
+                    <h3>Pending Appointments</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Schedule of Appointment</th>
+                                    <th>Purpose</th>
+                                    <th>Date Appointed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 17, 2004 <span class="time">9:30 AM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 15, 2004</td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td>Royeras, Mc Arthur Watapon</td>
+                                    <td>Jun 29, 2004 <span class="time">12:00 NN</span></td>
+                                    <td>Maglu2</td>
+                                    <td>Jun 4, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 30, 2004 <span class="time">1:00 PM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 15, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Devera, Cory Khong</td>
+                                    <td>Jun 30, 2004 <span class="time">1:30 PM</span></td>
+                                    <td>Cleaning</td>
+                                    <td>Jun 17, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Royeras, Mc Arthur Watapon</td>
+                                    <td>Jun 30, 2004 <span class="time">2:30 PM</span></td>
+                                    <td>Maglu2</td>
+                                    <td>Jun 4, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 30, 2004 <span class="time">1:00 PM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 15, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Devera, Cory Khong</td>
+                                    <td>Jun 30, 2004 <span class="time">1:30 PM</span></td>
+                                    <td>Cleaning</td>
+                                    <td>Jun 17, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Royeras, Mc Arthur Watapon</td>
+                                    <td>Jun 30, 2004 <span class="time">2:30 PM</span></td>
+                                    <td>Maglu2</td>
+                                    <td>Jun 4, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 30, 2004 <span class="time">1:00 PM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 15, 2004</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn" onclick="toggleRows('pending-section')">See more</button>
+                    </div>
+                </div>
+    
+                <div class="appointment-section" id="approved-section">
+                    <h3>Approved Appointments</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Schedule of Appointment</th>
+                                    <th>Purpose</th>
+                                    <th>Date Appointed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 29, 2004 <span class="time">9:30 AM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 14, 2004</td>
+                                </tr>
+                                <tr class="expandable-row">
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 29, 2004 <span class="time">9:30 AM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 14, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Devera, Cory Khong</td>
+                                    <td>Jun 30, 2004 <span class="time">1:30 PM</span></td>
+                                    <td>Cleaning</td>
+                                    <td>Jun 17, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Royeras, Mc Arthur Watapon</td>
+                                    <td>Jun 30, 2004 <span class="time">2:30 PM</span></td>
+                                    <td>Maglu2</td>
+                                    <td>Jun 4, 2004</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn" onclick="toggleRows('approved-section')">See more</button>
+                    </div>
+                </div>
+    
+                <div class="appointment-section" id="cancelled-section">
+                    <h3>Cancelled Appointments</h3>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Customer</th>
+                                    <th>Schedule of Appointment</th>
+                                    <th>Purpose</th>
+                                    <th>Date Appointed</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Navarez, Jaja Nikolkog</td>
+                                    <td>Jun 29, 2004 <span class="time">9:30 AM</span></td>
+                                    <td>Buy</td>
+                                    <td>Jun 14, 2004</td>
+                                </tr>
+                                <tr>
+                                    <td>Devera, Cory Khong</td>
+                                    <td>Jun 30, 2004 <span class="time">1:30 PM</span></td>
+                                    <td>Cleaning</td>
+                                    <td>Jun 17, 2004</td>
+                                </tr>
+                                <tr class="hidden-row">
+                                    <td>Royeras, Mc Arthur Watapon</td>
+                                    <td>Jun 30, 2004 <span class="time">2:30 PM</span></td>
+                                    <td>Maglu2</td>
+                                    <td>Jun 4, 2004</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn" onclick="toggleRows('cancelled-section')">See more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- Customer Details Modal -->
+<div id="customer-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h3>Customer Details</h3>
+        <div class="modal-section">
+            <div class="detail-row">
+                <div class="detail-label">First Name</div>
+                <div class="detail-value" id="modal-first-name">Jaja</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Last Name</div>
+                <div class="detail-value" id="modal-last-name">Navarez</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Contact Number</div>
+                <div class="detail-value">09467135588</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Email Address</div>
+                <div class="detail-value">nigganingIM@gmail.com</div>
+            </div>
+        </div>
+        
+        <h3>Appointment Details</h3>
+        <div class="modal-section">
+            <div class="detail-row">
+                <div class="detail-label">Date</div>
+                <div class="detail-value" id="modal-date">June 29, 2004</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Time</div>
+                <div class="detail-value" id="modal-time">9:30 AM</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Purpose</div>
+                <div class="detail-value" id="modal-purpose">Buy</div>
+            </div>
+            <div class="detail-row">
+                <div class="detail-label">Date Appointed</div>
+                <div class="detail-value" id="modal-date-appointed">June 4, 2004</div>
+            </div>
+        </div>
+        
+        <div class="modal-actions">
+            <button class="accept-btn">Accept</button>
+            <button class="reject-btn">Reject</button>
+        </div>
+    </div>
+</div>
+
+<!-- Approval Remarks Modal -->
+<div id="approval-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close approval-close">&times;</span>
+        <h3>Appointment Approval Remarks</h3>
+        <div class="modal-section">
+            <div class="detail-label">Description</div>
+            <textarea class="remarks-textarea" id="approval-remarks" placeholder="Enter approval remarks...">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit, turpis at accumsan malesuada, felis mauris effendum ligula, ut rhoncus felis elit et risus. Aenean vitae justo dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pretium convallis elit et aliquam.</textarea>
+        </div>
+        <div class="modal-actions">
+            <button class="accept-btn" id="confirm-approval">Accept</button>
+            <button class="reject-btn approval-cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Rejection Remarks Modal -->
+<div id="rejection-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close rejection-close">&times;</span>
+        <h3>Appointment Rejection Remarks</h3>
+        <div class="modal-section">
+            <div class="detail-label">Description</div>
+            <textarea class="remarks-textarea" id="rejection-remarks" placeholder="Enter rejection reason...">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit, turpis at accumsan malesuada, felis mauris effendum ligula, ut rhoncus felis elit et risus. Aenean vitae justo dui. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pretium convallis elit et aliquam.</textarea>
+        </div>
+        <div class="modal-actions">
+            <button class="reject-btn" id="confirm-rejection">Reject</button>
+            <button class="accept-btn rejection-cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal for Approval -->
+<div id="approval-confirmation-modal" class="modal">
+    <div class="modal-content confirmation-content">
+        <span class="modal-close confirmation-close">&times;</span>
+        <h3>Appointment Approval</h3>
+        <div class="confirmation-message">
+            <p>Appointment approved successfully!</p>
+        </div>
+        <div class="modal-actions confirmation-actions">
+            <button class="accept-btn confirmation-okay">Okay</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal for Rejection -->
+<div id="rejection-confirmation-modal" class="modal">
+    <div class="modal-content confirmation-content">
+        <span class="modal-close confirmation-close">&times;</span>
+        <h3>Appointment Rejection</h3>
+        <div class="confirmation-message">
+            <p>Appointment rejected successfully!</p>
+        </div>
+        <div class="modal-actions confirmation-actions">
+            <button class="accept-btn confirmation-okay">Okay</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
