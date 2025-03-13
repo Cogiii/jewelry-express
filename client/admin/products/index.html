@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jewelry Express | Products</title>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
@@ -47,7 +47,6 @@
                 </div>
             </div>
             
-            <!-- Main content area - Products -->
             <div class="main-content">
                 <!-- Necklace Section -->
                 <div class="product-section" id="necklace-section">
@@ -76,6 +75,183 @@
                                         <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
                                     </td>
                                 </tr>
+                                <tr class="product-row hidden-row" data-product-id="2" data-product-type="Necklace">
+                                    <td>#904322</td>
+                                    <td>Pearl Pendant Necklace</td>
+                                    <td>Freshwater Pearl, Sterling Silver</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                                <tr class="product-row hidden-row" data-product-id="3" data-product-type="Necklace">
+                                    <td>#904323</td>
+                                    <td>Diamond Pendant Necklace</td>
+                                    <td>Diamond, 14K Gold</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn">See more</button>
+                    </div>
+                </div>
+
+                <!-- Earrings Section -->
+                <div class="product-section" id="earrings-section">
+                    <div class="product-header">
+                        <h3>Earrings</h3>
+                        <button class="add-product-btn" data-product-type="Earrings">Add Product</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Code</th>
+                                    <th>Product Name</th>
+                                    <th>Product Material</th>
+                                    <th>Product Description</th>
+                                    <th>Product Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="product-row" data-product-id="4" data-product-type="Earrings">
+                                    <td>#905121</td>
+                                    <td>Diamond Stud Earrings</td>
+                                    <td>Diamond, 18K Gold</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                                <tr class="product-row hidden-row" data-product-id="5" data-product-type="Earrings">
+                                    <td>#905122</td>
+                                    <td>Pearl Drop Earrings</td>
+                                    <td>South Sea Pearl, Sterling Silver</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                                <tr class="product-row hidden-row" data-product-id="6" data-product-type="Earrings">
+                                    <td>#905123</td>
+                                    <td>Gemstone Hoop Earrings</td>
+                                    <td>Sapphire, 14K Gold</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn">See more</button>
+                    </div>
+                </div>
+
+                <!-- Rings Section -->
+                <div class="product-section" id="rings-section">
+                    <div class="product-header">
+                        <h3>Rings</h3>
+                        <button class="add-product-btn" data-product-type="Rings">Add Product</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Code</th>
+                                    <th>Product Name</th>
+                                    <th>Product Material</th>
+                                    <th>Product Description</th>
+                                    <th>Product Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="product-row" data-product-id="7" data-product-type="Rings">
+                                    <td>#906121</td>
+                                    <td>Diamond Solitaire Ring</td>
+                                    <td>Diamond, Platinum</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                                <tr class="product-row hidden-row" data-product-id="8" data-product-type="Rings">
+                                    <td>#906122</td>
+                                    <td>Emerald Halo Ring</td>
+                                    <td>Emerald, Diamond, 18K Gold</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                                <tr class="product-row hidden-row" data-product-id="9" data-product-type="Rings">
+                                    <td>#906123</td>
+                                    <td>Vintage Filigree Ring</td>
+                                    <td>Sterling Silver</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn">See more</button>
+                    </div>
+                </div>
+
+                <!-- Bracelets Section -->
+                <div class="product-section" id="bracelets-section">
+                    <div class="product-header">
+                        <h3>Bracelets</h3>
+                        <button class="add-product-btn" data-product-type="Bracelets">Add Product</button>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Code</th>
+                                    <th>Product Name</th>
+                                    <th>Product Material</th>
+                                    <th>Product Description</th>
+                                    <th>Product Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="product-row" data-product-id="10" data-product-type="Bracelets">
+                                    <td>#907121</td>
+                                    <td>Tennis Bracelet</td>
+                                    <td>Diamond, 18K White Gold</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                                <tr class="product-row hidden-row" data-product-id="11" data-product-type="Bracelets">
+                                    <td>#907122</td>
+                                    <td>Charm Bracelet</td>
+                                    <td>Sterling Silver</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
+                                <tr class="product-row hidden-row" data-product-id="12" data-product-type="Bracelets">
+                                    <td>#907123</td>
+                                    <td>Beaded Bracelet</td>
+                                    <td>Jade, 14K Gold</td>
+                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                    <td class="product-image-cell">
+                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -84,171 +260,14 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Earrings Section -->
-        <div class="product-section" id="earrings-section">
-            <div class="product-header">
-                <h3>Earrings</h3>
-                <button class="add-product-btn" data-product-type="Earrings">Add Product</button>
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Code</th>
-                            <th>Product Name</th>
-                            <th>Product Material</th>
-                            <th>Product Description</th>
-                            <th>Product Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="product-row" data-product-id="4" data-product-type="Earrings">
-                            <td>#905121</td>
-                            <td>Diamond Stud Earrings</td>
-                            <td>Diamond, 18K Gold</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                        <tr class="product-row hidden-row" data-product-id="5" data-product-type="Earrings">
-                            <td>#905122</td>
-                            <td>Pearl Drop Earrings</td>
-                            <td>South Sea Pearl, Sterling Silver</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                        <tr class="product-row hidden-row" data-product-id="6" data-product-type="Earrings">
-                            <td>#905123</td>
-                            <td>Gemstone Hoop Earrings</td>
-                            <td>Sapphire, 14K Gold</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="see-more-container">
-                <button class="see-more-btn" onclick="toggleRows('earrings-section')">See more</button>
-            </div>
         </div>
-
-        <!-- Rings Section -->
-        <div class="product-section" id="rings-section">
-            <div class="product-header">
-                <h3>Rings</h3>
-                <button class="add-product-btn" data-product-type="Rings">Add Product</button>
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Code</th>
-                            <th>Product Name</th>
-                            <th>Product Material</th>
-                            <th>Product Description</th>
-                            <th>Product Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="product-row" data-product-id="7" data-product-type="Rings">
-                            <td>#906121</td>
-                            <td>Diamond Solitaire Ring</td>
-                            <td>Diamond, Platinum</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                        <tr class="product-row hidden-row" data-product-id="8" data-product-type="Rings">
-                            <td>#906122</td>
-                            <td>Emerald Halo Ring</td>
-                            <td>Emerald, Diamond, 18K Gold</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                        <tr class="product-row hidden-row" data-product-id="9" data-product-type="Rings">
-                            <td>#906123</td>
-                            <td>Vintage Filigree Ring</td>
-                            <td>Sterling Silver</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="see-more-container">
-                <button class="see-more-btn" onclick="toggleRows('rings-section')">See more</button>
-            </div>
-        </div>
-
-        <!-- Bracelets Section -->
-        <div class="product-section" id="bracelets-section">
-            <div class="product-header">
-                <h3>Bracelets</h3>
-                <button class="add-product-btn" data-product-type="Bracelets">Add Product</button>
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product Code</th>
-                            <th>Product Name</th>
-                            <th>Product Material</th>
-                            <th>Product Description</th>
-                            <th>Product Image</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="product-row" data-product-id="10" data-product-type="Bracelets">
-                            <td>#907121</td>
-                            <td>Tennis Bracelet</td>
-                            <td>Diamond, 18K White Gold</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                        <tr class="product-row hidden-row" data-product-id="11" data-product-type="Bracelets">
-                            <td>#907122</td>
-                            <td>Charm Bracelet</td>
-                            <td>Sterling Silver</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                        <tr class="product-row hidden-row" data-product-id="12" data-product-type="Bracelets">
-                            <td>#907123</td>
-                            <td>Beaded Bracelet</td>
-                            <td>Jade, 14K Gold</td>
-                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                            <td class="product-image-cell">
-                                <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        <div class="see-more-container">
-        <button class="see-more-btn" onclick="toggleRows('bracelets-section')">See more</button>
     </div>
-    
 
     <!-- Product Details Modal -->
     <div id="product-details-modal" class="modal product-details-modal">
         <div class="modal-content">
             <div class="product-details-header">
-                <h3>Product Details</h3>
+                <div class="product-info-label">Product Details</div>
                 <span class="modal-close">&times;</span>
             </div>
             

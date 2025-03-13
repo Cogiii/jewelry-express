@@ -207,31 +207,7 @@
                 </div>
             </div>
         </div>
-
     </div>
-
-    <script>
-        function toggleRows(sectionId) {
-            const section = document.getElementById(sectionId);
-            const hiddenRows = section.querySelectorAll('.hidden-row');
-            const button = section.querySelector('.see-more-btn');
-            
-            // Toggle visibility of hidden rows
-            hiddenRows.forEach(row => {
-                row.classList.toggle('show');
-            });
-            
-            // Toggle section expanded state
-            section.classList.toggle('expanded');
-            
-            // Change button text
-            if (section.classList.contains('expanded')) {
-                button.textContent = 'See less';
-            } else {
-                button.textContent = 'See more';
-            }
-        }
-    </script>
 
 <!-- Customer Details Modal -->
 <div id="customer-modal" class="modal">

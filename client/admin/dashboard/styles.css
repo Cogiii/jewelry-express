@@ -1,8 +1,10 @@
+/* dashboard section */
 body {
     margin: 0;
     padding: 20px;
     font-family: 'Georgia', serif;
     background-color: #F0E9E1;
+    overflow: hidden;
 }
 
 .top-bar {
@@ -14,19 +16,24 @@ body {
 }
 
 .logo-container {
-    width: 300px;
+    width: 100%; 
+    padding: 10px 0;
+    text-align: center;
 }
 
 .logo-image {
     width: 100%;
     max-width: 300px;
     height: 54px;
+    object-fit: contain;
 }
 
 .user-profile {
     display: flex;
     align-items: center;
     gap: 20px;
+    margin-left: auto; 
+    padding-right: 20px;
 }
 
 .user-profile h2 {
@@ -63,19 +70,19 @@ body {
 
 .page-content {
     display: flex;
-    height: calc(100vh - 120px);
 }
 
 .sidebar {
     width: 220px;
     background-color: #2d4f45;
-    height: 100%;
+    height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;
     border-radius: 20px;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     margin-right: 20px;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
 .menu-item {
@@ -115,11 +122,15 @@ body {
 }
 
 .sign-out {
-    margin-top: auto;
     display: flex;
     align-items: center;
-    padding: 15px 20px;
     color: white;
+    padding: 15px 20px;
+    margin: 0 0 2px 0;
+    cursor: pointer;
+    transition: background 0.3s;
+    box-sizing: border-box;
+    margin-top: auto;
     cursor: pointer;
     font-size: 14px;
 }
@@ -133,8 +144,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 100%;
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+    padding-right: 10px;
 }
 
 .recent-appointments {
@@ -217,6 +229,8 @@ table {
     width: 100%;
     border-collapse: separate;
     border-spacing: 0;
+    table-layout: fixed; /* Add fixed table layout */
+
 }
 
 /* This ensures proper spacing between rows */
@@ -253,7 +267,7 @@ thead th:last-child {
 }
 
 tbody tr {
-    background-color: #e6e6e6;
+    background-color: #ffffff;
 }
 
 tbody tr:not(:last-child) {

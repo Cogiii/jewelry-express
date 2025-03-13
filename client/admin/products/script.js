@@ -1,33 +1,70 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Set up See More buttons functionality
+    const seeMoreButtons = document.querySelectorAll('.see-more-btn');
+    
+    seeMoreButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            // Prevent event bubbling
+            e.stopPropagation();
+            
+            // Find the parent product section
+            const section = this.closest('.product-section');
+            if (section) {
+                toggleRows(section.id);
+            }
+        });
+    });
+    
     // Toggle hidden rows in product sections
     window.toggleRows = function(sectionId) {
         const section = document.getElementById(sectionId);
         const hiddenRows = section.querySelectorAll('.hidden-row');
         const button = section.querySelector('.see-more-btn');
         
-        // Toggle visibility of hidden rows
-        hiddenRows.forEach(row => {
-            row.classList.toggle('show');
-        });
-        
         // Toggle section expanded state
-        section.classList.toggle('expanded');
+        const isExpanded = section.classList.contains('expanded');
         
-        // Change button text
-        if (section.classList.contains('expanded')) {
+        if (!isExpanded) {
+            // Expand section
+            section.classList.add('expanded');
+            
+            // Show hidden rows with animation
+            hiddenRows.forEach(row => {
+                row.style.display = 'table-row';
+                row.style.opacity = '0';
+                setTimeout(() => {
+                    row.style.transition = 'opacity 0.3s ease';
+                    row.style.opacity = '1';
+                }, 10);
+            });
+            
+            // Change button text
             button.textContent = 'See less';
         } else {
+            // Collapse section
+            section.classList.remove('expanded');
+            
+            // Hide hidden rows with animation
+            hiddenRows.forEach(row => {
+                row.style.transition = 'opacity 0.3s ease';
+                row.style.opacity = '0';
+                setTimeout(() => {
+                    row.style.display = 'none';
+                }, 300);
+            });
+            
+            // Change button text
             button.textContent = 'See more';
         }
     };
 
-    // ===== PRODUCT DETAILS MODAL =====
+    // Product Details Modal functionality
     const productDetailsModal = document.getElementById('product-details-modal');
     const productRows = document.querySelectorAll('.product-row');
     const productDetailsClose = productDetailsModal.querySelector('.modal-close');
     const goBackBtn = productDetailsModal.querySelector('.go-back-btn');
     
-    // Sample product data (in a real app, this would come from a database)
+    // Sample product data
     const productData = {
         1: {
             code: '#904321',
@@ -69,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to open product details modal
     function openProductDetailsModal(productId) {
-        // Get product data from our sample data, or use fallback data from the row
+        // Get product data
         const product = productData[productId] || {};
         const productRow = document.querySelector(`.product-row[data-product-id="${productId}"]`);
         
@@ -91,12 +128,10 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set the main product image
         document.getElementById('modal-product-image').src = product.images[0];
         
-        // Generate thumbnails
+        // Generate thumbnails and dots
         const thumbnailContainer = document.getElementById('thumbnail-container');
-        thumbnailContainer.innerHTML = '';
-        
-        // Generate image navigation dots
         const imageNavDots = document.getElementById('image-nav-dots');
+        thumbnailContainer.innerHTML = '';
         imageNavDots.innerHTML = '';
         
         // Add thumbnails and dots for each image
@@ -156,9 +191,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Open product details modal when clicking on a product row
     productRows.forEach(row => {
-        row.addEventListener('click', function() {
-            const productId = this.getAttribute('data-product-id');
-            openProductDetailsModal(productId);
+        row.addEventListener('click', function(e) {
+            // Make sure we're not clicking on a button within the row
+            if (!e.target.closest('button')) {
+                const productId = this.getAttribute('data-product-id');
+                openProductDetailsModal(productId);
+            }
         });
     });
     
@@ -242,7 +280,10 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Open add product modal when clicking add product button
     addProductBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            // Prevent event bubbling
+            e.stopPropagation();
+            
             const productType = this.getAttribute('data-product-type');
             productTypeTitle.textContent = productType;
             
