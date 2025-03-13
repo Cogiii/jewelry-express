@@ -87,13 +87,17 @@ a {
 
 .jewelry img {
     width: 255px;
+    height: 255px;
 }
 .jewelry h3 {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 500;
+    font-family: 'Cactus Classical Serif';
+    margin-top: 10px;
 }
 .jewelry_material {
     margin-top: 5px;
+    font-family: 'Inria Serif';
 }
 
 /* Slider dots positioned below the container */
@@ -125,6 +129,7 @@ a {
     padding: 10px 5px;
     border-radius: 7px;
     font-family: 'Inria Font';
+    font-size: 16px;
 }
 .book_appointment_link:hover {
     background-color: var(--secondary-H-color);

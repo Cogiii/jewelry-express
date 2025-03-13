@@ -208,19 +208,17 @@ function validateForm() {
         { field: document.getElementById('firstName'), message: "Please enter your first name." }
     ];
     let isValid = true;
-
     for (let { field, message, pattern } of fields) {
         if (!field) continue; // Skip if field doesn't exist
         const value = field.value.trim();
 
+        field.setCustomValidity("");
         if (!value || (pattern && !pattern.test(value))) {
             field.setCustomValidity(message);
             field.reportValidity();
             field.scrollIntoView({ behavior: "smooth", block: "center" });
             isValid = false;
             field.classList.add('error');
-        } else {
-            field.setCustomValidity(""); // Clear error
         }
     }
 

@@ -16,18 +16,18 @@ function displayNav() {
 
         <div class="mobile_links" id="mobile_links">
             <ul>
-                <li><a href="">Jewelries</a></li>
+                <li><a href="/jewelries">Jewelries</a></li>
                 <hr>
-                <li><a href="">Ring</a></li>
-                <li><a href="">Earring</a></li>
-                <li><a href="">Necklace</a></li>
-                <li><a href="">Bracelet</a></li>
+                <li><a href="/jewelries/#ring">Ring</a></li>
+                <li><a href="/jewelries/#earring">Earring</a></li>
+                <li><a href="/jewelries/#necklace">Necklace</a></li>
+                <li><a href="/jewelries/#bracelet">Bracelet</a></li>
                 <hr>
-                <li><a href="">Amethyst</a></li>
-                <li><a href="">Gold</a></li>
-                <li><a href="">Diamond</a></li>
+                <li><a href="/jewelries/#amethyst">Amethyst</a></li>
+                <li><a href="/jewelries/#gold">Gold</a></li>
+                <li><a href="/jewelries/#diamond">Diamond</a></li>
                 <hr>
-                <li><a href="">Services</a></li>
+                <li><a href="/#services">Services</a></li>
             </ul>
 
             <div class="info">
@@ -107,10 +107,11 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 $(document).ready(function(){
+    const mobile_links = document.getElementById('mobile_links');
+
 	$('#menu').click(function(){
 		$(this).toggleClass('open');
 
-		const mobile_links = document.getElementById('mobile_links');
         document.body.classList.toggle('no-scroll', this.classList.contains('open'));
         mobile_links.classList.toggle('open_links', this.classList.contains('open'));
 	});
@@ -118,4 +119,11 @@ $(document).ready(function(){
 	$('.dropdown_arrow').click(function(){
 		$(this).toggleClass('down up');
 	});
+
+    $('.mobile_links ul li a').click(function () {
+        $('#menu').toggleClass('open');
+        
+        document.body.classList.toggle('no-scroll', this.classList.contains('open'));
+        mobile_links.classList.toggle('open_links', this.classList.contains('open'));
+    });
 });

@@ -14,5 +14,8 @@ router.get('/appointment', (req, res) => {
 router.get('/jewelries', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/public/jewelries/index.html'));
 });
+router.get('/collection/:productId', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/public/collection/index.html'));
+});
 
 module.exports = router;

@@ -25,10 +25,21 @@ function createJewelrySlider(data, containerSelector, dotsSelector) {
         dotsContainer.appendChild(dot);
     });
 
-    initializeSlider(container, dotsContainer, data.length);
+    initializeSlider(data, container, dotsContainer, data.length);
+    updateAppointmentButton(data, 0);
 }
 
-function initializeSlider(container, dotsContainer, totalItems) {
+function updateAppointmentButton(data, currentIndex) {
+    if (data[currentIndex] && data[currentIndex].id) {
+        const existingBtn = document.getElementById("appointment-link");
+        
+        if (existingBtn) {
+            existingBtn.href = `/appointment/${data[currentIndex].id}`;
+        }
+    }
+}
+
+function initializeSlider(data, container, dotsContainer, totalItems) {
     let currentIndex = 0;
     const jewelryItem = container.querySelector(".jewelry");
     if (!jewelryItem) return;
@@ -40,6 +51,8 @@ function initializeSlider(container, dotsContainer, totalItems) {
         dotsContainer.querySelectorAll(".dot").forEach((dot, i) => {
             dot.classList.toggle("active", i === currentIndex);
         });
+
+        updateAppointmentButton(data, currentIndex);
     }
 
     dotsContainer.addEventListener("click", (event) => {
@@ -79,8 +92,8 @@ function initializeSlider(container, dotsContainer, totalItems) {
     });
 }
 
-function showGridJewelries(data, container) {
-    data.forEach(jewelry => {
+function showGridJewelries(products, container) {
+    products.forEach(jewelry => {
         const item = document.createElement("div");
         item.classList.add("jewelry-item");
 
@@ -92,42 +105,225 @@ function showGridJewelries(data, container) {
         `;
 
         container.appendChild(item);
+
+        item.addEventListener('click', () => {
+            window.location = `/collection/${jewelry.id}`;
+        });
     });
 }
 
+function movableNav() {
+    const navType = document.querySelector('.navigation');
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    navType.addEventListener('mousedown', (e) => {
+        isDown = true;
+        startX = e.pageX - navType.offsetLeft;
+        scrollLeft = navType.scrollLeft;
+    });
+
+    navType.addEventListener('mouseleave', () => {
+        isDown = false;
+    });
+
+    navType.addEventListener('mouseup', () => {
+        isDown = false;
+    });
+
+    navType.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - navType.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust speed
+        navType.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch support
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
+
+    navType.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].pageX;
+        touchScrollLeft = navType.scrollLeft;
+    });
+
+    navType.addEventListener('touchmove', (e) => {
+        const touchX = e.touches[0].pageX;
+        const move = touchX - touchStartX;
+        navType.scrollLeft = touchScrollLeft - move;
+    });
+}
+
+function jewelriesFilter() {
+    const categories = document.querySelectorAll(".filter_nav");
+    const jewelrySections = document.querySelectorAll(".rings, .earrings, .necklaces, .bracelets");
+    const materialSections = document.querySelectorAll(".amethysts, .golds, .diamonds");
+
+    function updateDisplay(selectedType) {
+        categories.forEach(cat => cat.classList.remove("active"));
+        document.getElementById(selectedType)?.classList.add("active");
+        console.log(selectedType)
+
+        jewelrySections.forEach(section => {
+            section.style.display = "none";
+            section.classList.remove("fade-in");
+        });
+
+        materialSections.forEach(section => {
+            section.style.display = "none";
+            section.classList.remove("fade-in");
+        });
+
+        setTimeout(() => {
+            jewelrySections.forEach(section => {
+                section.style.display = (selectedType === "all" || section.classList.contains(selectedType + "s")) ? "block" : "none";
+                section.classList.toggle("fade-in", (selectedType === "all" || section.classList.contains(selectedType + "s")));
+            });
+    
+            materialSections.forEach(section => {
+                section.style.display = (section.classList.contains(selectedType + "s")) ? "block" : "none";
+                section.classList.toggle("fade-in", section.classList.contains(selectedType + "s"));
+            });
+        }, 0);
+    }
+
+    function isValidHash(hash) {
+        hash = hash + "s";
+        return [...jewelrySections].some(section => section.classList.contains(hash)) ||
+               [...materialSections].some(section => section.classList.contains(hash));
+    }    
+
+    const hash = window.location.hash.slice(1);
+
+    if(hash && hash !== "" && isValidHash(hash)) {
+        updateDisplay(hash.toLocaleLowerCase());
+    } else {
+        updateDisplay("all");
+    }
+
+
+    categories.forEach(category => {
+        category.addEventListener("click", () => {
+            const selectedType = category.id.toLowerCase();
+            updateDisplay(selectedType);
+        });
+    });
+    
+
+    // if url is change can you update the display
+    window.addEventListener("hashchange", () => {
+        const hash = window.location.hash.slice(1);
+        updateDisplay(hash.toLocaleLowerCase());
+    });
+}
+
+function showFeaturedJewelries() {
+    fetch('/api/getFeaturedProduct', {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(featuredProducts => {
+        return Promise.all(
+            featuredProducts.map(async (product) => {
+                const imageResponse = await fetch(`/api/getProductImage/${product.product_id}`);
+                const imageBlob = await imageResponse.blob();
+                const imageUrl = URL.createObjectURL(imageBlob);
+            
+                return {
+                    id: product.product_id,
+                    name: product.product_name,
+                    material: product.product_material,
+                    type: product.product_type,
+                    img: imageUrl,
+                };
+            })
+        );
+    })
+    .then(data => {
+        createJewelrySlider(data, ".jewelries_container", ".slider_dots");
+    })
+    .catch(error => console.error("Error fetching featured jewelries:", error));
+}
+
+function showJewelryType(type, container) {
+    fetch(`/api/getProductByType/${type}`, {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(products => {
+        return Promise.all(
+            products.map(async (product) => {
+                const imageResponse = await fetch(`/api/getProductImage/${product.product_id}`);
+                const imageBlob = await imageResponse.blob();
+                const imageUrl = URL.createObjectURL(imageBlob);
+            
+                return {
+                    id: product.product_id,
+                    name: product.product_name,
+                    material: product.product_material,
+                    type: product.product_type,
+                    src: imageUrl,
+                    alt: product.product_name,
+                    description: product.product_description
+                };
+            })
+        );
+    })
+    .then(products => {
+        showGridJewelries(products, container);
+    })
+    .catch(error => console.error("Error fetching featured jewelries:", error));
+}
+
+function showJewelryMaterial(material, container) {
+    fetch(`/api/getProductByMaterial/${material}`, { method: 'GET' })
+    .then(response => response.json())
+    .then(async (products) => {
+        if (!Array.isArray(products) || products.length === 0) {
+            throw new Error(`No products found for ${material}.`);
+        }
+
+        const processedProducts = await Promise.all(
+            products.map(async (product) => {
+                const imageResponse = await fetch(`/api/getProductImage/${product.product_id}`);
+                const imageBlob = await imageResponse.blob();
+                const imageUrl = URL.createObjectURL(imageBlob);
+            
+                return {
+                    id: product.product_id,
+                    name: product.product_name,
+                    material: product.product_material,
+                    type: product.product_type,
+                    src: imageUrl,
+                    alt: product.product_name,
+                    description: product.product_description
+                };
+            })
+        );
+
+        return processedProducts; 
+    })
+    .then(products => showGridJewelries(products, container))
+    .catch(error => console.error("Error fetching featured jewelries:", error));
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
-    createJewelrySlider([
-        { img: "../assets/images/ring.webp", name: "Jubilated" },
-        { img: "../assets/images/bracelet.webp", name: "Melancholy" },
-        { img: "../assets/images/necklace.webp", name: "Despair"},
-        { img: "../assets/images/necklace.webp", name: "Lust"}
-    ], ".featured_jewelries .jewelries_container", ".earrings_slider");
+    movableNav();
+    jewelriesFilter();
 
-    showGridJewelries([
-        { src: "../assets/images/ring.png", alt: "Sloth Ring", name: "Seraphim", material: "Gold", description: "A ring from the Angels collection." },
-        { src: "lust.jpg", alt: "Lust Earrings", name: "Lust", material: "Amethyst", description: "An earring from the Sinful collection." },
-        { src: "envy.jpg", alt: "Envy Bracelet", name: "Envy", material: "Diamond", description: "A bracelet from the Sinful collection." },
-        { src: "wrath.jpg", alt: "Wrath Necklace", name: "Wrath", material: "Gold", description: "A necklace from the Sinful collection." }
-    ], document.querySelector(".rings .jewelries"));
+    // FEATURED JEWELRIES
+    showFeaturedJewelries();
 
-    showGridJewelries([
-        { src: "../assets/images/ring.png", alt: "Sloth Ring", name: "Seraphim", material: "Gold", description: "A ring from the Angels collection." },
-        { src: "lust.jpg", alt: "Lust Earrings", name: "Lust", material: "Amethyst", description: "An earring from the Sinful collection." },
-        { src: "envy.jpg", alt: "Envy Bracelet", name: "Envy", material: "Diamond", description: "A bracelet from the Sinful collection." },
-        { src: "wrath.jpg", alt: "Wrath Necklace", name: "Wrath", material: "Gold", description: "A necklace from the Sinful collection." }
-    ], document.querySelector(".earrings .jewelries"));
+    showJewelryType("Ring", document.querySelector(".rings .jewelries"));
+    showJewelryType("Earring", document.querySelector(".earrings .jewelries"));
+    showJewelryType("Necklace", document.querySelector(".necklaces .jewelries"));
+    showJewelryType("Bracelet", document.querySelector(".bracelets .jewelries"));
 
-    showGridJewelries([
-        { src: "../assets/images/ring.png", alt: "Sloth Ring", name: "Seraphim", material: "Gold", description: "A ring from the Angels collection." },
-        { src: "lust.jpg", alt: "Lust Earrings", name: "Lust", material: "Amethyst", description: "An earring from the Sinful collection." },
-        { src: "envy.jpg", alt: "Envy Bracelet", name: "Envy", material: "Diamond", description: "A bracelet from the Sinful collection." },
-        { src: "wrath.jpg", alt: "Wrath Necklace", name: "Wrath", material: "Gold", description: "A necklace from the Sinful collection." }
-    ], document.querySelector(".Necklaces .jewelries"));
-
-    showGridJewelries([
-        { src: "../assets/images/ring.png", alt: "Sloth Ring", name: "Seraphim", material: "Gold", description: "A ring from the Angels collection." },
-        { src: "lust.jpg", alt: "Lust Earrings", name: "Lust", material: "Amethyst", description: "An earring from the Sinful collection." },
-        { src: "envy.jpg", alt: "Envy Bracelet", name: "Envy", material: "Diamond", description: "A bracelet from the Sinful collection." },
-        { src: "wrath.jpg", alt: "Wrath Necklace", name: "Wrath", material: "Gold", description: "A necklace from the Sinful collection." }
-    ], document.querySelector(".Bracelets .jewelries"));
+    showJewelryMaterial("Amethyst", document.querySelector(".amethysts .jewelries"))
+    showJewelryMaterial("Gold", document.querySelector(".golds .jewelries"))
+    showJewelryMaterial("Diamond", document.querySelector(".diamonds .jewelries"))
 });

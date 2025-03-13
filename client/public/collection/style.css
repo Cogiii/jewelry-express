@@ -1,0 +1,147 @@
+main .product_links {
+    margin: 20px 32px;
+}
+
+main .product_links * {
+    color: var(--text-H-color);
+    opacity: 0.7;
+}
+
+.jewelry_images {
+    border: none;
+    padding: 10px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.jewelries_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.jewelry_container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+    width: 100%;
+    gap: 45px;
+    padding: 0 60px;
+}
+
+.jewelry {
+    text-align: center;
+    flex: 0 0 80%; /* Ensures only one item is shown */
+}
+
+.jewelry img {
+    width: 255px;
+    height: 255px;
+}
+.jewelry_details {
+    font-family: 'Inria Serif';
+    font-weight: lighter;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+/* Slider dots positioned below the container */
+.slider_dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Space between items and dots */
+    gap: 10px;
+}
+
+.slider_dots .dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--secondary-H-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slider_dots .dot.active {
+    background-color: var(--secondary-color);
+}
+
+.book_appointment_link {
+    margin-top: 50px;
+    text-decoration: none;
+    background-color: var(--secondary-color);
+    color: var(--main-H-color);
+    padding: 10px 5px;
+    border-radius: 7px;
+    font-family: 'Inria Font';
+}
+.book_appointment_link:hover {
+    background-color: var(--secondary-H-color);
+}
+
+.product_description {
+    margin-top: 50px;
+    padding: 35px 52px;
+    text-align: center;
+    font-family: 'Inria Serif';
+    border-top: solid var(--section-border-color) 1px;
+}
+.product_description p {
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: -2%;
+}
+
+nav .mobile_links .info {
+    margin: 15px auto;
+    width: 90%;
+    padding: 20px;
+    position: relative;
+    color: var(--text-color);
+}
+
+.shop_details {
+    border-top: solid var(--section-border-color) 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.shop_details > * {
+    display: flex;
+    font-family: 'Inria Serif';
+    font-size: 10px;
+    margin: 3px auto;
+    text-align: center;
+    color: var(--text-H-color);
+    opacity: 0.7;
+}
+.shop_details > * > img {
+    width: 15px;
+    height: 15px;
+}
+.shop_details > * > * {
+    margin: 0 5px;
+}
+.related_creations {
+    border-top: solid var(--section-border-color) 1px;
+    padding-top: 35px;
+    text-align: center;
+}
+.related_creations h2 {
+    font-family: 'Gamalia';
+    color: var(--text-color);
+    font-weight: lighter;
+    font-size: 22px;
+}
+.related {
+    margin-top: 15px;
+}

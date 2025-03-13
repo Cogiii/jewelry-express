@@ -37,7 +37,7 @@ body, html {
     background-color: var(--main-color);
     overflow-x: hidden;
     color: var(--text-color);
-    /* scroll-behavior: smooth; */
+    scroll-behavior: smooth;
 }
 
 input:-webkit-autofill {

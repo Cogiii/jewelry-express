@@ -204,7 +204,6 @@ router.post('/addAppointment', upload.none(), async (req, res) => {
                 "INSERT INTO customer_email (email, customer_id) VALUES (?, ?)",
                 [email, customer_id]
             );
-            console.log("test");
         } else if(!checkIfEmailExist[0].customer_id) {
             query(
                 "UPDATE customer_email SET customer_id = ? WHERE email_id = ?",
@@ -259,6 +258,235 @@ function convertTo24HourFormat(time) {
 
     return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00`;
 }
+
+router.get('/getFeaturedProduct', async (req, res) => {
+    try {
+        const result = await query(
+            `SELECT p.*, pm.product_material, pt.product_type FROM product p
+            JOIN product_material pm ON p.product_material_id = pm.product_material_id
+            JOIN product_type pt ON p.product_type_id = pt.product_type_id
+            WHERE is_featured = 1`
+        );
+
+        res.status(200).json(result);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/getProductImage/:productId', async (req, res) => {
+    const { productId } = req.params;
+
+    try {
+        const result = await query(
+            "SELECT image_data FROM product_image WHERE product_id = ?",
+            [productId]
+        );
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        const imageBuffer = result[0].image_data;
+
+        res.setHeader("Content-Type", "image/webp");
+        res.status(200).send(imageBuffer);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/getProductImageById/:imageId', async (req, res) => {
+    const { imageId } = req.params;
+
+    try {
+        const result = await query(
+            "SELECT image_data FROM product_image WHERE product_image_id = ?",
+            [imageId]
+        );
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        const imageBuffer = result[0].image_data;
+
+        res.setHeader("Content-Type", "image/webp");
+        res.status(200).send(imageBuffer);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/getAllProductImages/:productId', async (req, res) => {
+    const { productId } = req.params;
+
+    try {
+        const result = await query(
+            "SELECT product_image_id FROM product_image WHERE product_id = ?",
+            [productId]
+        );
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: "No images found for this product" });
+        }
+
+        res.status(200).json(result);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/getProductMaterial/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await query(
+            "SELECT product_material FROM product_material WHERE product_material_id = ?",
+            [id]
+        );
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: "Material not found" });
+        }
+
+        res.status(200).json(result[0].product_material);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/getProductByMaterial/:material', async (req, res) => {
+    const { material } = req.params;
+
+    try {
+        const result = await query(
+            `SELECT 
+                p.*, 
+                pt.product_type ,
+                pm.product_material
+            FROM 
+                product p
+            JOIN 
+                product_material pm ON p.product_material_id = pm.product_material_id
+            JOIN 
+                product_type pt ON p.product_type_id = pt.product_type_id
+            WHERE 
+                pm.product_material = ?`,
+            [material]
+        );
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: "Product material not found" });
+        }
+
+        res.status(200).json(result);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/getProductByType/:type', async (req, res) => {
+    const { type } = req.params;
+
+    try {
+        const result = await query(
+            `SELECT 
+                p.*, 
+                pt.product_type ,
+                pm.product_material
+            FROM 
+                product p
+            JOIN 
+                product_material pm ON p.product_material_id = pm.product_material_id
+            JOIN 
+                product_type pt ON p.product_type_id = pt.product_type_id
+            WHERE 
+                pt.product_type = ?`,
+            [type]
+        );
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: "Product type not found" });
+        }
+
+        res.status(200).json(result);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/getProduct/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const result = await query(
+            `SELECT 
+                p.*, 
+                pt.product_type ,
+                pm.product_material
+            FROM 
+                product p
+            JOIN 
+                product_material pm ON p.product_material_id = pm.product_material_id
+            JOIN 
+                product_type pt ON p.product_type_id = pt.product_type_id
+            WHERE 
+                p.product_id = ?`,
+            [id]
+        );
+
+        if (result.length === 0) {
+            return res.status(404).json({ message: "Product type not found" });
+        }
+        res.status(200).json(result);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
+router.get('/relatedCreations/:productId', async (req, res) => {
+    const { productId } = req.params;
+
+    try {
+        const product = await query(
+            `SELECT pt.product_type, pm.product_material FROM product p 
+            JOIN product_type pt ON p.product_type_id = pt.product_type_id
+            JOIN product_material pm ON p.product_material_id = pm.product_material_id
+            WHERE product_id = ?`,
+            [productId]
+        );
+
+        if (product.length === 0) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        const { product_type, product_material } = product[0];
+
+        const relatedCreations = await query(
+            `SELECT p.product_id, p.product_name FROM product p
+            JOIN product_type pt ON p.product_type_id = pt.product_type_id
+            JOIN product_material pm ON p.product_material_id = pm.product_material_id
+            WHERE (pt.product_type = ? OR pm.product_material LIKE ?) 
+            AND p.product_id != ?
+            ORDER BY RAND() LIMIT 5`,
+            [product_type, `%${product_material}%`, productId]
+        );
+
+        res.status(200).json(relatedCreations);
+    } catch (error) {
+        console.error("Database error:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
 
 
 module.exports = router;

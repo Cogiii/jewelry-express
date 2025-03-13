@@ -58,6 +58,7 @@ main section.description {
 
 .jewelry img {
     width: 255px;
+    height: 255px;
 }
 .jewelry h3 {
     font-size: 18px;
@@ -125,22 +126,44 @@ main section.description {
     margin-top: 30px;
 }
 
-.navigation_type {
+.navigation {
     display: flex;
     gap: 30px;
     padding: 0 30px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
 
-.type {
+.navigation::-webkit-scrollbar {
+    display: none;
+}
+
+.filter_nav {
     text-align: center;
+    flex: 0 0 auto;
 }
-.type img {
+.filter_nav img {
     width: 44px;
+    transition: filter 0.3s ease-in-out;
 }
-.type p {
+.filter_nav:hover img {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(24%) saturate(750%) hue-rotate(120deg);
+}
+.filter_nav.active img {
+    filter: brightness(0) saturate(100%) invert(23%) sepia(24%) saturate(750%) hue-rotate(120deg);
+}
+.filter_nav p {
     font-family: 'Inria Serif';
     font-size: 12.81px;
     font-weight: lighter;
+}
+.filter_nav:hover p {
+    color: var(--secondary-color);
+}
+.filter_nav.active p {
+    color: var(--secondary-color);
 }
 
 .jewelries {
@@ -158,6 +181,7 @@ main section.description {
 
 .jewelry-item img {
     width: 100%;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 
@@ -176,7 +200,7 @@ main section.description {
 }
 
 .jewelry-item .description {
-    font-size: 11px;
+    font-size: 12.18px;
     color: #444;
     font-family: 'Inria Serif';
     margin-top: 20px;
@@ -187,4 +211,25 @@ main section.description {
     height: 80vh;
     object-position: 30% 50%;
 
+}
+
+/* Smooth fade-in effect */
+@keyframes fadeEffect {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeEffect 0.5s ease-in-out;
+}
+
+/* Hide sections initially */
+.rings, .earrings, .necklaces, .bracelets, .amethyst, .gold, .diamond {
+    display: none;
 }

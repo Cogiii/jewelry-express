@@ -1,8 +1,9 @@
 function createJewelrySlider(data, containerSelector, dotsSelector) {
     const container = document.querySelector(containerSelector);
     const dotsContainer = document.querySelector(dotsSelector);
+    const jewelriesWrapper = document.querySelector(".featured");
 
-    if (!container || !dotsContainer) return;
+    if (!container || !dotsContainer || !jewelriesWrapper) return;
 
     container.innerHTML = "";
     dotsContainer.innerHTML = "";
@@ -25,10 +26,30 @@ function createJewelrySlider(data, containerSelector, dotsSelector) {
         dotsContainer.appendChild(dot);
     });
 
-    initializeSlider(container, dotsContainer, data.length);
+    initializeSlider(data, container, dotsContainer, data.length);
+    updateAppointmentButton(data, 0);
+    updateCategorySeeMore(data, 0)
 }
 
-function initializeSlider(container, dotsContainer, totalItems) {
+function updateAppointmentButton(data, currentIndex) {
+    if (data[currentIndex] && data[currentIndex].id) {
+        const existingBtn = document.getElementById("appointment-link");
+        
+        if (existingBtn) {
+            existingBtn.href = `/appointment/${data[currentIndex].id}`;
+        }
+    }
+}
+
+function updateCategorySeeMore(data, currentIndex) {
+    if (data[currentIndex] && data[currentIndex].category) {
+        const seeMore = document.getElementById("category-seemore");
+
+        seeMore.href = `/jewelries/#${data[currentIndex].category.toLowerCase()}`;
+    }
+}
+
+function initializeSlider(data, container, dotsContainer, totalItems) {
     let currentIndex = 0;
     const jewelryItem = container.querySelector(".jewelry");
     if (!jewelryItem) return;
@@ -37,9 +58,13 @@ function initializeSlider(container, dotsContainer, totalItems) {
     function goToSlide(index) {
         currentIndex = index;
         container.style.transform = `translateX(${-currentIndex * slideDistance}px)`;
+
         dotsContainer.querySelectorAll(".dot").forEach((dot, i) => {
             dot.classList.toggle("active", i === currentIndex);
         });
+
+        updateAppointmentButton(data, currentIndex);
+        updateCategorySeeMore(data, currentIndex)
     }
 
     dotsContainer.addEventListener("click", (event) => {
@@ -79,20 +104,53 @@ function initializeSlider(container, dotsContainer, totalItems) {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    createJewelrySlider([
-        { img: "../assets/images/ring.webp", name: "Amore, small", material: "Gold" },
-        { img: "../assets/images/bracelet.webp", name: "Pearl Bracelet", material: "Freshwater Pearl" },
-        { img: "../assets/images/necklace.webp", name: "Gold Necklace", material: "18K Gold" },
-        { img: "../assets/images/necklace.webp", name: "Gold Necklace", material: "18K Gold" }
-    ], ".jewelries_container", ".jewelries_slider");
+function showFeaturedJewelries() {
+    fetch('/api/getFeaturedProduct', {
+        method: 'GET'
+    })
+    .then(response => response.json())
+    .then(featuredProducts => {
+        return Promise.all(
+            featuredProducts.map(async (product) => {
+                const imageResponse = await fetch(`/api/getProductImage/${product.product_id}`);
+                const imageBlob = await imageResponse.blob();
+                const imageUrl = URL.createObjectURL(imageBlob);
+            
+                return {
+                    id: product.product_id,
+                    name: product.product_name,
+                    material: product.product_material,
+                    type: product.product_type,
+                    img: imageUrl
+                };
+            })
+        );
+    })
+    .then(data => {
+        createJewelrySlider(data, ".jewelries_container", ".jewelries_slider");
+    })
+    .catch(error => console.error("Error fetching featured jewelries:", error));
+}
 
-    createJewelrySlider([
-        { img: "../assets/images/ring.webp", category: "Rings" },
-        { img: "../assets/images/bracelet.webp", category: "Bracelets" },
-        { img: "../assets/images/necklace.webp", category: "Necklaces" },
-        { img: "../assets/images/earring.webp", category: "Earrings" }
-    ], ".category_container", ".category_slider");
+function showCategories() {
+    const data = [
+        { img: "../assets/images/ring.webp", category: "Ring" },
+        { img: "../assets/images/bracelet.webp", category: "Bracelet" },
+        { img: "../assets/images/necklace.webp", category: "Necklace" },
+        { img: "../assets/images/earring.webp", category: "Earring" }
+    ];
+
+    createJewelrySlider(data, ".category_container", ".category_slider");
+}
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    // FEATURED JEWELRIES
+    showFeaturedJewelries();
+
+    // Categories
+    showCategories();
 });
 
 
