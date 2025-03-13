@@ -1,3 +1,4 @@
+/* appointments section */
 body {
     margin: 0;
     padding: 20px;
@@ -230,7 +231,7 @@ thead th:last-child {
 }
 
 tbody tr {
-    background-color: #a8c0b9;
+    background-color: #ffffff;
 }
 
 tbody tr:not(:last-child) {
@@ -304,6 +305,8 @@ tbody td:last-child {
     height: 100%;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-content {
