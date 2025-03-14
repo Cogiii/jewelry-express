@@ -233,6 +233,96 @@ table {
 
 }
 
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #F0E9E1;
+    margin: 0 auto;
+    padding: 25px;
+    width: 500px;
+    max-width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.confirmation-content {
+    width: 400px;
+    padding: 20px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #2d4f45;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal h3 {
+    color: #2d4f45;
+    margin-top: 0;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #a8c0b9;
+}
+
+.modal-section {
+    margin-bottom: 25px;
+}
+
+.detail-row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.detail-label {
+    width: 40%;
+    color: #555;
+    font-weight: 600;
+}
+
+.detail-value {
+    width: 60%;
+    background-color: #E4DBD0;
+    padding: 8px 12px;
+    border-radius: 4px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.goBackBtn {
+    background-color: #2d4f45;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
 /* This ensures proper spacing between rows */
 tbody tr {
     margin-top: 10px;
