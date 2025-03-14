@@ -131,9 +131,91 @@ logout.addEventListener('click', () => {
 // dashboard.js - Customer modal functionality for dashboard
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Set up click handlers for all customer rows in the dashboard
+    const userName = document.querySelector('.user-profile .userName');
+    userName.textContent = localStorage.getItem('username');
+
+    fetchAppointmentCounts();
     setupDashboardRowClicks();
+    fetchUpcomingAppointments();
 });
+
+function fetchUpcomingAppointments() {
+    const dropdown = document.querySelector(".dropdown");
+
+    // Function to get the selected filter type and fetch data
+    function fetchAppointments() {
+        let selectedValue = dropdown.value.toLowerCase(); // Get dropdown value
+
+        // Map dropdown text to query parameter
+        let filter = "day"; // Default
+        if (selectedValue.includes("week")) {
+            filter = "week";
+        } else if (selectedValue.includes("month")) {
+            filter = "month";
+        }
+
+        fetch(`/api/getAppointments?range=${filter}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    updateTable(data.data);
+                } else {
+                    console.error("Failed to fetch appointments");
+                }
+            })
+            .catch(error => console.error("Error fetching appointments:", error));
+    }
+
+    // Function to update the table
+    function updateTable(appointments) {
+        const tbody = document.querySelector(".table-container tbody");
+        tbody.innerHTML = ""; // Clear previous rows
+
+        if (appointments.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4">No upcoming appointments found.</td></tr>`;
+            return;
+        }
+
+        appointments.forEach(app => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${app.last_name}, ${app.first_name}</td>
+                <td>${new Date(app.sched_of_appointment).toLocaleDateString()} 
+                    <span class="time">${new Date(app.sched_of_appointment).toLocaleTimeString()}</span>
+                </td>
+                <td>${app.appointment_purpose || "N/A"}</td>
+                <td>${new Date(app.date_appointed).toLocaleDateString()}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    // Event listener for dropdown change
+    dropdown.addEventListener("change", fetchAppointments);
+
+    // Fetch default data on page load
+    fetchAppointments();
+}
+
+async function fetchAppointmentCounts() {
+    try {
+        const response = await fetch("/api/appointment-counts"); // Adjust API path if needed
+        const result = await response.json();
+
+        if (result.success) {
+            const { today_count, week_count, month_count } = result.data;
+
+            // Update the UI with fetched data
+            document.querySelector(".stat-box:nth-child(1) span").textContent = today_count;
+            document.querySelector(".stat-box:nth-child(2) span").textContent = week_count;
+            document.querySelector(".stat-box:nth-child(3) span").textContent = month_count;
+        } else {
+            console.error("Failed to fetch appointment counts:", result.message);
+        }
+    } catch (error) {
+        console.error("Error fetching appointment counts:", error);
+    }
+}
 
 /**
  * Set up click handlers for all customer rows in the dashboard table

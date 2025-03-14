@@ -390,3 +390,8 @@ tbody td:last-child {
 .time {
     color: #777;
 }
+
+#logout {
+    background-color: transparent;
+    border: none;
+}

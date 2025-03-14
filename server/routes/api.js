@@ -626,4 +626,62 @@ router.post('/cancelAppointment', upload.none(), async (req, res) => {
     }
 });
 
+router.get("/appointment-counts", async (req, res) => {
+    try {
+        const data = await query(
+            `SELECT 
+                COUNT(CASE WHEN DATE(sched_of_appointment) = CURDATE() THEN 1 END) AS today_count,
+                COUNT(CASE WHEN YEARWEEK(sched_of_appointment, 1) = YEARWEEK(CURDATE(), 1) THEN 1 END) AS week_count,
+                COUNT(CASE WHEN YEAR(sched_of_appointment) = YEAR(CURDATE()) AND MONTH(sched_of_appointment) = MONTH(CURDATE()) THEN 1 END) AS month_count
+            FROM appointment;
+        `);
+        res.json({ success: true, data: data[0] });
+    } catch (error) {
+        console.error('Error fetching number of appointments:', error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
+router.get('/getAppointments', upload.none(), async (req, res) => {
+    try {
+        const { range } = req.query; // Get the filter range from the request query
+
+        let dateCondition = '';
+
+        // Determine the SQL condition based on the selected range
+        if (range === 'day') {
+            dateCondition = `DATE(a.sched_of_appointment) = CURDATE() 
+                             AND TIME(a.sched_of_appointment) >= CURTIME()`;
+        } else if (range === 'week') {
+            dateCondition = `YEARWEEK(a.sched_of_appointment, 1) = YEARWEEK(CURDATE(), 1)`;
+        } else if (range === 'month') {
+            dateCondition = `YEAR(a.sched_of_appointment) = YEAR(CURDATE()) 
+                             AND MONTH(a.sched_of_appointment) = MONTH(CURDATE())`;
+        }
+
+        const rows = await query(`
+            SELECT 
+                a.*, 
+                c.first_name, 
+                c.last_name, 
+                GROUP_CONCAT(DISTINCT ce.email ORDER BY ce.email SEPARATOR ', ') AS emails, 
+                GROUP_CONCAT(DISTINCT cc.contact_number ORDER BY cc.contact_number SEPARATOR ', ') AS contact_numbers
+            FROM appointment a
+            JOIN customer c ON c.customer_id = a.customer_id
+            LEFT JOIN customer_email ce ON ce.customer_id = a.customer_id
+            LEFT JOIN customer_contact cc ON cc.customer_id = a.customer_id
+            WHERE a.appointment_status = 'approve' 
+            AND a.sched_of_appointment >= NOW()
+            ${dateCondition ? `AND ${dateCondition}` : ''}
+            GROUP BY a.appointment_id, c.customer_id;
+        `);
+
+        res.json({ success: true, data: rows });
+    } catch (error) {
+        console.error('Error fetching approved appointments:', error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
+
 module.exports = router;

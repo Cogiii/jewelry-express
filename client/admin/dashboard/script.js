@@ -1,5 +1,7 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+
+
     // Select all table rows in the tbody
     const tableRows = document.querySelectorAll('table tbody tr');
     
