@@ -14,9 +14,6 @@ router.get('/appointments', ensureAuthenticated, (req, res) => {
 router.get('/products', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../../client/admin/products/index.html"));
 });
-router.get('/employees', ensureAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, "../../client/admin/employees/index.html"));
-});
 router.get('/settings', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../../client/admin/settings/index.html"));
 });

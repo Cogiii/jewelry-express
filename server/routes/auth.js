@@ -96,6 +96,40 @@ router.post('/registerAdmin', async (req, res) => {
     }
 });
 
+// Change Password Route
+router.post('/changePassword', ensureAuthenticated, async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const username = req.user.username; // Get logged-in user
+
+    try {
+        // Fetch the user's current password from the database
+        const results = await query('SELECT password FROM admin_cred WHERE username = ?', [username]);
+        if (results.length === 0) {
+            return res.status(404).json({ message: 'User not found.' });
+        }
+
+        const admin = results[0];
+        
+        // Check if the current password is correct
+        const isMatch = await bcrypt.compare(currentPassword, admin.password);
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Current password is incorrect.' });
+        }
+
+        // Hash the new password
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+        // Update the password in the database
+        await query('UPDATE admin_cred SET password = ? WHERE username = ?', [hashedNewPassword, username]);
+
+        res.status(200).json({ message: 'Password changed successfully.' });
+    } catch (err) {
+        console.error('Error changing password:', err);
+        res.status(500).json({ message: 'Error changing password.' });
+    }
+});
+
+
 // Login route
 router.post('/login', ensureNotAuthenticated, (req, res, next) => {
     passport.authenticate('local', (err, admin, info) => {

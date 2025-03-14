@@ -12,7 +12,6 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding: 0 20px;
 }
 
 .page-content {
@@ -35,8 +34,7 @@ body {
 }
 
 .logo-image {
-    width: 100%;
-    max-width: 300px;
+    width: 220px;
     height: 54px;
     object-fit: contain;
 }
@@ -312,31 +310,6 @@ input[type="password"] {
     font-family: 'Georgia', serif;
     background-color: #fff;
     box-sizing: border-box;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .page-content {
-        flex-direction: column;
-        height: auto;
-    }
-    
-    .left {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-    
-    .sidebar {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        flex-grow: 0;
-    }
-    
-    .main-content {
-        height: auto;
-        min-height: 500px;
-    }
 }
 
 .user-credentials {

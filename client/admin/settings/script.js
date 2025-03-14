@@ -1,5 +1,13 @@
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
+    const userName = document.querySelector('.user-profile .userName');
+    userName.textContent = localStorage.getItem('username');
+
+    logout.addEventListener('click', () => {
+        window.location.href = '/auth/logout';
+        console.log("YESY")
+    });
+
     // Get modal elements
     const changePasswordModal = document.getElementById('change-password-modal');
     const changePasswordBtn = document.getElementById('changePasswordBtn');
@@ -41,28 +49,42 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Handle Save Changes button click
-    saveBtn.addEventListener('click', function() {
+    saveBtn.addEventListener('click', function () {
         const currentPassword = currentPasswordInput.value;
         const newPassword = newPasswordInput.value;
         const confirmPassword = confirmPasswordInput.value;
-        
-        // Basic validation
-        if (!currentPassword || !newPassword || !confirmPassword) {
-            alert('Please fill in all password fields');
-            return;
-        }
-        
+
         if (newPassword !== confirmPassword) {
             alert('New password and confirmation do not match');
             return;
         }
-        
-        // In a real application, you would send this data to the server
-        // For now, just show success message and close modal
-        alert('Password changed successfully!');
-        changePasswordModal.style.display = 'none';
+
+        fetch('/auth/changePassword', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                currentPassword,
+                newPassword
+            }),
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === 'Password changed successfully.') {
+                alert('Password changed successfully!');
+                changePasswordModal.style.display = 'none';
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while changing the password.');
+        });
     });
-    
+
     // Make sidebar menu items clickable
     const menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach(item => {
