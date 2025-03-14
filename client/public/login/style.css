@@ -18,13 +18,15 @@ h2 {
     font-weight: 100;
     letter-spacing: 1px;
     font-size: 30px;
-    padding: 35.5px 52px;
+    padding-bottom: 35px;
     color: #11100E;
 }
 label {
     font-family: 'Inria Serif';
     letter-spacing: 0.5px;
     padding-bottom: 5px;
+    padding-left: 5px;
+    font-size: 19px;
 }
 
 #login {
@@ -83,11 +85,13 @@ label {
 
 .form-group input {
     width: 100%;
-    width: 200px;
-    max-width: 200px;
+    width: 250px;
+    max-width: 250px;
     padding: 10px 20px;
     height: 45px;
     border: 1px solid #B3ACA3;
+    background-color: #E4DBD0; 
+    color: #11100E; 
     border-radius: 5px;
     font-size: 13px;
 }
@@ -97,13 +101,14 @@ label {
 .login-btn {
     width: 100%;
     padding: 15px;
+    margin-top: 15px;
     background-color: #245B51;
     border: none;
     color: #F0E9E1;
-    border-radius: 5px;
+    border-radius: 7px;
     cursor: pointer;
     font-family: Inria Serif;
-    font-size: 16px;
+    font-size: 19px;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
