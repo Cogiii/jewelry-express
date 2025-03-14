@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Express | Settings</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
+</head>
+<body>
+    <div class="page-content">
+        <div class="left">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Jewelry Express Logo" class="logo-image">
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="menu-item">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="far fa-calendar"></i> Appointments
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="fas fa-gem"></i> Products
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="fas fa-users"></i> Employees
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item active">
+                    <i class="fas fa-cog"></i> Settings
+                </div>
+                <div class="sign-out">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="top-bar">
+                <div class="user-profile">
+                    <h2>Welcome, Emu!</h2>
+                    <div class="profile-section">
+                        <div class="profile-pic">
+                            <img src="profile.jpg" alt="Profile" />
+                        </div>
+                        <div class="menu-dots">...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <h1>Settings</h1>
+                <div class="user-credentials">
+                    <h3>User Details</h3>
+                    <div class="user-details-container">
+                        <div class="detail-row">
+                            <div class="detail-label">Username</div>
+                            <div class="detail-value">emu_admin</div>
+                        </div>
+                        <div class="detail-row">
+                            <div class="detail-label">Password</div>
+                            <div class="detail-value">••••••••</div>
+                        </div>
+                        <div class="password-actions">
+                            <button id="changePasswordBtn" class="goBackBtn">Change Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="change-password-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h3>Change Password</h3>
+            <div class="modal-section">
+                <div class="detail-row">
+                    <div class="detail-label">Current Password</div>
+                    <div class="detail-value">
+                        <input type="password" id="current-password" placeholder="Enter current password">
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">New Password</div>
+                    <div class="detail-value">
+                        <input type="password" id="new-password" placeholder="Enter new password">
+                    </div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Confirm Password</div>
+                    <div class="detail-value">
+                        <input type="password" id="confirm-password" placeholder="Confirm new password">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="cancelBtn goBackBtn">Cancel</button>
+                <button class="saveBtn goBackBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

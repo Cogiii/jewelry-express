@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jewelry Express | Employees</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
+</head>
+<body>
+    <div class="page-content">
+        <div class="left">
+            <div class="top-bar">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Jewelry Express Logo" class="logo-image">
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="menu-item">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="far fa-calendar"></i> Appointments
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="fas fa-gem"></i> Products
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item active">
+                    <i class="fas fa-users"></i> Employees
+                </div>
+                <div class="menu-separator"></div>
+                <div class="menu-item">
+                    <i class="fas fa-cog"></i> Settings
+                </div>
+                <div class="sign-out">
+                    <i class="fas fa-sign-out-alt"></i> Sign Out
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="top-bar">
+                <div class="user-profile">
+                    <h2>Welcome, Emu!</h2>
+                    <div class="profile-section">
+                        <div class="profile-pic">
+                            <img src="profile.jpg" alt="Profile" />
+                        </div>
+                        <div class="menu-dots">...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <h1>Employees</h1>
+                <div class="appointments-container">
+                    <div class="appointments-header">
+                        <h3>Employee List</h3>
+                        <select class="dropdown">
+                            <option>All Employees</option>
+                            <option>Admin Only</option>
+                            <option>Staff Only</option>
+                            <option>Active Only</option>
+                        </select>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Employee</th>
+                                    <th>Position</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Santos, Maria Elena</td>
+                                    <td>Store Manager</td>
+                                    <td>Admin</td>
+                                </tr>
+                                <tr>
+                                    <td>Reyes, Juan Carlos</td>
+                                    <td>Sales Manager</td>
+                                    <td>Admin</td>
+                                </tr>
+                                <tr>
+                                    <td>Villanueva, Anna Liza</td>
+                                    <td>Sales Associate</td>
+                                    <td>Staff</td>
+                                </tr>
+                                <tr>
+                                    <td>Dela Cruz, Michael</td>
+                                    <td>Jeweler</td>
+                                    <td>Staff</td>
+                                </tr>
+                                <tr>
+                                    <td>Mendoza, Paolo</td>
+                                    <td>Accountant</td>
+                                    <td>Staff</td>
+                                </tr>
+                                <tr>
+                                    <td>Fernandez, Rosario</td>
+                                    <td>Sales Associate</td>
+                                    <td>Resigned</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
