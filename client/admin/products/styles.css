@@ -151,7 +151,6 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 /* Product-specific styles */
@@ -208,7 +207,6 @@ body {
 /* Table styles */
 .table-container {
     position: relative;
-    max-height: 200px;
     overflow: hidden;
     transition: max-height 0.3s ease;
 }
@@ -416,6 +414,12 @@ tbody td:last-child {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-bottom: 25px;
+}
+.covertwo {
+    grid-column: span 2;
+}
+.product-info-item #modal-product-description {
+    min-height: 100px;
 }
 
 .product-info-item {
@@ -768,6 +772,7 @@ tbody td:last-child {
 .hidden-row {
     display: none;
     opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .product-section.expanded .hidden-row {
@@ -811,4 +816,67 @@ a {
 #logout {
     background-color: transparent;
     border: none;
+}
+
+.jewelry_images {
+    border: none;
+    padding: 10px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.jewelries_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+}
+
+.jewelry_container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+    width: 70%;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.jewelry {
+    text-align: center;
+}
+
+.jewelry img {
+    width: 150px;
+    height: 150px;
+}
+.jewelry_details {
+    font-family: 'Inria Serif';
+    font-weight: lighter;
+    font-size: 17px;
+    margin-top: 10px;
+}
+
+.slider_dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.slider_dots .dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--secondary-H-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slider_dots .dot.active {
+    background-color: var(--secondary-color);
 }

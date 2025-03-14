@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jewelry Express | Products</title>
     <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../assets/resources.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
@@ -44,7 +45,7 @@
         <div class="right">
             <div class="top-bar">
                 <div class="user-profile">
-                    <h2>Welcome, Emu!</h2>
+                    <h2>Welcome, <span class="userName">Emu!</span></h2>
                 </div>
             </div>
             
@@ -54,7 +55,7 @@
                     <button class="add-product-btn" id="global-add-product-btn">Add New Product</button>
                 </div>
                 <!-- Necklace Section -->
-                <div class="product-section" id="necklace-section">
+                <div class="product-section neck" id="necklace-section">
                     <div class="product-header">
                         <h3>Necklace</h3>
                     </div>
@@ -69,30 +70,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="product-row" data-product-id="1" data-product-type="Necklace">
-                                    <td>Sardonyx Shell Cameo Necklace</td>
-                                    <td>Sardonyx, Gold</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
-                                <tr class="product-row hidden-row" data-product-id="2" data-product-type="Necklace">
-                                    <td>Pearl Pendant Necklace</td>
-                                    <td>Freshwater Pearl, Sterling Silver</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
-                                <tr class="product-row hidden-row" data-product-id="3" data-product-type="Necklace">
-                                    <td>Diamond Pendant Necklace</td>
-                                    <td>Diamond, 14K Gold</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -102,7 +80,7 @@
                 </div>
 
                 <!-- Earrings Section -->
-                <div class="product-section" id="earrings-section">
+                <div class="product-section" id="earring-section">
                     <div class="product-header">
                         <h3>Earrings</h3>
                     </div>
@@ -117,30 +95,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="product-row" data-product-id="4" data-product-type="Earrings">
-                                    <td>Diamond Stud Earrings</td>
-                                    <td>Diamond, 18K Gold</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
-                                <tr class="product-row hidden-row" data-product-id="5" data-product-type="Earrings">
-                                    <td>Pearl Drop Earrings</td>
-                                    <td>South Sea Pearl, Sterling Silver</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
-                                <tr class="product-row hidden-row" data-product-id="6" data-product-type="Earrings">
-                                    <td>Gemstone Hoop Earrings</td>
-                                    <td>Sapphire, 14K Gold</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -150,7 +105,7 @@
                 </div>
 
                 <!-- Rings Section -->
-                <div class="product-section" id="rings-section">
+                <div class="product-section" id="ring-section">
                     <div class="product-header">
                         <h3>Rings</h3>
                     </div>
@@ -165,30 +120,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="product-row" data-product-id="7" data-product-type="Rings">
-                                    <td>Diamond Solitaire Ring</td>
-                                    <td>Diamond, Platinum</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
-                                <tr class="product-row hidden-row" data-product-id="8" data-product-type="Rings">
-                                    <td>Emerald Halo Ring</td>
-                                    <td>Emerald, Diamond, 18K Gold</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
-                                <tr class="product-row hidden-row" data-product-id="9" data-product-type="Rings">
-                                    <td>Vintage Filigree Ring</td>
-                                    <td>Sterling Silver</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -198,7 +130,7 @@
                 </div>
 
                 <!-- Bracelets Section -->
-                <div class="product-section" id="bracelets-section">
+                <div class="product-section" id="bracelet-section">
                     <div class="product-header">
                         <h3>Bracelets</h3>
                     </div>
@@ -213,30 +145,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="product-row" data-product-id="10" data-product-type="Bracelets">
-                                    <td>Tennis Bracelet</td>
-                                    <td>Diamond, 18K White Gold</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
-                                <tr class="product-row hidden-row" data-product-id="11" data-product-type="Bracelets">
-                                    <td>Charm Bracelet</td>
-                                    <td>Sterling Silver</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
-                                <tr class="product-row hidden-row" data-product-id="12" data-product-type="Bracelets">
-                                    <td>Beaded Bracelet</td>
-                                    <td>Jade, 14K Gold</td>
-                                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                                    <td class="product-image-cell">
-                                        <img src="placeholder.jpg" alt="Product" class="product-thumbnail">
-                                    </td>
-                                </tr>
+
                             </tbody>
                         </table>
                     </div>
@@ -257,43 +166,33 @@
             </div>
             
             <div class="product-info-grid">
-                <div class="product-info-item">
-                    <div class="product-info-label">Product Code</div>
-                    <div class="product-info-value" id="modal-product-code">#904321</div>
-                </div>
-                <div class="product-info-item">
+                <div class="product-info-item covertwo">
                     <div class="product-info-label">Product Name</div>
                     <div class="product-info-value" id="modal-product-name">Sardonyx Shell Cameo Necklace</div>
                 </div>
+
                 <div class="product-info-item">
                     <div class="product-info-label">Product Material</div>
-                    <div class="product-info-value" id="modal-product-material">Sardonyx, Gold</div>
+                    <div class="product-info-value" id="modal-product-material"></div>
                 </div>
                 <div class="product-info-item">
+                    <div class="product-info-label">Product Type</div>
+                    <div class="product-info-value" id="modal-product-type"></div>
+                </div>
+                <div class="product-info-item covertwo">
                     <div class="product-info-label">Product Description</div>
-                    <div class="product-info-value" id="modal-product-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                    <div class="product-info-value " id="modal-product-description"></div>
                 </div>
             </div>
             
             <div class="product-images-section">
                 <div class="product-info-label">Product Images</div>
                 
-                <div class="product-images-container">
-                    <div class="product-image-gallery">
-                        <img src="placeholder.jpg" alt="Product" class="product-image-main" id="modal-product-image">
+                <div class="jewelry_images">
+                    <div class="jewelries_wrapper">
+                        <div class="jewelry_container"></div>
+                        <div class="slider_dots"></div>
                     </div>
-                </div>
-                
-                <div class="product-thumbnail-container" id="thumbnail-container">
-                    <img src="placeholder.jpg" alt="Thumbnail 1" class="product-thumbnail-item active" data-image-index="0">
-                    <img src="placeholder.jpg" alt="Thumbnail 2" class="product-thumbnail-item" data-image-index="1">
-                    <img src="placeholder.jpg" alt="Thumbnail 3" class="product-thumbnail-item" data-image-index="2">
-                </div>
-                
-                <div class="product-image-nav" id="image-nav-dots">
-                    <span class="image-nav-dot active" data-image-index="0"></span>
-                    <span class="image-nav-dot" data-image-index="1"></span>
-                    <span class="image-nav-dot" data-image-index="2"></span>
                 </div>
             </div>
             
@@ -318,28 +217,14 @@
                     
                     <label class="form-label" for="product-type">Product Type</label>
                     <select id="product-type" class="form-input" required>
-                        <option value="">Select product type...</option>
-                        <option value="Necklace">Necklace</option>
-                        <option value="Earrings">Earrings</option>
-                        <option value="Rings">Rings</option>
-                        <option value="Bracelets">Bracelets</option>
+                        <option value="" selected disabled>Select product type...</option>
                     </select>
                 </div>
                 
                 <div class="form-row">
                     <label class="form-label" for="product-material">Material</label>
                     <select id="product-material" class="form-input" required>
-                        <option value="">Select material...</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Platinum">Platinum</option>
-                        <option value="Diamond, 18K Gold">Diamond, 18K Gold</option>
-                        <option value="Diamond, Platinum">Diamond, Platinum</option>
-                        <option value="Emerald, Diamond, 18K Gold">Emerald, Diamond, 18K Gold</option>
-                        <option value="Freshwater Pearl, Sterling Silver">Freshwater Pearl, Sterling Silver</option>
-                        <option value="Sardonyx, Gold">Sardonyx, Gold</option>
-                        <option value="Sterling Silver">Sterling Silver</option>
-                        <option value="Jade, 14K Gold">Jade, 14K Gold</option>
+                        <option value="" selected disabled>Select material...</option>
                     </select>
                 </div>
                 
@@ -355,7 +240,7 @@
                 
                 <div class="form-row image-upload-container">
                     <label class="form-label">Product Images</label>
-                    <input type="file" id="file-upload" accept="image/*" multiple>
+                    <input type="file" id="file-upload" accept="image/*" multiple required>
                     <label for="file-upload" class="upload-btn">
                         <i class="fas fa-cloud-upload-alt"></i> Click to upload images
                     </label>
