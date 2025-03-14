@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const userName = document.querySelector('.user-profile .userName');
     userName.textContent = localStorage.getItem('username');
 
+    document.getElementById('username').textContent = localStorage.getItem('username');
+
     logout.addEventListener('click', () => {
         window.location.href = '/auth/logout';
         console.log("YESY")
