@@ -400,16 +400,13 @@ router.get('/getProductByType/:type', async (req, res) => {
             `SELECT 
                 p.*, 
                 pt.product_type,
-                pm.product_material,
-                pc.product_code
+                pm.product_material
             FROM 
                 product p
             JOIN 
                 product_material pm ON p.product_material_id = pm.product_material_id
             JOIN 
                 product_type pt ON p.product_type_id = pt.product_type_id
-            JOIN 
-                product_code pc ON pc.product
             WHERE 
                 pt.product_type = ?`,
             [type]
@@ -710,33 +707,6 @@ router.get('/getAppointments', upload.none(), async (req, res) => {
     } catch (error) {
         console.error('Error fetching approved appointments:', error);
         res.status(500).json({ success: false, message: 'Internal Server Error' });
-    }
-});
-
-router.get('/getProductByType/:type', async (req, res) => {
-    const { type } = req.params;
-    console.log("Received request for type:", type);  // Debugging
-
-    try {
-        const result = await query(
-            `SELECT p.*, pt.product_type, pm.product_material 
-            FROM product p
-            JOIN product_type pt ON pt.product_type_id = p.product_type_id
-            JOIN product_material pm ON pm.product_material_id = p.product_material_id
-            WHERE pt.product_type = ?`,
-            [type]
-        );
-
-        console.log("Query result:", result); // Debugging
-
-        if (result.length === 0) {
-            return res.status(404).json({ success: false, message: "No product found" });
-        }
-
-        res.json({ success: true, products: result });
-    } catch (error) {
-        console.error("Error fetching products:", error);
-        res.status(500).json({ success: false, message: "Server error" });
     }
 });
 

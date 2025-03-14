@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const userName = document.querySelector('.user-profile .userName');
     userName.textContent = localStorage.getItem('username');
-    
+
     const logout = document.getElementById('logout');
 
     logout.addEventListener('click', () => {
@@ -278,7 +278,6 @@ function fetchProductsByType(type, containerSelector) {
                         return { ...product, img: imageUrl };
                     } catch (error) {
                         console.error(`Error fetching image for product ${product.product_id}:`, error);
-                        return { ...product, img: "placeholder.jpg" };
                     }
                 })
             );
