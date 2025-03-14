@@ -1,3 +1,4 @@
+let appointmentData = null;
 document.addEventListener('DOMContentLoaded', function() {
     // Modal elements
     const customerModal = document.getElementById('customer-modal');
@@ -5,10 +6,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const rejectionModal = document.getElementById('rejection-modal');
     const approvalConfirmModal = document.getElementById('approval-confirmation-modal');
     const rejectionConfirmModal = document.getElementById('rejection-confirmation-modal');
+    const userName = document.querySelector('.user-profile .userName');
+    userName.textContent = localStorage.getItem('username');
     
-    // Add click handlers directly to all relevant rows
-    setupTableRowClicks();
-    
+    fetchAppointments("Pending", "#pending-section .table-container");
+    fetchAppointments("Approve", "#approved-section .table-container");
+    fetchAppointments("Cancelled", "#cancelled-section .table-container");
+
+    const logout = document.getElementById('logout');
+
+    logout.addEventListener('click', () => {
+        window.location.href = '/auth/logout';
+        console.log("YESY")
+    });
+        
+
     // Setup See More buttons for expandable sections
     setupSeeMoreButtons();
     
@@ -16,19 +28,113 @@ document.addEventListener('DOMContentLoaded', function() {
     setupModals();
 });
 
+async function fetchAppointments(status, containerSelector) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/get${status}Appointments`);
+        const result = await response.json();
+
+        if (!result.success) {
+            console.error('Error fetching appointments:', result.message);
+            return [];
+        }
+
+        const appointments = result.data.map((appointment, index) => ({
+            appointmentId: appointment.appointment_id,
+            customerId: appointment.customer_id,
+            firstName: appointment.first_name,
+            lastName: appointment.last_name,
+            name: `${appointment.first_name} ${appointment.last_name}`,
+            emails: appointment.emails,
+            contactNumbers: appointment.contact_numbers,
+            schedule: new Date(appointment.sched_of_appointment).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            time: new Date(appointment.sched_of_appointment).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }),
+            purpose: appointment.appointment_purpose,
+            appointedDate: new Date(appointment.date_appointed).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+            rowType: index === 0 ? "normal" : (index === 1 ? "expandable" : "hidden") // Adjust row type logic as needed
+        }));        
+
+        if(status == "Pending") createAppointmentsTable(appointments, "#pending-section .table-container");
+        if(status == "Approve") createAppointmentsTable(appointments, "#approved-section .table-container");
+        if(status == "Cancelled") createAppointmentsTable(appointments, "#cancelled-section .table-container");
+
+        setupTableRowClicks(appointments, containerSelector);
+    } catch (error) {
+        console.error('Failed to fetch pending appointments:', error);
+        return [];
+    }
+}
+
+function createAppointmentsTable(data, containerSelector) {
+    const container = document.querySelector(containerSelector);
+
+    container.innerHTML = '';
+    const appointments = data || [
+        { name: "Navarez, Jaja Nikolkog", schedule: "Jun 29, 2004", time: "9:30 AM", purpose: "Buy", appointedDate: "Jun 14, 2004", rowType: "normal" },
+        { name: "Navarez, Jaja Nikolkog", schedule: "Jun 29, 2004", time: "9:30 AM", purpose: "Buy", appointedDate: "Jun 14, 2004", rowType: "expandable" },
+        { name: "Devera, Cory Khong", schedule: "Jun 30, 2004", time: "1:30 PM", purpose: "Cleaning", appointedDate: "Jun 17, 2004", rowType: "hidden" },
+        { name: "Royeras, Mc Arthur Watapon", schedule: "Jun 30, 2004", time: "2:30 PM", purpose: "Maglu2", appointedDate: "Jun 4, 2004", rowType: "hidden" },
+    ];
+
+    // Create table element
+    const table = document.createElement('table');
+
+    // Create table header
+    const thead = document.createElement('thead');
+    thead.innerHTML = `
+        <tr>
+            <th>Customer</th>
+            <th>Schedule of Appointment</th>
+            <th>Purpose</th>
+            <th>Date Appointed</th>
+        </tr>
+    `;
+    table.appendChild(thead);
+
+    // Create table body
+    const tbody = document.createElement('tbody');
+
+    // Loop through appointments and create rows
+    appointments.forEach((appointment) => {
+        const row = document.createElement('tr');
+
+        // Apply appropriate class for hidden or expandable rows
+        if (appointment.rowType === "hidden") {
+            row.classList.add('hidden-row');
+        } else if (appointment.rowType === "expandable") {
+            row.classList.add('expandable-row');
+        }
+
+        // Insert row data
+        row.innerHTML = `
+            <td>${appointment.name}</td>
+            <td>${appointment.schedule} <span class="time">${appointment.time}</span></td>
+            <td>${appointment.purpose}</td>
+            <td>${appointment.appointedDate}</td>
+        `;
+
+        tbody.appendChild(row);
+    });
+
+    // Append tbody to table
+    table.appendChild(tbody);
+
+    // Append table to container
+    container.appendChild(table);
+}
+
 // =============================================
 // ROW CLICK FUNCTIONALITY
 // =============================================
 
-function setupTableRowClicks() {
-    // Get all non-hidden rows from all tables
-    const allTables = document.querySelectorAll('table');
+function setupTableRowClicks(appointments, containerSelector) {
+    // Get all tables inside the specified container
+    const tables = document.querySelectorAll(`${containerSelector} table`);
     
-    allTables.forEach(table => {
+    tables.forEach(table => {
         const section = table.closest('.appointment-section');
         const sectionId = section ? section.id : null;
         let status = 'pending';
-        
+
         // Determine status based on section ID
         if (sectionId) {
             if (sectionId.includes('approved')) {
@@ -37,77 +143,45 @@ function setupTableRowClicks() {
                 status = 'cancelled';
             }
         }
-        
+
         // Get all rows in this table except header rows
         const rows = table.querySelectorAll('tbody tr');
-        
-        rows.forEach(row => {
-            // Add a direct click handler to each row
+        rows.forEach((row, index) => {
+            // Add a click event to each row
             row.addEventListener('click', function(event) {
-                // Prevent click if we clicked on a button inside the row
-                if (event.target.tagName === 'BUTTON' || 
-                    event.target.closest('button')) {
-                    return;
+                if (event.target.tagName === 'BUTTON' || event.target.closest('button')) {
+                    return; // Ignore clicks on buttons
                 }
-                
-                // Otherwise show the modal
-                openCustomerModal(row, status);
+
+                // Ensure the index exists in appointments
+                if (index < appointments.length) {
+                    openCustomerModal(appointments[index], status);
+                }
             });
-            
+
             // Add a visual indication that rows are clickable
             row.style.cursor = 'pointer';
         });
     });
 }
 
-function openCustomerModal(row, status) {
-    console.log("Opening modal for row:", row, "with status:", status);
-    
-    // Extract data from the row
-    const cells = row.cells;
-    if (!cells || cells.length === 0) {
-        console.error("No cells found in row");
-        return;
-    }
-    
-    // Get customer name from first column
-    const customerName = cells[0].textContent.trim();
-    
-    // Split name into parts (assuming "LastName, FirstName" format)
-    const nameParts = customerName.split(',');
-    const lastName = nameParts[0].trim();
-    let firstName = "";
-    
-    if (nameParts.length > 1) {
-        const firstNameFull = nameParts[1].trim();
-        const firstNameParts = firstNameFull.split(' ');
-        firstName = firstNameParts[0];
-    }
-    
-    // Get appointment details
-    let date = "";
-    let time = "";
-    if (cells.length > 1) {
-        const scheduleText = cells[1].textContent.trim();
-        const scheduleParts = scheduleText.split(' ');
-        
-        if (scheduleParts.length >= 3) {
-            date = scheduleParts.slice(0, 3).join(' '); // e.g. "Jun 17, 2004"
-            
-            // Extract time if it exists (might be in a span)
-            const timeSpan = cells[1].querySelector('.time');
-            if (timeSpan) {
-                time = timeSpan.textContent.trim();
-            } else if (scheduleParts.length > 3) {
-                time = scheduleParts.slice(3).join(' ');
-            }
-        }
-    }
-    
-    // Get purpose and date appointed
-    const purpose = cells.length > 2 ? cells[2].textContent.trim() : "";
-    const dateAppointed = cells.length > 3 ? cells[3].textContent.trim() : "";
-    
+function openCustomerModal(appointment, status) {
+    appointmentData = appointment;
+
+    // Extract appointment details
+    const firstName = appointment.firstName;
+    const lastName = appointment.lastName;
+    const date = appointment.schedule;
+    const time = appointment.time;
+    const purpose = appointment.purpose;
+    const dateAppointed = appointment.appointedDate;
+    const contactNumber = appointment.contactNumbers || "No contact available"; // Handle missing numbers
+
+    // Split emails and format them
+    const emails = appointment.emails 
+        ? appointment.emails.split(", ").map(email => `<div>${email}</div>`).join("")
+        : "<div>No email available</div>"; // Handle missing emails
+
     // Update modal content
     document.getElementById('modal-first-name').textContent = firstName;
     document.getElementById('modal-last-name').textContent = lastName;
@@ -115,17 +189,20 @@ function openCustomerModal(row, status) {
     document.getElementById('modal-time').textContent = time;
     document.getElementById('modal-purpose').textContent = purpose;
     document.getElementById('modal-date-appointed').textContent = dateAppointed;
-    
+    document.getElementById('modal-contact-number').textContent = contactNumber;
+    document.getElementById('modal-email').innerHTML = emails; // Use innerHTML for multiple emails
+
     // Store the status as a data attribute
     const customerModal = document.getElementById('customer-modal');
     customerModal.setAttribute('data-source', status);
-    
+
     // Update buttons based on status
     updateModalButtons(status);
-    
+
     // Show the modal
     customerModal.style.display = 'block';
 }
+
 
 // =============================================
 // SEE MORE FUNCTIONALITY
@@ -254,38 +331,88 @@ function setupActionButtons() {
     
     // Confirm approval button
     const confirmApprovalBtn = document.getElementById('confirm-approval');
+    const approvalRemarks = document.getElementById('approval-remarks');
     if (confirmApprovalBtn) {
-        confirmApprovalBtn.addEventListener('click', function() {
+        confirmApprovalBtn.addEventListener('click', async function() {
             approvalModal.style.display = 'none';
             
             // Update message based on source
             const source = customerModal.getAttribute('data-source');
             const confirmMsg = document.querySelector('#approval-confirmation-modal .confirmation-message p');
             
-            if (source === 'cancelled') {
-                confirmMsg.textContent = 'Appointment restored successfully!';
-            } else {
-                confirmMsg.textContent = 'Appointment approved successfully!';
+            const formData = new FormData();
+            formData.append('appointmentId', appointmentData.appointmentId);
+            formData.append('adminId', localStorage.getItem('id'));
+            formData.append('remarks', approvalRemarks.value);
+
+            approvalRemarks.value = '';
+
+            try {
+                const response = await fetch('/api/approveAppointment', {
+                    method: 'POST',
+                    body: formData
+                });
+    
+                const result = await response.json();
+    
+                if (result.success) {
+                    // Hide approval modal only if successful
+                    approvalModal.style.display = 'none';
+                    confirmMsg.textContent = source === 'cancelled'
+                        ? 'Appointment restored successfully!'
+                        : 'Appointment approved successfully!';
+                    location.reload();
+                } else {
+                    confirmMsg.textContent = `Failed to approve appointment: ${result.message}`;
+                }
+            } catch (error) {
+                console.error("Error approving appointment:", error);
+                confirmMsg.textContent = "Error connecting to server.";
             }
-            
+
             approvalConfirmModal.style.display = 'block';
         });
     }
     
     // Confirm rejection button
     const confirmRejectionBtn = document.getElementById('confirm-rejection');
+    const rejectionRemarks = document.getElementById('rejection-remarks');
     if (confirmRejectionBtn) {
-        confirmRejectionBtn.addEventListener('click', function() {
+        confirmRejectionBtn.addEventListener('click', async function() {
             rejectionModal.style.display = 'none';
             
             // Update message based on source
             const source = customerModal.getAttribute('data-source');
             const confirmMsg = document.querySelector('#rejection-confirmation-modal .confirmation-message p');
-            
-            if (source === 'approved') {
-                confirmMsg.textContent = 'Appointment cancelled successfully!';
-            } else {
-                confirmMsg.textContent = 'Appointment rejected successfully!';
+
+            const formData = new FormData();
+            formData.append('appointmentId', appointmentData.appointmentId);
+            formData.append('adminId', localStorage.getItem('id'));
+            formData.append('remarks', rejectionRemarks.value);
+
+            rejectionRemarks.value = '';
+
+            try {
+                const response = await fetch('/api/cancelAppointment', {
+                    method: 'POST',
+                    body: formData
+                });
+    
+                const result = await response.json();
+    
+                if (result.success) {
+                    // Hide approval modal only if successful
+                    approvalModal.style.display = 'none';
+                    confirmMsg.textContent = source === 'approved'
+                        ? 'Appointment rejected successfully!'
+                        : 'Appointment cancelled successfully!';
+                    location.reload();
+                } else {
+                    confirmMsg.textContent = `Failed to cancel appointment: ${result.message}`;
+                }
+            } catch (error) {
+                console.error("Error cancelling appointment:", error);
+                confirmMsg.textContent = "Error connecting to server.";
             }
             
             rejectionConfirmModal.style.display = 'block';
@@ -369,3 +496,5 @@ function updateModalButtons(status) {
         rejectBtn.style.display = 'none';
     }
 }
+
+

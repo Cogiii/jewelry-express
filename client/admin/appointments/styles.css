@@ -12,7 +12,6 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding: 0 20px;
 }
 
 .logo-container {
@@ -22,8 +21,7 @@ body {
 }
 
 .logo-image {
-    width: 100%;
-    max-width: 300px;
+    width: 220px;
     height: 54px;
     object-fit: contain;
 }
@@ -413,7 +411,7 @@ tbody td:last-child {
 }
 
 .remarks-textarea {
-    width: 100%;
+    width: 95%;
     min-height: 120px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -434,3 +432,13 @@ tbody tr:hover {
     background-color: #8ca9a0;
 }
 
+
+
+a {
+    text-decoration: none;
+    color: white;
+}
+#logout {
+    background-color: transparent;
+    border: none;
+}

@@ -488,5 +488,142 @@ router.get('/relatedCreations/:productId', async (req, res) => {
     }
 });
 
+router.get('/getPendingAppointments', async (req, res) => {
+    try {
+        const rows = await query(
+            `SELECT 
+                a.*, 
+                c.first_name, 
+                c.last_name, 
+                GROUP_CONCAT(DISTINCT ce.email ORDER BY ce.email SEPARATOR ', ') AS emails, 
+                GROUP_CONCAT(DISTINCT cc.contact_number ORDER BY cc.contact_number SEPARATOR ', ') AS contact_numbers
+            FROM appointment a
+            JOIN customer c ON c.customer_id = a.customer_id
+            LEFT JOIN customer_email ce ON ce.customer_id = a.customer_id
+            LEFT JOIN customer_contact cc ON cc.customer_id = a.customer_id
+            WHERE a.appointment_status = 'pending'
+            GROUP BY a.appointment_id, c.customer_id;
+            `);
+        res.json({ success: true, data: rows });
+    } catch (error) {
+        console.error('Error fetching pending appointments:', error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+router.get('/getApproveAppointments', async (req, res) => {
+    try {
+        const rows = await query(
+            `SELECT 
+                a.*, 
+                c.first_name, 
+                c.last_name, 
+                GROUP_CONCAT(DISTINCT ce.email ORDER BY ce.email SEPARATOR ', ') AS emails, 
+                GROUP_CONCAT(DISTINCT cc.contact_number ORDER BY cc.contact_number SEPARATOR ', ') AS contact_numbers
+            FROM appointment a
+            JOIN customer c ON c.customer_id = a.customer_id
+            LEFT JOIN customer_email ce ON ce.customer_id = a.customer_id
+            LEFT JOIN customer_contact cc ON cc.customer_id = a.customer_id
+            WHERE a.appointment_status = 'approve'
+            GROUP BY a.appointment_id, c.customer_id;
+            `);
+        res.json({ success: true, data: rows });
+    } catch (error) {
+        console.error('Error fetching pending appointments:', error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+router.get('/getCancelledAppointments', async (req, res) => {
+    try {
+        const rows = await query(
+            `SELECT 
+                a.*, 
+                c.first_name, 
+                c.last_name, 
+                GROUP_CONCAT(DISTINCT ce.email ORDER BY ce.email SEPARATOR ', ') AS emails, 
+                GROUP_CONCAT(DISTINCT cc.contact_number ORDER BY cc.contact_number SEPARATOR ', ') AS contact_numbers
+            FROM appointment a
+            JOIN customer c ON c.customer_id = a.customer_id
+            LEFT JOIN customer_email ce ON ce.customer_id = a.customer_id
+            LEFT JOIN customer_contact cc ON cc.customer_id = a.customer_id
+            WHERE a.appointment_status = 'Cancelled'
+            GROUP BY a.appointment_id, c.customer_id;
+            `);
+        res.json({ success: true, data: rows });
+    } catch (error) {
+        console.error('Error fetching pending appointments:', error);
+        res.status(500).json({ success: false, message: 'Internal Server Error' });
+    }
+});
+
+router.post('/approveAppointment', upload.none(), async (req, res) => {
+    try {
+        const { appointmentId, adminId, remarks } = req.body;
+
+        if (!appointmentId) {
+            return res.status(400).json({ success: false, message: "Appointment ID is required." });
+        }
+
+        const result = await query(
+            `
+            INSERT INTO appointment_approval
+            (appointment_id, admin_id, remarks) 
+            VALUES (?, ?, ?)
+            `, 
+            [appointmentId, adminId, remarks]
+        );
+
+        const updateStatus = await query(
+            `UPDATE appointment SET appointment_status = 'approve' WHERE appointment_id = ?`,
+            [appointmentId]
+        );
+        
+        console.log("Update result:", updateStatus);        
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: "Appointment not found." });
+        }
+
+        return res.json({ success: true, message: "Appointment approved successfully." });
+
+    } catch (error) {
+        console.error("Error approving appointment:", error);
+        return res.status(500).json({ success: false, message: "Internal server error." });
+    }
+});
+router.post('/cancelAppointment', upload.none(), async (req, res) => {
+    try {
+        const { appointmentId, adminId, remarks } = req.body;
+
+        if (!appointmentId) {
+            return res.status(400).json({ success: false, message: "Appointment ID is required." });
+        }
+
+        const result = await query(
+            `
+            INSERT INTO appointment_approval
+            (appointment_id, admin_id, remarks) 
+            VALUES (?, ?, ?)
+            `, 
+            [appointmentId, adminId, remarks]
+        );
+
+        const updateStatus = await query(
+            `UPDATE appointment SET appointment_status = 'cancelled' WHERE appointment_id = ?`,
+            [appointmentId]
+        );
+        
+        console.log("Update result:", updateStatus);        
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: "Appointment not found." });
+        }
+
+        return res.json({ success: true, message: "Appointment cancelled successfully." });
+
+    } catch (error) {
+        console.error("Error cancelling appointment:", error);
+        return res.status(500).json({ success: false, message: "Internal server error." });
+    }
+});
 
 module.exports = router;

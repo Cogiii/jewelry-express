@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     
     <title>Jewelry Express | Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
 </head>
@@ -51,43 +50,42 @@
         <button type="submit">Add Product</button>
     </form> -->
     
-
-
-    <script src="index.js"></script>
     <div class="page-content">
         <div class="left">
             <div class="top-bar">
-                <div class="logo-container">
-                    <img src="logo.png" alt="Jewelry Express Logo" class="logo-image">
-                </div>
+                <img src="../assets/images/Jewelry_Express_Logo_Transparent 2.webp" alt="Jewelry Express Logo" class="logo-image">
             </div>
+
             <div class="sidebar">
-                <div class="menu-item active">
-                    <i class="fas fa-th-large"></i> Dashboard
-                </div>
+                <a href="/dashboard">
+                    <div class="menu-item active">
+                        <i class="fas fa-th-large"></i> Dashboard
+                    </div>
+                </a>
                 <div class="menu-separator"></div>
-                <div class="menu-item">
-                    <i class="far fa-calendar"></i> Appointments
-                </div>
+                <a href="/appointments">
+                    <div class="menu-item">
+                        <i class="far fa-calendar"></i> Appointments
+                    </div>
+                </a>
                 <div class="menu-separator"></div>
-                <div class="menu-item">
-                    <i class="fas fa-gem"></i> Products
-                </div>
-                <div class="sign-out">
+                <a href="/products">
+                    <div class="menu-item">
+                        <i class="fas fa-gem"></i> Products
+                    </div>
+                </a>
+
+                <button class="sign-out" id="logout">
                     <i class="fas fa-sign-out-alt"></i> Sign Out
-                </div>
+                </button>
             </div>
         </div>
+
+
         <div class="right">
             <div class="top-bar">
                 <div class="user-profile">
                     <h2>Welcome, Emu!</h2>
-                    <div class="profile-section">
-                        <div class="profile-pic">
-                            <img src="profile.jpg" alt="Profile" />
-                        </div>
-                        <div class="menu-dots">...</div>
-                    </div>
                 </div>
             </div>
             <div class="main-content">
@@ -162,5 +160,7 @@
             </div>
         </div>
     </div>
+
+    <script src="index.js"></script>
 </body>
 </html>

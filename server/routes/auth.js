@@ -109,9 +109,13 @@ router.post('/login', ensureNotAuthenticated, (req, res, next) => {
     })(req, res, next);
 });
 
-router.delete('/logout', (req, res) => {
-    req.logOut();
-    res.redirect('/login');
+router.get('/logout', (req, res, next) => {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.redirect('/login');
+    });
 });
 
 module.exports = router;

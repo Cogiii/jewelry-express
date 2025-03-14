@@ -396,3 +396,10 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmationModal.style.display = 'block';
     });
 });
+
+const logout = document.getElementById('logout');
+
+logout.addEventListener('click', () => {
+    window.location.href = '/auth/logout';
+    console.log("YESY")
+});

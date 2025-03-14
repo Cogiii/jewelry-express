@@ -248,7 +248,7 @@ function appointmentForm() {
     const purposeField = document.getElementById('purpose');
 
     document.getElementById('appointment_form').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent page refresh
+        event.preventDefault();
 
         const firstName = firstNameField.value.trim();
         const lastName = lastNameField.value.trim();
@@ -257,8 +257,6 @@ function appointmentForm() {
         const email = emailField.value.trim();
         const purpose = purposeField.value.trim();
         const selectedServices = getAppointmentTypes();
-        // getSelectedDate
-        // getSelectedTime
         
         const formData = new FormData();
 
@@ -379,7 +377,6 @@ function submitConfirmedInfo(formData) {
     const servicesText = document.querySelector('#services_info p');
     const purposeText = document.querySelector('.purpose_details p');
     const submitAppointmentBtn = document.getElementById('submitAppointmentBtn');
-    // console.log(formData);
 
     // Get values from FormData
     const firstName = formData.get('firstName') || 'N/A';
@@ -429,42 +426,46 @@ function submitConfirmedInfo(formData) {
         confirmation.classList.remove('show');
     });
 
-    submitAppointmentBtn.addEventListener('click', async () => {
+    // Define a single submit event handler
+    async function submitAppointmentHandler() {
+        submitAppointmentBtn.textContent = "Submitting...";
+        submitAppointmentBtn.disabled = true;
+
         try {
-            const response = await fetch(`/api/checkIfDateAndTimeAvailable?date=${encodeURIComponent(formattedDate)}&time=${encodeURIComponent(time)}`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' }  // Content-Type is unnecessary for GET, but it won't break
-            });
-    
+            // Check if date and time are available
+            const response = await fetch(`/api/checkIfDateAndTimeAvailable?date=${encodeURIComponent(formattedDate)}&time=${encodeURIComponent(time)}`);
             const date = await response.json();
-            
-            if(date.isAvailable) {
-                fetch('/api/addAppointment', {
+
+            if (date.isAvailable) {
+                // Proceed with adding appointment
+                const appointmentResponse = await fetch('/api/addAppointment', {
                     method: 'POST',
                     body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.message === 'Appointment added successfully!') {
-                        displayOverlay("Thank You!", "Check your email and messages for your appointment’s updates.");
-                        
-                    } else {
+                });
 
-                    }
-                })
-                .catch(error => {
-                    console.error("Error during submision:", error);
-                })
-
+                const data = await appointmentResponse.json();
+                
+                if (data.message === 'Appointment added successfully!') {
+                    displayOverlay("Thank You!", "Check your email and messages for your appointment’s updates.");
+                } else {
+                    console.error("Error: Unexpected response", data);
+                }
             } else {
-                console.log("SAD");
+                console.log("Appointment slot is not available.");
             }
-    
         } catch (error) {
             console.error("Error in adding appointment:", error);
+        } finally {
+            submitAppointmentBtn.textContent = "Submit";
+            submitAppointmentBtn.disabled = false;
         }
-    });    
+    }
+
+    // Ensure the event listener is only added once
+    submitAppointmentBtn.removeEventListener('click', submitAppointmentHandler);
+    submitAppointmentBtn.addEventListener('click', submitAppointmentHandler);
 }
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
