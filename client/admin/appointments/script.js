@@ -189,8 +189,8 @@ function openCustomerModal(appointment, status) {
     document.getElementById('modal-time').textContent = time;
     document.getElementById('modal-purpose').textContent = purpose;
     document.getElementById('modal-date-appointed').textContent = dateAppointed;
-    document.getElementById('modal-contact-number').textContent = contactNumber;
-    document.getElementById('modal-email').innerHTML = emails; // Use innerHTML for multiple emails
+    document.getElementById('modal-contact-number').innerHTML = contactNumber;
+    document.getElementById('modal-email').innerHTML = emails;
 
     // Store the status as a data attribute
     const customerModal = document.getElementById('customer-modal');

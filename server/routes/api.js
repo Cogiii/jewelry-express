@@ -563,21 +563,34 @@ router.post('/approveAppointment', upload.none(), async (req, res) => {
             return res.status(400).json({ success: false, message: "Appointment ID is required." });
         }
 
-        const result = await query(
-            `
-            INSERT INTO appointment_approval
-            (appointment_id, admin_id, remarks) 
-            VALUES (?, ?, ?)
-            `, 
-            [appointmentId, adminId, remarks]
+        const checkIfAppoitnmentExist = await query(
+            `SELECT approval_id FROM appointment_approval WHERE appointment_id = ?`,
+            [appointmentId]
         );
+
+        let result;
+        if(checkIfAppoitnmentExist.length > 0) {
+            result = await query(
+                `UPDATE appointment_aproval SET admin_id = ?, remarks = ? WHERE approval_id = ?`,
+                [adminId, remarks, checkIfAppoitnmentExist[0].approval_id]
+            );
+        } else {
+            result = await query(
+                `
+                INSERT INTO appointment_approval
+                (appointment_id, admin_id, remarks) 
+                VALUES (?, ?, ?)
+                `, 
+                [appointmentId, adminId, remarks]
+            );
+        }
 
         const updateStatus = await query(
             `UPDATE appointment SET appointment_status = 'approve' WHERE appointment_id = ?`,
             [appointmentId]
         );
         
-        console.log("Update result:", updateStatus);        
+        // console.log("Update result:", updateStatus);        
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ success: false, message: "Appointment not found." });
@@ -598,21 +611,35 @@ router.post('/cancelAppointment', upload.none(), async (req, res) => {
             return res.status(400).json({ success: false, message: "Appointment ID is required." });
         }
 
-        const result = await query(
-            `
-            INSERT INTO appointment_approval
-            (appointment_id, admin_id, remarks) 
-            VALUES (?, ?, ?)
-            `, 
-            [appointmentId, adminId, remarks]
+        const checkIfAppoitnmentExist = await query(
+            `SELECT approval_id FROM appointment_approval WHERE appointment_id = ?`,
+            [appointmentId]
         );
+
+        let result;
+        if(checkIfAppoitnmentExist.length > 0) {
+            result = await query(
+                `UPDATE appointment_aproval SET admin_id = ?, remarks = ? WHERE approval_id = ?`,
+                [adminId, remarks, checkIfAppoitnmentExist[0].approval_id]
+            );
+        } else {
+            result = await query(
+                `
+                INSERT INTO appointment_approval
+                (appointment_id, admin_id, remarks) 
+                VALUES (?, ?, ?)
+                `, 
+                [appointmentId, adminId, remarks]
+            );
+        }
+
 
         const updateStatus = await query(
             `UPDATE appointment SET appointment_status = 'cancelled' WHERE appointment_id = ?`,
             [appointmentId]
         );
         
-        console.log("Update result:", updateStatus);        
+        // console.log("Update result:", updateStatus);        
 
         if (result.affectedRows === 0) {
             return res.status(404).json({ success: false, message: "Appointment not found." });

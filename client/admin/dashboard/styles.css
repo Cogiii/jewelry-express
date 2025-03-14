@@ -12,7 +12,6 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    padding: 0 20px;
 }
 
 .logo-container {
@@ -22,8 +21,7 @@ body {
 }
 
 .logo-image {
-    width: 100%;
-    max-width: 300px;
+    width: 220px;
     height: 54px;
     object-fit: contain;
 }
@@ -369,6 +367,9 @@ tbody td {
     color: #333;
     border-top: 5px solid #E4DBD0;
     border-bottom: 5px solid #E4DBD0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 tbody tr:hover {
