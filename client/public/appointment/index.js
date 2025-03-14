@@ -466,8 +466,55 @@ function submitConfirmedInfo(formData) {
     submitAppointmentBtn.addEventListener('click', submitAppointmentHandler);
 }
 
+function showProductAppointed() {
+    const path = window.location.pathname.split("/");
+    const productId = path[2];
 
+    
+    if(productId) {
+        fetch(`/api/getProduct/${productId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(async product => {
+            product = product[0]
+            // Select elements to update
+            const productContainer = document.querySelector('.product');
+            productContainer.style.display = 'block';
+            const productImage = document.querySelector('.product .details img');
+            const productName = document.querySelector('.product .details .name');
+            const productMaterial = document.querySelector('.product .details .material');
+            const productDescription = document.querySelector('.product .description');
+
+            const imageResponse = await fetch(`/api/getProductImage/${productId}`);
+            const imageBlob = await imageResponse.blob();
+            const imageUrl = URL.createObjectURL(imageBlob);
+            
+            productImage.src = imageUrl;
+            productImage.alt = product.product_name;
+            productName.textContent = product.product_name;
+            productMaterial.textContent = product.product_material;
+            productDescription.textContent = product.product_description;
+        })
+        .catch(error => {
+            console.error('Error fetching product:', error);
+        });
+            
+    } else {
+        console.log("NO")
+    }
+
+}
 
 document.addEventListener("DOMContentLoaded", function () {
+    showProductAppointed();
     appointmentForm();
 });

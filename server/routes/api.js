@@ -710,5 +710,19 @@ router.get('/getAppointments', upload.none(), async (req, res) => {
     }
 });
 
+router.get('/searchProducts', async (req, res) => {
+    const searchTerm = req.query.q;
+
+    try {
+        const results = await query(
+            `SELECT product_id, product_name FROM product WHERE product_name LIKE ? LIMIT 10`,
+            [`%${searchTerm}%`]
+        );
+        res.json(results);
+    } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
 
 module.exports = router;
