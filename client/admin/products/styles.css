@@ -147,6 +147,13 @@ body {
     padding-right: 10px;
 }
 
+ .header-container { 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 /* Product-specific styles */
 .product-section {
     background-color: #E4DBD0;
@@ -173,6 +180,7 @@ body {
     border-radius: 4px;
 }
 
+
 .product-header {
     display: flex;
     justify-content: space-between;
@@ -184,11 +192,13 @@ body {
     background-color: #2d4f45;
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 12px 30px; 
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    text-align: center;
 }
 
 .add-product-btn:hover {

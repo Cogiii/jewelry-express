@@ -112,10 +112,11 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (!product.code && productRow) {
             // Extract data from the row if not found in sample data
-            product.code = productRow.cells[0].textContent;
-            product.name = productRow.cells[1].textContent;
-            product.material = productRow.cells[2].textContent;
-            product.description = productRow.cells[3].textContent;
+            const cells = productRow.cells;
+            product.name = cells[0].textContent;
+            product.material = cells[1].textContent;
+            product.description = cells[2].textContent;
+            product.code = "#" + Math.floor(Math.random() * 1000000); // Generate a random code if not available
             product.images = ['placeholder.jpg', 'placeholder.jpg', 'placeholder.jpg'];
         }
         
@@ -218,11 +219,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== ADD PRODUCT MODAL =====
     const addProductModal = document.getElementById('add-product-modal');
-    const addProductBtns = document.querySelectorAll('.add-product-btn');
+    const addProductBtn = document.getElementById('global-add-product-btn');
     const addProductClose = addProductModal.querySelector('.modal-close');
     const cancelAddProductBtn = document.getElementById('cancel-add-product');
     const addProductForm = document.getElementById('add-product-form');
-    const productTypeTitle = document.getElementById('product-type-title');
     
     // File upload and preview functionality
     const fileUpload = document.getElementById('file-upload');
@@ -279,22 +279,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Open add product modal when clicking add product button
-    addProductBtns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            // Prevent event bubbling
-            e.stopPropagation();
-            
-            const productType = this.getAttribute('data-product-type');
-            productTypeTitle.textContent = productType;
-            
-            // Reset the form
-            addProductForm.reset();
-            imagePreviewContainer.innerHTML = '';
-            uploadedFiles.length = 0;
-            
-            // Show the modal
-            addProductModal.style.display = 'block';
-        });
+    addProductBtn.addEventListener('click', function(e) {
+        // Prevent event bubbling
+        e.stopPropagation();
+        
+        // Reset the form
+        addProductForm.reset();
+        imagePreviewContainer.innerHTML = '';
+        uploadedFiles.length = 0;
+        
+        // Show the modal
+        addProductModal.style.display = 'block';
     });
     
     // Close add product modal
@@ -343,11 +338,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const productName = document.getElementById('product-name').value;
         const productMaterial = document.getElementById('product-material').value;
         const productDescription = document.getElementById('product-description').value;
-        const productType = document.getElementById('product-type-title').textContent;
+        const productType = document.getElementById('product-type').value; // Changed from product-type-title
         
         // Create a new product row
         const sectionId = productType.toLowerCase() + '-section';
         const section = document.getElementById(sectionId);
+        
+        if (!section) {
+            console.error('Section not found:', sectionId);
+            return;
+        }
+        
         const tbody = section.querySelector('tbody');
         
         // Generate a unique product ID
@@ -361,7 +362,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Set row content
         newRow.innerHTML = `
-            <td>${productCode}</td>
             <td>${productName}</td>
             <td>${productMaterial}</td>
             <td>${productDescription}</td>
