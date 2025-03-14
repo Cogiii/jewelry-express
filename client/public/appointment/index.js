@@ -447,6 +447,13 @@ function submitConfirmedInfo(formData) {
                 
                 if (data.message === 'Appointment added successfully!') {
                     displayOverlay("Thank You!", "Check your email and messages for your appointment’s updates.");
+                    const message = `
+                    Date & Time: ${formattedDate} ${time}
+                    Location: Door 63 Hermanos Bldg. Legaspi St. Davao City
+                    Service: ${servicesTextValue}
+                    purpose: ${purpose}
+                    `
+                    sendMail(formData.get('email'), `${firstName} ${lastName}`, message);
                 } else {
                     console.error("Error: Unexpected response", data);
                 }
