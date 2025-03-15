@@ -571,7 +571,7 @@ router.post('/approveAppointment', upload.none(), async (req, res) => {
         let result;
         if(checkIfAppoitnmentExist.length > 0) {
             result = await query(
-                `UPDATE appointment_aproval SET admin_id = ?, remarks = ? WHERE approval_id = ?`,
+                `UPDATE appointment_approval SET admin_id = ?, remarks = ? WHERE approval_id = ?`,
                 [adminId, remarks, checkIfAppoitnmentExist[0].approval_id]
             );
         } else {
@@ -619,7 +619,7 @@ router.post('/cancelAppointment', upload.none(), async (req, res) => {
         let result;
         if(checkIfAppoitnmentExist.length > 0) {
             result = await query(
-                `UPDATE appointment_aproval SET admin_id = ?, remarks = ? WHERE approval_id = ?`,
+                `UPDATE appointment_approval SET admin_id = ?, remarks = ? WHERE approval_id = ?`,
                 [adminId, remarks, checkIfAppoitnmentExist[0].approval_id]
             );
         } else {

@@ -361,7 +361,6 @@ function setupActionButtons() {
                     confirmMsg.textContent = source === 'cancelled'
                         ? 'Appointment restored successfully!'
                         : 'Appointment approved successfully!';
-                    location.reload();
                 } else {
                     confirmMsg.textContent = `Failed to approve appointment: ${result.message}`;
                 }
@@ -406,7 +405,6 @@ function setupActionButtons() {
                     confirmMsg.textContent = source === 'approved'
                         ? 'Appointment rejected successfully!'
                         : 'Appointment cancelled successfully!';
-                    location.reload();
                 } else {
                     confirmMsg.textContent = `Failed to cancel appointment: ${result.message}`;
                 }
@@ -441,7 +439,7 @@ function setupActionButtons() {
     confirmationOkButtons.forEach(button => {
         button.addEventListener('click', function() {
             closeAllModals();
-            // Here you would typically update the UI or refresh data
+            location.reload();
         });
     });
 }

@@ -77,6 +77,8 @@ CREATE TABLE product (
     admin_id INT NOT NULL,
     date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
     is_featured BOOLEAN NOT NULL DEFAULT FALSE,
+    product_code varchar(255) UNIQUE,
+    is_sold BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (product_type_id) REFERENCES product_type(product_type_id),
     FOREIGN KEY (product_material_id) REFERENCES product_material(product_material_id),
     FOREIGN KEY (admin_id) REFERENCES admin_cred(admin_id)
@@ -151,23 +153,6 @@ CREATE TABLE appointment_product (
     appointment_id INT,
     FOREIGN KEY (product_id) REFERENCES product(product_id),
     FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id)
-);
-
-CREATE TABLE purchase (
-    purchase_id INT PRIMARY KEY AUTO_INCREMENT,
-    appointment_id INT,
-    date_purchased DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id)
-);
-
-CREATE TABLE purchase_details (
-    purchase_details_id INT PRIMARY KEY AUTO_INCREMENT,
-    purchase_id INT,
-    product_id INT,
-    product_code VARCHAR(255),
-    FOREIGN KEY (purchase_id) REFERENCES purchase(purchase_id),
-    FOREIGN KEY (product_id) REFERENCES product(product_id),
-    FOREIGN KEY (product_code) REFERENCES product_coding(product_code)
 );
 
 -- ==============================================================

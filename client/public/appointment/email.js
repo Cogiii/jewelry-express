@@ -1,9 +1,9 @@
 function sendMail(email, customerName, message) {
     let params = {
-        email: email,
         customerName: customerName,
-        message: message
+        message: message,
+        email: email
     }
 
-    emailjs.send("service_dxxhkvt","template_e3d3rhh",params).then(alert("Email Sent!"));
+    emailjs.send("service_dxxhkvt","template_e3d3rhh",params);
 }

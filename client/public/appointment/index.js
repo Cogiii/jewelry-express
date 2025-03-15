@@ -453,7 +453,7 @@ function submitConfirmedInfo(formData) {
                     Service: ${servicesTextValue}
                     purpose: ${purpose}
                     `
-                    sendMail(formData.get('email'), `${firstName} ${lastName}`, message);
+                    sendMail(email, `${firstName} ${lastName}`, message);
                 } else {
                     console.error("Error: Unexpected response", data);
                 }

@@ -206,6 +206,7 @@ function addNewProduct() {
     
     confirmationOkayBtn.addEventListener('click', function() {
         confirmationModal.style.display = 'none';
+        location.reload();
     });
     
     // Close modal when clicking outside of it
