@@ -30,22 +30,6 @@ Jewelry Express is an e-commerce platform specializing in handcrafted jewelry. T
    npm start
    ```
 
-## API Endpoints
-### Get Product by ID
-```http
-GET /api/getProduct/:productId
-```
-Response:
-```json
-{
-  "id": "123",
-  "name": "Amore Earrings",
-  "image": "../assets/images/earring.webp",
-  "material": "Gold",
-  "description": "Handcrafted gold earrings."
-}
-```
-
 ## Technologies Used
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Node.js, Express.js
