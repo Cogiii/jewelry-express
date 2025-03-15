@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jewelry Express | Products</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../assets/resources.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Georgia:wght@400;700&display=swap">
+    <link rel="shortcut icon" href="../assets/images/logo-fav.png" type="image/x-icon">
+
+</head>
+<body>
+    <div class="page-content">
+        <div class="left">
+            <div class="top-bar">
+                <img src="../assets/images/Jewelry_Express_Logo_Transparent 2.webp" alt="Jewelry Express Logo" class="logo-image">
+            </div>
+
+            <div class="sidebar">
+                <a href="/dashboard">
+                    <div class="menu-item">
+                        <i class="fas fa-th-large"></i> Dashboard
+                    </div>
+                </a>
+                <div class="menu-separator"></div>
+                <a href="/appointments">
+                    <div class="menu-item">
+                        <i class="far fa-calendar"></i> Appointments
+                    </div>
+                </a>
+                <div class="menu-separator"></div>
+                <a href="/products">
+                    <div class="menu-item active">
+                        <i class="fas fa-gem"></i> Products
+                    </div>
+                </a>
+
+                <div class="menu-separator"></div>
+                <a href="/settings">
+                    <div class="menu-item">
+                        <i class="fas fa-cog"></i> Settings
+                    </div>
+                </a>
+                <div class="sign-out">
+                    <button class="sign-out" id="logout">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="top-bar">
+                <div class="user-profile">
+                    <h2>Welcome, <span class="userName">Emu!</span></h2>
+                </div>
+            </div>
+            
+            <div class="main-content">
+                <div class="header-container">
+                    <h1>Jewelries</h1>
+                    <button class="add-product-btn" id="global-add-product-btn">Add New Product</button>
+                </div>
+                <!-- Necklace Section -->
+                <div class="product-section neck" id="necklace-section">
+                    <div class="product-header">
+                        <h3>Necklace</h3>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Material</th>
+                                    <th>Product Description</th>
+                                    <th>Product Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn">See more</button>
+                    </div>
+                </div>
+
+                <!-- Earrings Section -->
+                <div class="product-section" id="earring-section">
+                    <div class="product-header">
+                        <h3>Earrings</h3>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Material</th>
+                                    <th>Product Description</th>
+                                    <th>Product Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn">See more</button>
+                    </div>
+                </div>
+
+                <!-- Rings Section -->
+                <div class="product-section" id="ring-section">
+                    <div class="product-header">
+                        <h3>Rings</h3>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Material</th>
+                                    <th>Product Description</th>
+                                    <th>Product Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn">See more</button>
+                    </div>
+                </div>
+
+                <!-- Bracelets Section -->
+                <div class="product-section" id="bracelet-section">
+                    <div class="product-header">
+                        <h3>Bracelets</h3>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Product Material</th>
+                                    <th>Product Description</th>
+                                    <th>Product Image</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="see-more-container">
+                        <button class="see-more-btn">See more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div id="product-details-modal" class="modal product-details-modal">
+        <div class="modal-content">
+            <div class="product-details-header">
+                <div class="product-info-label">Product Details</div>
+                <span class="modal-close">&times;</span>
+            </div>
+            
+            <div class="product-info-grid">
+                <div class="product-info-item covertwo">
+                    <div class="product-info-label">Product Name</div>
+                    <div class="product-info-value" id="modal-product-name">Sardonyx Shell Cameo Necklace</div>
+                </div>
+
+                <div class="product-info-item">
+                    <div class="product-info-label">Product Material</div>
+                    <div class="product-info-value" id="modal-product-material"></div>
+                </div>
+                <div class="product-info-item">
+                    <div class="product-info-label">Product Type</div>
+                    <div class="product-info-value" id="modal-product-type"></div>
+                </div>
+                <div class="product-info-item covertwo">
+                    <div class="product-info-label">Product Description</div>
+                    <div class="product-info-value " id="modal-product-description"></div>
+                </div>
+            </div>
+            
+            <div class="product-images-section">
+                <div class="product-info-label">Product Images</div>
+                
+                <div class="jewelry_images">
+                    <div class="jewelries_wrapper">
+                        <div class="jewelry_container"></div>
+                        <div class="slider_dots"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="go-back-btn">Go Back</button>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="add-product-modal" class="modal add-product-modal">
+        <div class="modal-content">
+            <div class="product-details-header">
+                <h3>Add New Product</h3>
+                <span class="modal-close">&times;</span>
+            </div>
+            
+            <form id="add-product-form">
+                <div class="form-row">
+                    <div class="form-row">
+                        <label class="form-label" for="product-name">Name</label>
+                        <input type="text" id="product-name" class="form-input" placeholder="Enter product name..." required>
+                    </div>
+                    
+                    <label class="form-label" for="product-type">Product Type</label>
+                    <select id="product-type" class="form-input" required>
+                        <option value="" selected disabled>Select product type...</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <label class="form-label" for="product-material">Material</label>
+                    <select id="product-material" class="form-input" required>
+                        <option value="" selected disabled>Select material...</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <label class="form-label" for="product-description">Product Description</label>
+                    <textarea id="product-description" class="form-textarea" placeholder="Enter product description..." required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <label class="form-label" for="product-code">Code</label>
+                    <input type="text" id="product-code" class="form-input" placeholder="Enter product code..." required>
+                </div>
+                
+                <div class="form-row image-upload-container">
+                    <label class="form-label">Product Images</label>
+                    <input type="file" id="file-upload" accept="image/*" multiple required>
+                    <label for="file-upload" class="upload-btn">
+                        <i class="fas fa-cloud-upload-alt"></i> Click to upload images
+                    </label>
+                    
+                    <div class="image-preview-container" id="image-preview-container">
+                        <!-- Image previews will be added here dynamically -->
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="submit" class="accept-btn">Add Product</button>
+                    <button type="button" class="reject-btn" id="cancel-add-product">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal">
+        <div class="modal-content confirmation-content">
+            <span class="modal-close confirmation-close">&times;</span>
+            <h3>Product Added</h3>
+            <div class="confirmation-message">
+                <p>Product has been added successfully!</p>
+            </div>
+            <div class="modal-actions confirmation-actions">
+                <button class="accept-btn confirmation-okay">Okay</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -59,9 +59,12 @@ function displayNav() {
         </div>
 
         <div class="search-container" id="searchContainer">
-            <input type="text" id="searchInput" placeholder="Search..." />
+            <img src="../assets/icons/ion_search-outline.webp" alt"search">
+            <input type="text" id="searchInput" placeholder="Search creations, categories, materials ..." />
             <button id="closeSearch">&times;</button>
         </div>
+
+        <div id="searchResults" class="search-results"></div>
     `;
 
     nav.innerHTML = template;
@@ -69,6 +72,7 @@ function displayNav() {
 
 document.addEventListener("DOMContentLoaded", function () {
     displayNav();
+    search();
 
     const searchBtn = document.getElementById("search");
     const searchContainer = document.getElementById("searchContainer");
@@ -77,9 +81,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	const bookAppointmentBtn = document.getElementById('bookAppointmentBtn')
 
     // Open search when button is clicked
-    searchBtn.addEventListener("click", function () {
+    searchBtn.addEventListener("click", function (event) {
+        event.preventDefault();
         searchContainer.classList.add("active");
-        searchInput.focus();
+        setTimeout(() => {
+            searchInput.focus({ preventScroll: true });
+        }, 0);
     });
 
     // Close search when close button is clicked
@@ -127,3 +134,69 @@ $(document).ready(function(){
         mobile_links.classList.toggle('open_links', this.classList.contains('open'));
     });
 });
+
+function search() {
+    const searchInput = document.getElementById("searchInput");
+    const searchResults = document.getElementById("searchResults");
+    const closeSearch = document.getElementById("closeSearch");
+
+    searchInput.addEventListener("input", async () => {
+        const query = searchInput.value.trim();
+        
+        if (query.length === 0) {
+            searchResults.innerHTML = "";
+            searchResults.style.display = "none";
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/searchProducts?q=${query}`);
+            if (!response.ok) throw new Error("Failed to fetch search results");
+
+            const products = await response.json();
+            displayResults(products);
+        } catch (error) {
+            console.error("Error fetching products:", error);
+        }
+    });
+
+    function displayResults(products) {
+        searchResults.innerHTML = "";
+
+        if (products.length === 0) {
+            searchResults.innerHTML = "<p style='text-align: center;'>No results found</p>";
+        } else {
+            products.forEach(async product => {
+                const imageResponse = await fetch(`/api/getProductImage/${product.product_id}`);
+                const imageBlob = await imageResponse.blob();
+                const imageUrl = URL.createObjectURL(imageBlob);
+
+                const item = document.createElement("div");
+                item.classList.add("search-result-item");
+                item.innerHTML = `
+                    <img src="${imageUrl}" alt="${product.product_name}">
+                    <span>${product.product_name}</span>
+                `;
+                item.addEventListener("click", () => {
+                    window.location.href = `/collection/${product.product_id}`;
+                });
+
+                searchResults.appendChild(item);
+            });
+        }
+
+        searchResults.style.display = "block";
+    }
+
+    closeSearch.addEventListener("click", () => {
+        searchInput.value = "";
+        searchResults.innerHTML = "";
+        searchResults.style.display = "none";
+    });
+
+    document.addEventListener("click", (event) => {
+        if (!searchInput.contains(event.target) && !searchResults.contains(event.target)) {
+            searchResults.style.display = "none";
+        }
+    });
+}

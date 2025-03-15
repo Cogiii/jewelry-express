@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../assets/css/nav.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../assets/images/logo-fav.png" type="image/x-icon">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Jewelry Express | Appointment</title>
 </head>
@@ -17,7 +18,17 @@
     <main>
         <section class="form">
             <h1>Book an Appointment</h1>
-    
+            
+            <div class="product">
+                <div class="details">
+                    <img src="" alt="">
+                    <h2 class="name">Amore</h2>
+                    <p class="material">Gold</p>
+                </div>
+
+                <p class="description"></p>
+            </div>
+
             <form action="" id="appointment_form" class="appointment_form">
                 <div class="appointment_services_container">
                     <div class="service" data-value="Resizing">
@@ -147,8 +158,20 @@
 
     <footer></footer>
     
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "YC075Obo6PKlfE3jZ",
+        });
+    })();
+    </script>
+    <script src="email.js"></script>
     <script src="index.js"></script>
     <script src="../assets/js/nav.js"></script>
     <script src="../assets/js/footer.js"></script>
+
 </body>
 </html>

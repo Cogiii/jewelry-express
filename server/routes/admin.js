@@ -8,7 +8,14 @@ const router = express.Router();
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../../client/admin/dashboard/index.html"));
 });
-
-
+router.get('/appointments', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, "../../client/admin/appointments/index.html"));
+});
+router.get('/products', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, "../../client/admin/products/index.html"));
+});
+router.get('/settings', ensureAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, "../../client/admin/settings/index.html"));
+});
 
 module.exports = router;

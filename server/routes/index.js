@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/public/index.html'));
 });
 
-router.get('/appointment', (req, res) => {
+router.get('/appointment/:productId?', (req, res) => {
     res.sendFile(path.join(__dirname, '../../client/public/appointment/index.html'));
 });
 router.get('/jewelries', (req, res) => {

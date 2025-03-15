@@ -10,6 +10,31 @@ main h1 {
     font-weight: 500;
 }
 
+.product {
+    margin: 35px 72px;
+    text-align: center;
+    display: none;
+}
+.product .details img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+.product .details h2 {
+    font-size: 18px;
+    font-weight: lighter;
+    font-family: 'Cactus Classical Serif';
+}
+.product .details p {
+    font-size: 14px;
+    margin-top: 5px;
+    font-family: 'Inria Serif';
+}
+.product > p {
+    font-size: 12px;
+    margin-top: 15px;
+    font-family: 'Inria Serif';
+}
+
 .appointment_services_container {
     display: flex;
     justify-content: space-between;

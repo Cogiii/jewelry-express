@@ -248,7 +248,7 @@ function appointmentForm() {
     const purposeField = document.getElementById('purpose');
 
     document.getElementById('appointment_form').addEventListener('submit', function (event) {
-        event.preventDefault(); // Prevent page refresh
+        event.preventDefault();
 
         const firstName = firstNameField.value.trim();
         const lastName = lastNameField.value.trim();
@@ -257,8 +257,6 @@ function appointmentForm() {
         const email = emailField.value.trim();
         const purpose = purposeField.value.trim();
         const selectedServices = getAppointmentTypes();
-        // getSelectedDate
-        // getSelectedTime
         
         const formData = new FormData();
 
@@ -379,7 +377,6 @@ function submitConfirmedInfo(formData) {
     const servicesText = document.querySelector('#services_info p');
     const purposeText = document.querySelector('.purpose_details p');
     const submitAppointmentBtn = document.getElementById('submitAppointmentBtn');
-    // console.log(formData);
 
     // Get values from FormData
     const firstName = formData.get('firstName') || 'N/A';
@@ -429,44 +426,102 @@ function submitConfirmedInfo(formData) {
         confirmation.classList.remove('show');
     });
 
-    submitAppointmentBtn.addEventListener('click', async () => {
+    // Define a single submit event handler
+    async function submitAppointmentHandler() {
+        submitAppointmentBtn.textContent = "Submitting...";
+        submitAppointmentBtn.disabled = true;
+
         try {
-            const response = await fetch(`/api/checkIfDateAndTimeAvailable?date=${encodeURIComponent(formattedDate)}&time=${encodeURIComponent(time)}`, {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' }  // Content-Type is unnecessary for GET, but it won't break
-            });
-    
+            // Check if date and time are available
+            const response = await fetch(`/api/checkIfDateAndTimeAvailable?date=${encodeURIComponent(formattedDate)}&time=${encodeURIComponent(time)}`);
             const date = await response.json();
-            
-            if(date.isAvailable) {
-                fetch('/api/addAppointment', {
+
+            if (date.isAvailable) {
+                // Proceed with adding appointment
+                const appointmentResponse = await fetch('/api/addAppointment', {
                     method: 'POST',
                     body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.message === 'Appointment added successfully!') {
-                        displayOverlay("Thank You!", "Check your email and messages for your appointment’s updates.");
-                        
-                    } else {
+                });
 
-                    }
-                })
-                .catch(error => {
-                    console.error("Error during submision:", error);
-                })
-
+                const data = await appointmentResponse.json();
+                
+                if (data.message === 'Appointment added successfully!') {
+                    displayOverlay("Thank You!", "Check your email and messages for your appointment’s updates.");
+                    const message = `
+                    Date & Time: ${formattedDate} ${time}
+                    Location: Door 63 Hermanos Bldg. Legaspi St. Davao City
+                    Service: ${servicesTextValue}
+                    purpose: ${purpose}
+                    `
+                    sendMail(formData.get('email'), `${firstName} ${lastName}`, message);
+                } else {
+                    console.error("Error: Unexpected response", data);
+                }
             } else {
-                console.log("SAD");
+                console.log("Appointment slot is not available.");
             }
-    
         } catch (error) {
             console.error("Error in adding appointment:", error);
+        } finally {
+            submitAppointmentBtn.textContent = "Submit";
+            submitAppointmentBtn.disabled = false;
         }
-    });    
+    }
+
+    // Ensure the event listener is only added once
+    submitAppointmentBtn.removeEventListener('click', submitAppointmentHandler);
+    submitAppointmentBtn.addEventListener('click', submitAppointmentHandler);
 }
 
+function showProductAppointed() {
+    const path = window.location.pathname.split("/");
+    const productId = path[2];
+
+    
+    if(productId) {
+        fetch(`/api/getProduct/${productId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(async product => {
+            product = product[0]
+            // Select elements to update
+            const productContainer = document.querySelector('.product');
+            productContainer.style.display = 'block';
+            const productImage = document.querySelector('.product .details img');
+            const productName = document.querySelector('.product .details .name');
+            const productMaterial = document.querySelector('.product .details .material');
+            const productDescription = document.querySelector('.product .description');
+
+            const imageResponse = await fetch(`/api/getProductImage/${productId}`);
+            const imageBlob = await imageResponse.blob();
+            const imageUrl = URL.createObjectURL(imageBlob);
+            
+            productImage.src = imageUrl;
+            productImage.alt = product.product_name;
+            productName.textContent = product.product_name;
+            productMaterial.textContent = product.product_material;
+            productDescription.textContent = product.product_description;
+        })
+        .catch(error => {
+            console.error('Error fetching product:', error);
+        });
+            
+    } else {
+        console.log("NO")
+    }
+
+}
 
 document.addEventListener("DOMContentLoaded", function () {
+    showProductAppointed();
     appointmentForm();
 });

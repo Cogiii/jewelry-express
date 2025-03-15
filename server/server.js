@@ -38,9 +38,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // If direct to /admin url just send(404 page)
-app.use('/admin', (req, res) => {
-    res.status(404).sendFile(path.join(__dirname, '../client/public/404.html'));
-});
+// app.use('/admin', (req, res) => {
+//     res.status(404).sendFile(path.join(__dirname, '../client/public/404.html'));
+// });
 
 // Middleware to protect the /admin directory
 app.use('/admin', ensureAuthenticated, express.static(path.join(__dirname, 'client/admin')));

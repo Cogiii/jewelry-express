@@ -9,7 +9,7 @@
     font-family: 'Gamalia';
     src: url('../font/GamiliaDemoRegular-d9DL7.ttf') format('truetype'),
          url('../font/GamiliademoRegular-mL9Ev.otf') format('opentype'); 
-    font-weight: normal;
+    font-weight: 100;
     font-style: normal;
 }
 

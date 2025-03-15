@@ -1,124 +1,213 @@
-async function productTypesDropDown() {
-    const typeDropdown = document.getElementById("type");
-    
-    try {
-        const response = await fetch("/api/getProductTypes");
-        const types = await response.json();
+const logout = document.getElementById('logout');
 
-        if (response.ok) {
-            types.forEach(type => {
-                const option = document.createElement("option");
-                option.value = type.product_type_id;
-                option.textContent = type.product_type;
-                typeDropdown.appendChild(option);
-            });
+logout.addEventListener('click', () => {
+    window.location.href = '/auth/logout';
+    console.log("YESY")
+});
+// dashboard.js - Customer modal functionality for dashboard
+
+let appointmentData;
+document.addEventListener('DOMContentLoaded', function() {
+    const userName = document.querySelector('.user-profile .userName');
+    userName.textContent = localStorage.getItem('username');
+
+    fetchAppointmentCounts();
+    fetchUpcomingAppointments();
+});
+
+function fetchUpcomingAppointments() {
+    const dropdown = document.querySelector(".dropdown");
+
+    // Function to get the selected filter type and fetch data
+    function fetchAppointments() {
+        let selectedValue = dropdown.value.toLowerCase(); // Get dropdown value
+
+        // Map dropdown text to query parameter
+        let filter = "day"; // Default
+        if (selectedValue.includes("week")) {
+            filter = "week";
+        } else if (selectedValue.includes("month")) {
+            filter = "month";
+        }
+
+        fetch(`/api/getAppointments?range=${filter}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Format appointments
+                    const appointments = data.data.map((appointment, index) => ({
+                        appointmentId: appointment.appointment_id,
+                        customerId: appointment.customer_id,
+                        firstName: appointment.first_name,
+                        lastName: appointment.last_name,
+                        name: `${appointment.first_name} ${appointment.last_name}`,
+                        emails: appointment.emails,
+                        contactNumbers: appointment.contact_numbers,
+                        schedule: new Date(appointment.sched_of_appointment).toLocaleDateString('en-US', { 
+                            month: 'short', day: 'numeric', year: 'numeric' 
+                        }),
+                        time: new Date(appointment.sched_of_appointment).toLocaleTimeString('en-US', { 
+                            hour: 'numeric', minute: '2-digit', hour12: true 
+                        }),
+                        purpose: appointment.appointment_purpose,
+                        appointedDate: new Date(appointment.date_appointed).toLocaleDateString('en-US', { 
+                            month: 'short', day: 'numeric', year: 'numeric' 
+                        }),
+                        rowType: index === 0 ? "normal" : (index === 1 ? "expandable" : "hidden") // Adjust row type logic as needed
+                    }));
+
+                    setupDashboardRowClicks(appointments);
+                    updateTable(appointments);
+                } else {
+                    console.error("Failed to fetch appointments");
+                }
+            })
+            .catch(error => console.error("Error fetching appointments:", error));
+    }
+
+
+    // Function to update the table
+    function updateTable(appointments) {
+        const tbody = document.querySelector(".table-container tbody");
+        tbody.innerHTML = ""; // Clear previous rows
+    
+        if (appointments.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="4">No upcoming appointments found.</td></tr>`;
+            return;
+        }
+    
+        appointments.forEach(app => {
+            const row = document.createElement("tr");
+            row.id = `appointment-${app.appointmentId}`;
+            row.innerHTML = `
+                <td>${app.firstName}, ${app.lastName}</td>
+                <td>${app.schedule} ${app.time}</td>
+                <td>${app.purpose || "N/A"}</td>
+                <td>${app.appointedDate}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    
+        // Attach click event AFTER rows are added
+        setupDashboardRowClicks(appointments);
+    }
+    
+
+    // Event listener for dropdown change
+    dropdown.addEventListener("change", fetchAppointments);
+
+    // Fetch default data on page load
+    fetchAppointments();
+}
+
+async function fetchAppointmentCounts() {
+    try {
+        const response = await fetch("/api/appointment-counts"); // Adjust API path if needed
+        const result = await response.json();
+
+        if (result.success) {
+            const { today_count, week_count, month_count } = result.data;
+
+            // Update the UI with fetched data
+            document.querySelector(".stat-box:nth-child(1) span").textContent = today_count;
+            document.querySelector(".stat-box:nth-child(2) span").textContent = week_count;
+            document.querySelector(".stat-box:nth-child(3) span").textContent = month_count;
         } else {
-            console.error("Failed to fetch positions:", types.message);
+            console.error("Failed to fetch appointment counts:", result.message);
         }
     } catch (error) {
-        console.error("Error fetching positions:", error);
+        console.error("Error fetching appointment counts:", error);
     }
 }
 
-async function productMaterialsDropDown() {
-    const materialDropdown = document.getElementById("material");
-    
-    try {
-        const response = await fetch("/api/getProductMaterials");
-        const materials = await response.json();
+/**
+ * Set up click handlers for all customer rows in the dashboard table
+ */
+function setupDashboardRowClicks(appointments) {
+    const tableBody = document.querySelector('.table-container tbody');
 
-        if (response.ok) {
-            materials.forEach(material => {
-                const option = document.createElement("option");
-                option.value = material.product_material_id;
-                option.textContent = material.product_material;
-                materialDropdown.appendChild(option);
-            });
-        } else {
-            console.error("Failed to fetch positions:", materials.message);
-        }
-    } catch (error) {
-        console.error("Error fetching positions:", error);
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    productTypesDropDown();
-    productMaterialsDropDown();
-});
-
-const selectedImages = []; // Store selected images
-
-document.getElementById('images').addEventListener('change', function (event) {
-    const files = event.target.files;
-    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
-
-    Array.from(files).forEach((file) => {
-        // Check if the file is already added
-        if (selectedImages.some(img => img.name === file.name)) {
-            alert(`Image "${file.name}" is already selected.`);
-            return; // Skip duplicate image
-        }
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const img = document.createElement('img');
-                img.src = e.target.result;
-                img.alt = file.name;
-                img.style.width = '100px';
-                img.style.height = '100px';
-                img.style.margin = '5px';
-                img.style.border = '1px solid #ccc';
-
-                imagePreviewContainer.appendChild(img);
-            };
-            reader.readAsDataURL(file);
-            selectedImages.push(file); // Store image
-        }
-    });
-});
-
-document.getElementById('productForm').addEventListener('submit', async function (event) {
-    event.preventDefault();
-
-    if (selectedImages.length === 0) {
-        alert('Please upload at least one image.');
+    if (!tableBody) {
+        console.error("Table body not found");
         return;
     }
 
-    const formData = new FormData();
-    formData.append('productName', document.getElementById('name').value);
-    formData.append('productType', document.getElementById('type').value);
-    formData.append('productMaterial', document.getElementById('material').value);
-    formData.append('productDescription', document.getElementById('description').value);
-    formData.append('productCode', document.getElementById('code').value);
-    formData.append('adminId', 1);
+    const rows = tableBody.querySelectorAll('tr');
 
-    // Append all selected images
-    selectedImages.forEach((image) => {
-        formData.append('productImages', image);
-    });
+    if (rows.length === 0) {
+        console.warn("No rows found to attach event listeners.");
+        return;
+    }
 
-    try {
-        const response = await fetch('/api/addProduct', {
-            method: 'POST',
-            body: formData,
+    rows.forEach((row, index) => {
+        row.addEventListener('click', function (event) {
+            if (event.target.tagName === 'BUTTON' || event.target.closest('button')) return;
+
+            if (row.cells.length === 1 && row.cells[0].textContent.includes("No upcoming appointments found.")) return;
+
+            if (index < appointments.length) {
+                openDashboardCustomerModal(appointments[index]);
+            }
         });
 
-        const data = await response.json();
+        row.style.cursor = 'pointer';
+    });
+}
 
-        if (response.ok) {
-            alert('Product added successfully!');
-            this.reset();
-            document.getElementById('imagePreviewContainer').innerHTML = ''; // Clear previews
-            selectedImages.length = 0; // Reset selected images
-        } else {
-            alert('Product add failed!');
-            console.log(data.message);
-        }
-    } catch (error) {
-        console.error('Error:', error);
+
+
+/**
+ * Open the customer modal with the provided data
+ * @param {Object} customerData - Customer information
+ * @param {Object} appointmentData - Appointment information
+ */
+function openDashboardCustomerModal(appointmentData) {
+    const modal = document.getElementById('customer-modal');
+    if (!modal) {
+        console.error("Customer modal not found");
+        return;
     }
-});
 
+    console.log("Opening modal with data:", appointmentData); // Debugging
+
+    document.getElementById('modal-first-name').textContent = appointmentData.firstName || '';
+    document.getElementById('modal-last-name').textContent = appointmentData.lastName || '';
+    document.getElementById('modal-contact').textContent = appointmentData.contactNumbers || '';
+    document.getElementById('modal-email').textContent = appointmentData.emails || '';
+    document.getElementById('modal-date').textContent = appointmentData.schedule || '';
+    document.getElementById('modal-time').textContent = appointmentData.time || '';
+    document.getElementById('modal-purpose').textContent = appointmentData.purpose || '';
+    document.getElementById('modal-date-appointed').textContent = appointmentData.appointedDate || '';
+
+    // Show modal
+    modal.style.display = 'block';
+
+    setupModalClose(modal);
+}
+
+/**
+ * Set up the close button and backdrop click for the modal
+ * @param {HTMLElement} modal - The modal element
+ */
+function setupModalClose(modal) {
+    const closeButton = modal.querySelector('.modal-close');
+    if (closeButton) {
+        closeButton.addEventListener('click', () => modal.style.display = 'none');
+    }
+
+    window.addEventListener('click', event => {
+        if (event.target === modal) modal.style.display = 'none';
+    });
+}
+
+/**
+ * Set up the go back button for the modal
+ * @param {HTMLElement} modal - The modal element
+ */
+function setupGoBackButton(modal) {
+    const goBackButton = modal.querySelector('.goBackBtn');
+    if (goBackButton) {
+        goBackButton.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+    }
+}

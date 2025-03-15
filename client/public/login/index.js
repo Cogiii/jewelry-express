@@ -15,9 +15,9 @@ document.getElementById('loginButton').addEventListener('click', async (error) =
         
         if (response.ok){
             localStorage.setItem("id", data.admin.employee_id);
+            localStorage.setItem("username", data.admin.username);
             window.location.href = data.redirectUrl;
 
-            // alert("Login")
         } else {
             console.log(response.message)
             alert("No login for you")

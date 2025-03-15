@@ -12,7 +12,7 @@
 -- =========================================
 
 --  UNCOMMENT THE MESSAGE BELOW TO ENABLE EVENT SCHEDULER IF ERROR EXISTS on EVENT
--- SET GLOBAL event_scheduler = ON;
+SET GLOBAL event_scheduler = ON;
 
 -- UNCOMMENT THE QUERY BELOW TO REPAIR THE EVENT TABLE IF ERROR EXISTS on EVENT
 -- REPAIR TABLE mysql.event;
@@ -139,7 +139,7 @@ CREATE TABLE appointment_approval (
     approval_id INT PRIMARY KEY AUTO_INCREMENT,
     appointment_id INT,
     admin_id INT,
-    date_processed DATETIME, 
+    date_processed DATETIME DEFAULT CURRENT_TIMESTAMP, 
     remarks VARCHAR(255),
     FOREIGN KEY (appointment_id) REFERENCES appointment(appointment_id),
     FOREIGN KEY (admin_id) REFERENCES admin_cred(admin_id)

@@ -3,27 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/images/logo-fav.png" type="image/x-icon">
 
     <link rel="stylesheet" href="style.css">
     <title>Jewelry Express | Admin Login</title>
     
 </head>
 <body>
-    <div class="login-container">
-        <h2>Admin Login</h2>
-
-        <form>
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" autocomplete="username" required>
+    <div id="login">
+        <div class="container">
+            <!-- Left  -->
+            <div class="image-left">
+                <!-- bg image -->
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" autocomplete="current-password" required>
+            
+            <!-- Right side -->
+            <div class="login-container">
+                <h2>Admin Login</h2>
+            
+                <form>
+                    
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" autocomplete="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" autocomplete="current-password" required>
+                    </div>
+                    <button type="submit" class="login-btn" id="loginButton">Login</button>
+                </form>
             </div>
-            <button type="submit" class="login-btn" id="loginButton">Login</button>
-        </form>
-        
+        </div>
     </div>
 
     <script src="index.js"></script>
