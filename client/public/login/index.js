@@ -4,20 +4,20 @@ document.getElementById('loginButton').addEventListener('click', async (error) =
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('http://localhost:3000/auth/login', {
+        const response = await fetch('/auth/login', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({username, password})
-        })
+        });
         const data = await response.json();
         
         if (response.ok){
-            // // sessionStorage.setItem("firstName", data.user.firstName);
+            localStorage.setItem("id", data.admin.employee_id);
+            localStorage.setItem("username", data.admin.username);
             window.location.href = data.redirectUrl;
 
-            // alert("Login")
         } else {
             console.log(response.message)
             alert("No login for you")

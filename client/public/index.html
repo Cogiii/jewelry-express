@@ -3,9 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="assets/css/resources.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="shortcut icon" href="assets/images/logo-fav.png" type="image/x-icon">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Jewelry Express</title>
 </head>
 <body>
-    <h1>TEST HOME PAGE</h1>
+    <nav></nav>
+
+    <main class="mobile">
+        <header>
+            <div class="header_vid">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/videos/6248708_Woman_Caucasian_1280x720.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="header_text">
+                    <h1>Maker of Fine Jewelry</h1>
+                    <p>EXCELLENCE CREATIVITY SERVICE</p>
+                </div>
+            </div>
+        </header>
+    
+        <div class="featured_jewelries">
+            <div class="jewelries_wrapper featured">
+                <div class="jewelries_container"></div>
+                <div class="slider_dots jewelries_slider"></div>
+    
+                <a href="/appointment/" id="appointment-link" class="book_appointment_link">Book Appointment</a>
+            </div>
+            <a href="/jewelries/#collections" class="see_more_link">SEE MORE</a>
+        </div>
+    
+        <section>
+            <div class="loop_vid">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/videos/6248708_Woman_Caucasian_1280x720.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+    
+        <section class="category">
+            <h2>Our Creations</h2>
+            <div class="jewelries_wrapper type">
+                <div class="category_container type"></div>
+                <div class="slider_dots category_slider"></div>
+    
+                <a href="/appointment" class="book_appointment_link">Book Appointment</a>
+                <a href="/jewelries/#" class="see_more_link" id="category-seemore">SEE MORE</a>
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <h2>Services</h2>
+
+            <div class="services_container">
+                <div class="service">
+                    <img src="assets/icons/resizing.webp" alt="Resizing">
+                    <p>Resizing</p>
+                </div>
+                <div class="service">
+                    <img src="assets/icons/consultation.webp" alt="Consultation">
+                    <p>Consultation</p>
+                </div>
+                <div class="service">
+                    <img src="assets/icons/restoration.webp" alt="Restoration">
+                    <p>Restoration</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer></footer>
+
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/footer.js"></script>
 </body>
 </html>

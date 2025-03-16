@@ -1,0 +1,335 @@
+main {
+    text-align: center;
+    font-family: 'Cactus Classical Serif';
+    padding: 30px 0;
+}
+
+main h1 {
+    font-family: 'Gamalia';
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.product {
+    margin: 35px 72px;
+    text-align: center;
+    display: none;
+}
+.product .details img {
+    width: 100%;
+    aspect-ratio: 1/1;
+}
+.product .details h2 {
+    font-size: 18px;
+    font-weight: lighter;
+    font-family: 'Cactus Classical Serif';
+}
+.product .details p {
+    font-size: 14px;
+    margin-top: 5px;
+    font-family: 'Inria Serif';
+}
+.product > p {
+    font-size: 12px;
+    margin-top: 15px;
+    font-family: 'Inria Serif';
+}
+
+.appointment_services_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 60px;
+    position: relative;
+}
+
+.appointment_services_container .service {
+    opacity: 0.5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.appointment_services_container .service:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.appointment_services_container .service.selected {
+    opacity: 1;
+}
+
+.appointment_services_container .service img {
+    width: 20px;
+}
+.appointment_services_container .service p {
+    font-size: 11px;
+    font-weight: lighter;
+}
+
+.appointment_form {
+    text-align: left;
+    margin: 20px 0;
+}
+
+div.input {
+    display: block;
+    margin: 9px 0;
+    font-size: 13px;
+    margin: 0 13%;
+}
+div.input > * {
+    margin: 9px 0;
+}
+
+.appointment_form input {
+    background-color: var(--main-H-color);
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.numberInput {
+    display: flex; 
+    gap: 5px;
+    align-items: center;
+}
+
+.numberInput select {
+    background-color: var(--main-H-color);
+    border: none;
+    padding: 10px 0 10px 5px;
+    width: 35%;
+    border-radius: 3px;
+}
+.numberInput input {
+    width: 65%;
+}
+
+.appointment_form textarea {
+    background-color: var(--main-H-color);
+    border: none;
+    padding: 10px 20px;
+    width: 100%;
+    resize: vertical;
+    height: 5em;
+    border-radius: 3px;
+}
+
+.calendar_container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    background-color: var(--main-H-color);
+}
+
+.calendar {
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    /* margin-bottom: 10px; */
+}
+
+.calendar-header span {
+    cursor: pointer;
+    padding: 5px;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 10px;
+    margin: 10px 0;
+    color: var(--text-H-color);
+}
+
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    font-size: 13px;
+}
+
+.calendar-dates div {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 100%;
+    transition: 0.3s;
+}
+
+.calendar-dates div.selected, .calendar-dates div:hover {
+    background-color: var(--secondary-color) !important;
+    color: var(--main-color);
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    color: gray;
+}
+
+/* Available Time */
+.available_time_container {
+    margin: 40px 41px;
+    text-align: center;
+    position: relative;
+}
+.available_time_container p {
+    color: var(--section-border-color);
+    margin-top: 50px;
+}
+/* .available_time_container.open {
+    display: block;
+} */
+.available_time_container h2 {
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.time-slot {
+    padding: 10px;
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.time-slot:hover, .time-slot.selected {
+    background-color: var(--secondary-color);
+    color: var(--main-color);
+}
+
+.time-slot.disabled {
+    color: #a6a6a6;
+    pointer-events: none;
+    border-color: #c0b8b0;
+}
+
+.submit_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* CONFIRMATION FORM */
+section.form {
+    /* display: none; */
+    display: block;
+}
+section.form.hide {
+    display: none;
+}
+
+section.confirmation {
+    display: none;
+    flex-direction: column;
+}
+section.confirmation.show {
+    display: flex;
+}
+section.confirmation > * {
+    margin: auto 10%;
+}
+
+section.confirmation header {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+section.confirmation header span {
+    position: absolute;
+    left: 0;
+}
+
+.confirmation .container_details {
+    font-family: 'Inria Serif';
+    margin: 35px 10%;
+}
+.confirmation .container_details .schedule {
+    margin-bottom: 35px;
+}
+.confirmation .container_details .schedule span {
+    font-size: 18px;
+}
+.confirmation .container_details .schedule p {
+    font-size: 12px;
+}
+
+.confirmation .container_details .customer_info {
+    font-size: 12px;
+
+}
+.confirmation .container_details .customer_info > * {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+}
+.confirmation .container_details .customer_info span {
+    font-family: 'Cactus Classical Serif';
+}
+.confirmation .purpose_details {
+    text-align: left;
+    border-top: solid var(--section-border-color) 1px;
+    margin: 0;
+    padding: 35px 51px;
+    font-size: 12px;
+}
+.confirmation .purpose_details span {
+    font-family: 'Cactus Classical Serif';
+}
+.confirmation .purpose_details p {
+    font-family: 'Inria Serif';
+    text-align: center;
+    margin: 15px 7px;
+}
+section.confirmation button {
+    margin: auto;
+}
+
+@media screen and (max-width: 360px) {
+    .numberInput select {
+        width: 45%;
+    }
+    .numberInput input {
+        width: 55%;
+    }
+
+    .time-slot {
+        font-size: 11px;
+    }
+    .available_time_container {
+        padding: 0 35px;
+    }
+}
+
+p.error_message {
+    color: red;
+    position: absolute;
+    bottom: -20px;
+    left: 0px;    
+    font-size: 12px;
+}
+.error {
+    border: solid red 1px !important;
+    padding: 5px;
+    border-radius: 3px;
+}

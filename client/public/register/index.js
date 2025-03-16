@@ -1,20 +1,20 @@
 function statusDropdown() {
     const statusDropDown = document.getElementById("status");
-    const status = ['Admin', 'Staff', 'Resigned'];
+    const status = ['Admin', 'Staff'];
 
     status.forEach(status => {
         const option = document.createElement("option");
         option.value = status;
         option.textContent = status;
         statusDropDown.appendChild(option);
-    })
+    });
 }
 
 async function positionDropdown() {
     const positionDropdown = document.getElementById("position");
     
     try {
-        const response = await fetch("http://localhost:3000/api/getPositions");
+        const response = await fetch("/api/getPositions");
         const positions = await response.json();
 
         if (response.ok) {
@@ -51,7 +51,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     const responseMessage = document.getElementById('responseMessage');
 
     try {
-        const response = await fetch('http://localhost:3000/auth/registerAdmin', {
+        const response = await fetch('/auth/registerAdmin', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

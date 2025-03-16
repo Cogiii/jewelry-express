@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../assets/css/resources.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="../assets/images/logo-fav.png" type="image/x-icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Jewelry Express | Appointment</title>
+</head>
+<body>
+    <nav></nav>
+    
+    <main>
+        <section class="form">
+            <h1>Book an Appointment</h1>
+            
+            <div class="product">
+                <div class="details">
+                    <img src="" alt="">
+                    <h2 class="name">Amore</h2>
+                    <p class="material">Gold</p>
+                </div>
+
+                <p class="description"></p>
+            </div>
+
+            <form action="" id="appointment_form" class="appointment_form">
+                <div class="appointment_services_container">
+                    <div class="service" data-value="Resizing">
+                        <img src="../assets/icons/resizing.webp" alt="Resizing">
+                        <p>Resizing</p>
+                    </div>
+                    <div class="service" data-value="Consultation">
+                        <img src="../assets/icons/consultation.webp" alt="Consultation">
+                        <p>Consultation</p>
+                    </div>
+                    <div class="service" data-value="Restoration">
+                        <img src="../assets/icons/restoration.webp" alt="Restoration">
+                        <p>Restoration</p>
+                    </div>
+                    <p class="error_message"></p>
+                </div>
+    
+                <div class="input">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" id="firstName" placeholder="Write your first name here..." autocomplete="given-name">
+                </div>
+    
+                <div class="input">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" id="lastName" placeholder="Write your last name here..." autocomplete="family-name">
+                </div>
+    
+                <div class="input">
+                    <label for="contactNumber">Contact Number</label>
+                    <div class="numberInput">
+                        <select name="countryCode" id="countryCode">
+                            <option value="+63" selected>🇵🇭 +63</option>
+                        </select>
+                        <input type="tel" name="contactNumber" id="contactNumber" placeholder="Enter your number...">
+                    </div>
+                </div>
+    
+                <div class="input">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Write your email here..." autocomplete="email">
+                </div>
+    
+                <div class="input">
+                    <label for="purpose">Describe your purpose</label>
+                    <textarea name="purpose" id="purpose" placeholder="Write your purpose here..."></textarea>
+                </div>
+    
+                <!-- Calendar -->
+                <div class="calendar_container">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <span id="prevMonth"><i class="arrow left"></i></span>
+                            <span id="currentMonthYear"></span>
+                            <span id="nextMonth"><i class="arrow right"></i></span>
+                        </div>
+                        <div class="calendar-days">
+                            <div class="day-label">SUN</div>
+                            <div class="day-label">MON</div>
+                            <div class="day-label">TUE</div>
+                            <div class="day-label">WED</div>
+                            <div class="day-label">THU</div>
+                            <div class="day-label">FRI</div>
+                            <div class="day-label">SAT</div>
+                        </div>
+                        <div class="calendar-dates"></div>
+                        <p class="error_message"></p>
+                    </div>
+                </div>
+    
+                <div class="available_time_container">
+                    <h2>Available Time</h2>
+                    <p>Please select a date first</p>
+                    <div class="time-grid" id="timeSlots"></div>
+                    <p class="error_message"></p>
+                </div>
+    
+                <div class="submit_container">
+                    <button type="submit">Confirm</button>
+                </div>
+            </form>
+        </section>
+
+        <section class="confirmation" id="confirmation">
+            <header>
+                <span id="goBack"><i class="arrow left"></i></span>
+                <h1>Confirm Details</h1>
+            </header>
+
+            <div class="container_details">
+                <div class="schedule">
+                    <span id="date">N/A</span>
+                    <p id="dayTime">N/A</p>
+                </div>
+
+                <div class="customer_info">
+                    <div id="full_name_info">
+                        <span>Full Name</span>
+                        <p>N/A</p>
+                    </div>
+                    <div id="contact_number_info">
+                        <span>Contact Number</span>
+                        <p>N/A</p>
+                    </div>
+                    <div id="email_info">
+                        <span>Email</span>
+                        <p>N/A</p>
+                    </div>
+                    <div id="services_info">
+                        <span>Service</span>
+                        <p>N/A</p>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="purpose_details">
+                <span>Purpose</span>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+
+            <!-- 
+            MAYBE ANOTHER DIV FOR PRODUCT CONSULTATION 
+            -->
+
+            <button id="submitAppointmentBtn">Submit</button>
+        </section>
+    </main>
+
+    <footer></footer>
+    
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+    (function(){
+        emailjs.init({
+            publicKey: "YC075Obo6PKlfE3jZ",
+        });
+    })();
+    </script>
+    <script src="email.js"></script>
+    <script src="index.js"></script>
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/footer.js"></script>
+
+</body>
+</html>

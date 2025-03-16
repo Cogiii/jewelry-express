@@ -1,0 +1,47 @@
+/* Inria Serif */
+@import url('https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+/* Cactus Classical Serif */
+@import url('https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+/* Gamalia */
+@font-face {
+    font-family: 'Gamalia';
+    src: url('../font/GamiliaDemoRegular-d9DL7.ttf') format('truetype'),
+         url('../font/GamiliademoRegular-mL9Ev.otf') format('opentype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --main-color: #F0E9E1;
+    --main-H-color: #E4DBD0;
+    --text-color: #11100E;
+    --text-H-color: #33312C;
+    --secondary-color: #245B51;
+    --secondary-H-color: #607974;
+    --compliment-color: #5D1C34;
+    --section-border-color: #B3ACA3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    overflow-x: hidden;
+    color: var(--text-color);
+    scroll-behavior: smooth;
+}
+
+input:-webkit-autofill {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0px 1000px var(--main-H-color) inset !important;
+    -webkit-text-fill-color: #000 !important;
+}

@@ -1,0 +1,305 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    background-color: inherit;
+    height: 7%;
+    position: sticky;
+    top: 0;
+    padding: 13px 17px 8px 17px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    /* border: solid red 2px; */
+}
+
+nav button {
+    background: none;
+    border: none;
+    width: 20px;
+}
+nav button img {
+    width: 20px;
+}
+nav button:hover {
+    background: var(--main-H-color);
+    cursor: pointer;
+}
+
+nav .logo img {
+    width: 210px;
+}
+
+nav .mobile_look {
+    display: flex;
+    justify-content: space-between;
+}
+nav .mobile_look .mobile_nav {
+    margin-right: 5px;
+}
+
+nav .mobile_links {
+    width: 100%;
+    height: 94vh;
+    padding: 10px 20px;
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+}
+
+nav .mobile_links hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid var(--section-border-color);
+    margin: 1em 0;
+    padding: 0;
+}
+
+nav .mobile_links ul {
+    list-style-type: none;
+    text-align: left;
+    font-size: large;
+    width: inherit;
+    margin: 15px auto;
+    width: 90%;
+    padding: 20px;
+    flex-grow: 1;
+}
+nav .mobile_links ul li {
+    margin: 10px 0;
+}
+nav .mobile_links a {
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Cactus Classical Serif';
+    font-size: 15px;
+}
+nav .mobile_links a:hover {
+    color: var(--text-H-color);
+    background-color: none;
+    text-decoration: underline;
+}
+
+nav .mobile_links .info {
+    margin: 15px auto;
+    width: 90%;
+    padding: 20px;
+    position: relative;
+    color: var(--text-color);
+}
+
+nav .mobile_links .info > * {
+    display: flex;
+    font-family: 'Inria Serif';
+    font-size: 10px;
+    margin: 3px 5px 3px 0;
+    justify-content:flex-start
+}
+nav .mobile_links .info > * > img {
+    width: 15px;
+    height: 15px;
+}
+nav .mobile_links .info > * > * {
+    margin: 0 5px;
+}
+
+nav .mobile_look .mobile_nav #menu {
+    width: 17px;
+    height: 13px;
+    position: relative;
+    margin-top: 3px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+
+nav .mobile_look .mobile_nav #menu span {
+    display: block;
+    position: absolute;
+    height: 1.5px;
+    width: 100%;
+    background: var(--secondary-H-color);
+    border-radius: 9px;
+    opacity: 1; 
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+}
+
+nav .mobile_look .mobile_nav #menu span:nth-child(1) {
+    top: 3px;
+    height: 1.5px;
+}
+  
+nav .mobile_look .mobile_nav #menu span:nth-child(2), 
+nav .mobile_look .mobile_nav #menu span:nth-child(3) {
+    top: 9.5px;
+    height: 1.5px;
+}
+  
+nav .mobile_look .mobile_nav #menu span:nth-child(4) {
+    top: 16px;
+    height: 1.5px;
+}
+  
+nav .mobile_look .mobile_nav #menu.open span:nth-child(1), 
+nav .mobile_look .mobile_nav #menu.open span:nth-child(4) {
+    top: 50%;
+    width: 0%;
+    left: 50%;
+}
+  
+nav .mobile_look .mobile_nav #menu.open span:nth-child(2) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    height: 1.5px;
+}
+  
+nav .mobile_look .mobile_nav #menu.open span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    height: 1.5px;
+}
+
+/* Search container covers the entire nav */
+nav .search-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--main-H-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px;
+    z-index: 1;
+    transition: transform 0.3s ease;
+    transform: translateY(-100%);
+}
+
+nav .search-container img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Search input styling */
+nav .search-container input {
+    width: 80%;
+    padding: 10px;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: transparent;
+}
+
+nav .search-container button {
+    color: var(--secondary-color);
+}
+
+/* Close button */
+nav .search-container button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Active state */
+nav .search-container.active {
+    transform: translateY(100%);
+}
+
+/* Search results container */
+nav .search-results {
+    position: absolute;
+    top: 190%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-height: 250px;
+    background: var(--main-H-color);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    display: none;
+    padding: 10px 0;
+    z-index: 10;
+}
+
+/* Individual search result item */
+nav .search-result-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+nav .search-result-item:hover {
+    background: #f0f0f0;
+}
+
+nav .search-result-item img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+
+
+@media only screen and (max-width: 431px) {
+    nav .mobile_links {
+        background-color: var(--main-color);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin-top: 40px;
+        padding: 0;
+        justify-content: center;
+        /* border: solid red 2px; */
+        overflow: hidden;
+        clip-path: inset(0 100% 0 0);
+        transition: clip-path 0.6s ease-out;
+        display: flex;
+    }
+
+    nav .mobile_links.open_links {
+        clip-path: inset(0 0 0 0);
+    }
+
+    body.no-scroll {
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+
+}

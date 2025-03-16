@@ -1,0 +1,206 @@
+header .header_vid {
+    width: 100%;
+    height: 93vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: none;
+}
+
+header .header_vid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+header .header_vid::after {
+    content: '';
+    position: absolute;
+    bottom: -3%;
+    background: linear-gradient(to top, var(--main-color) 15%, rgba(0, 0, 0, 0) 100%);
+    width: 100%;
+    height: 40%;
+    pointer-events: none;
+}
+
+header .header_vid .header_text {
+    position: absolute;
+    bottom: 20%;
+    z-index: 1;
+    width: 75%;
+    text-align: center;
+    padding: 5px;
+    border-bottom: solid #11100E 1px;
+}
+header .header_vid .header_text > h1 {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -2%;
+}
+header .header_vid .header_text > p {
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-top: 5px;
+    font-family: 'Gamalia';
+}
+
+.featured_jewelries {
+    border: none;
+    padding: 10px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.jewelries_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden; /* Prevent horizontal scrolling */
+}
+
+a {
+    color: var(--text-color);
+}
+
+.jewelries_container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+    width: 100%;
+    gap: 45px;
+    padding: 0 60px;
+}
+
+.jewelry {
+    text-align: center;
+    flex: 0 0 80%; /* Ensures only one item is shown */
+}
+
+.jewelry img {
+    width: 255px;
+    height: 255px;
+}
+.jewelry h3 {
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Cactus Classical Serif';
+    margin-top: 10px;
+}
+.jewelry_material {
+    margin-top: 5px;
+    font-family: 'Inria Serif';
+}
+
+/* Slider dots positioned below the container */
+.slider_dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Space between items and dots */
+    gap: 10px;
+}
+
+.slider_dots .dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--secondary-H-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.slider_dots .dot.active {
+    background-color: var(--secondary-color);
+}
+
+.book_appointment_link {
+    margin-top: 50px;
+    text-decoration: none;
+    background-color: var(--secondary-color);
+    color: var(--main-H-color);
+    padding: 10px 5px;
+    border-radius: 7px;
+    font-family: 'Inria Font';
+    font-size: 16px;
+}
+.book_appointment_link:hover {
+    background-color: var(--secondary-H-color);
+}
+
+.see_more_link {
+    margin-top: 20px;
+    text-decoration: none;
+    font-family: 'Inria Font';
+    text-align: center;
+    width: 100px;
+    border-bottom: solid var(--text-color) 1px;
+}
+.see_more_link:hover {
+    color: var(--text-H-color);
+    border-color: var(--text-H-color);
+}
+.loop_vid {
+    width: 100%;
+    height: 402px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: none;
+}
+
+.loop_vid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.category, .services {
+    text-align: center;
+    padding: 50px 0;
+}
+.category h2, .services h2 {
+    font-weight: 500;
+    font-size: larger;
+}
+
+.category_container {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+    width: 100%;
+    gap: 45px;
+    padding: 0 60px;
+    margin-top: 35px;
+}
+
+.services_container {
+    background-color: var(--main-H-color);
+    padding: 18px 0;
+    margin-top: 34px;
+}
+.service {
+    margin: 36px;
+}
+.service img {
+    width: 27px;
+}
+.service p {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+/* FOR MOBILE USERS */
+@media only screen and (max-width: 431px) {
+    
+}
